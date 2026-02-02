@@ -2,9 +2,11 @@
 Main Streamlit application for LEAN Live Trading Dashboard
 """
 
+import json
 import os
 import sys
 import time
+from pathlib import Path
 
 import pandas as pd
 import streamlit as st
@@ -109,8 +111,45 @@ except ImportError:
         render_margin_data_table,
     )
 
+LOG_PATH = Path(r"e:\factor\lean_project\Pensive Tan Bull Local\.cursor\debug.log")
+
+
+def _debug_log(hypothesis_id: str, location: str, message: str, data: dict) -> None:
+    try:
+        LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "sessionId": "debug-session",
+            "runId": "env-check",
+            "hypothesisId": hypothesis_id,
+            "location": location,
+            "message": message,
+            "data": data,
+            "timestamp": int(time.time() * 1000),
+        }
+        with open(LOG_PATH, "a", encoding="utf-8") as handle:
+            handle.write(json.dumps(payload) + "\n")
+    except Exception:
+        pass
+
 def main() -> None:
     st.set_page_config(**config.PAGE_CONFIG)
+
+    # Ensure Plotly candlestick defaults for deployments without env vars
+    os.environ.setdefault("DASHBOARD_USE_PLOTLY", "1")
+    os.environ.setdefault("DASHBOARD_PLOTLY_CANDLE", "1")
+    os.environ.setdefault("DASHBOARD_PLOTLY_HTML", "1")
+    os.environ.setdefault("DASHBOARD_PLOTLY_LINE", "1")
+    _debug_log(
+        "H22",
+        "app.py:140",
+        "Plotly env defaults",
+        {
+            "DASHBOARD_USE_PLOTLY": os.getenv("DASHBOARD_USE_PLOTLY"),
+            "DASHBOARD_PLOTLY_CANDLE": os.getenv("DASHBOARD_PLOTLY_CANDLE"),
+            "DASHBOARD_PLOTLY_HTML": os.getenv("DASHBOARD_PLOTLY_HTML"),
+            "DASHBOARD_PLOTLY_LINE": os.getenv("DASHBOARD_PLOTLY_LINE"),
+        },
+    )
 
     example_mode = os.getenv("DASHBOARD_EXAMPLE_MODE", "1" if config.DEFAULT_EXAMPLE_MODE else "0") == "1"
     if example_mode:
