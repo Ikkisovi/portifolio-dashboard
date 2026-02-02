@@ -1,0 +1,16 @@
+{
+  "account_currency": "USD",
+  "cash": 58320.50,
+  "holdings": 42179.50,
+  "equity": 100500.00,
+  "runtimeStatistics": {
+    "Equity": "$100,500.00",
+    "Fees": "-$12.34",
+    "Holdings": "$42,179.50",
+    "Net Profit": "+$500.00",
+    "Probabilistic Sharpe Ratio": "62%",
+    "Return": "+0.50 %",
+    "Unrealized": "+$320.10",
+    "Volume": "$2,345,678"
+  }
+}

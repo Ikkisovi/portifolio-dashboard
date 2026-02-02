@@ -1,0 +1,5 @@
+[
+  {"symbol": "AAPL", "direction": "Up", "magnitude": 0.03, "generated": "2026-01-06T14:30:00"},
+  {"symbol": "MSFT", "direction": "Up", "magnitude": 0.02, "generated": "2026-01-06T14:35:00"},
+  {"symbol": "NVDA", "direction": "Down", "magnitude": 0.025, "generated": "2026-01-06T14:40:00"}
+]
