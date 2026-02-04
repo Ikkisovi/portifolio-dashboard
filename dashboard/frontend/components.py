@@ -48,8 +48,17 @@ def get_global_styles() -> str:
         border-right: 1px solid var(--border);
     }
 
-    .stMarkdown, .stText, .stCaption, .stDataFrame, .stTable {
+    [data-testid="stAppViewContainer"] *,
+    [data-testid="stSidebar"] * {
         color: var(--text);
+    }
+
+    .stMarkdown, .stText, .stCaption, .stDataFrame, .stTable, p, span, label, li, a {
+        color: var(--text);
+    }
+
+    a {
+        color: var(--accent);
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -58,14 +67,7 @@ def get_global_styles() -> str:
         letter-spacing: -0.02em;
     }
 
-    .metrics-row {
-        display: grid;
-        grid-template-columns: repeat(7, minmax(120px, 1fr));
-        gap: 12px;
-        margin-bottom: 18px;
-    }
-
-    .metrics-card {
+    div[data-testid="stMetric"] {
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: 10px;
@@ -73,13 +75,12 @@ def get_global_styles() -> str:
         box-shadow: var(--shadow);
     }
 
-    .metrics-label {
+    div[data-testid="stMetricLabel"] {
         font-size: 0.78rem;
         color: var(--text-secondary);
-        margin-bottom: 6px;
     }
 
-    .metrics-value {
+    div[data-testid="stMetricValue"] {
         font-size: 1.05rem;
         font-weight: 600;
         color: var(--text);
@@ -146,36 +147,18 @@ def get_global_styles() -> str:
         border-color: #d0d0cb;
         background: #fbfbfa;
     }
+
+    pre, code {
+        background: #f5f5f2 !important;
+        color: var(--text) !important;
+        border: 1px solid var(--border);
+    }
     </style>
     """
 
 
 def inject_global_styles() -> None:
     st.markdown(get_global_styles(), unsafe_allow_html=True)
-
-
-def build_metrics_bar_html(equity: str, fees: str, holdings: str, net_profit: str, psr: str, unrealized: str, cash: str) -> str:
-    items = [
-        ("Equity", equity, "positive"),
-        ("Fees", fees, "negative"),
-        ("Holdings", holdings, "positive"),
-        ("Net Profit", net_profit, "neutral"),
-        ("PSR", psr, "neutral"),
-        ("Unrealized", unrealized, "neutral"),
-        ("Cash", cash, "neutral"),
-    ]
-    cards = []
-    for label, value, tone in items:
-        color = COLORS.get(tone, COLORS["text"])
-        cards.append(
-            f"""
-            <div class="metrics-card">
-                <div class="metrics-label">{label}</div>
-                <div class="metrics-value" style="color:{color};">{value}</div>
-            </div>
-            """
-        )
-    return f"<div class='metrics-row'>{''.join(cards)}</div>"
 
 
 def render_metrics_bar(results: Dict) -> None:
@@ -204,16 +187,18 @@ def render_metrics_bar(results: Dict) -> None:
     def fmt_dol(val):
         return f"${val:,.2f}"
 
-    html = build_metrics_bar_html(
-        equity=fmt_dol(equity),
-        fees=fees,
-        holdings=fmt_dol(total_value),
-        net_profit=net_profit,
-        psr=psr,
-        unrealized=fmt_dol(total_unrealized),
-        cash=fmt_dol(cash),
-    )
-    st.markdown(html, unsafe_allow_html=True)
+    metrics = [
+        ("Equity", fmt_dol(equity)),
+        ("Fees", fees),
+        ("Holdings", fmt_dol(total_value)),
+        ("Net Profit", net_profit),
+        ("PSR", psr),
+        ("Unrealized", fmt_dol(total_unrealized)),
+        ("Cash", fmt_dol(cash)),
+    ]
+    cols = st.columns(len(metrics))
+    for col, (label, value) in zip(cols, metrics):
+        col.metric(label, value)
 
 
 def render_server_stats_box(stats: Dict) -> None:
