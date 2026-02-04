@@ -16,6 +16,151 @@ ORDER_DIRECTION = config.ORDER_DIRECTION
 COLORS = config.COLORS
 
 
+def get_global_styles() -> str:
+    return """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+    :root {
+        --bg: #f7f7f5;
+        --surface: #ffffff;
+        --border: #e6e6e2;
+        --text: #1a1a1a;
+        --text-secondary: #6b6b6b;
+        --accent: #2563eb;
+        --positive: #1f7a6d;
+        --negative: #b42318;
+        --shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+    }
+
+    html, body, [data-testid="stAppViewContainer"] {
+        background: var(--bg) !important;
+        color: var(--text);
+        font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    [data-testid="stHeader"] {
+        background: transparent;
+    }
+
+    [data-testid="stSidebar"] {
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+    }
+
+    [data-testid="stAppViewContainer"] *,
+    [data-testid="stSidebar"] * {
+        color: var(--text);
+    }
+
+    .stMarkdown, .stText, .stCaption, .stDataFrame, .stTable, p, span, label, li, a {
+        color: var(--text);
+    }
+
+    a {
+        color: var(--accent);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+        color: var(--text);
+        letter-spacing: -0.02em;
+    }
+
+    div[data-testid="stMetric"] {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px 14px;
+        box-shadow: var(--shadow);
+    }
+
+    div[data-testid="stMetricLabel"] {
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+    }
+
+    div[data-testid="stMetricValue"] {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .panel-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px 16px;
+        box-shadow: var(--shadow);
+    }
+
+    .panel-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--text);
+    }
+
+    [data-testid="stTabs"] button {
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    [data-testid="stTabs"] button[aria-selected="true"] {
+        color: var(--text);
+        border-bottom: 2px solid var(--accent);
+    }
+
+    .stRadio [role="radiogroup"] {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px;
+        display: flex;
+        gap: 6px;
+    }
+
+    .stRadio label {
+        margin: 0 !important;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+
+    .stRadio label:has(input:checked) {
+        background: var(--bg);
+        color: var(--text);
+        border: 1px solid var(--border);
+    }
+
+    .stButton > button {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-weight: 500;
+        padding: 6px 12px;
+    }
+
+    .stButton > button:hover {
+        border-color: #d0d0cb;
+        background: #fbfbfa;
+    }
+
+    pre, code {
+        background: #f5f5f2 !important;
+        color: var(--text) !important;
+        border: 1px solid var(--border);
+    }
+    </style>
+    """
+
+
+def inject_global_styles() -> None:
+    st.markdown(get_global_styles(), unsafe_allow_html=True)
+
+
 def render_metrics_bar(results: Dict) -> None:
     holdings = results.get("holdings", {}) if isinstance(results, dict) else {}
     cash = results.get("cash", {}).get("USD", {}).get("amount", 0)
@@ -42,31 +187,29 @@ def render_metrics_bar(results: Dict) -> None:
     def fmt_dol(val):
         return f"${val:,.2f}"
 
-    st.markdown(
-        f"""
-        <div style="display:flex;justify-content:space-between;background:{COLORS['background']};padding:10px 15px;border-bottom:1px solid #333;border-radius:4px;margin-bottom:20px;">
-            <div><div style="color:{COLORS['text_secondary']};font-size:0.85rem;">Equity</div><div style="color:{COLORS['positive']};font-size:1.1rem;font-weight:600;">{fmt_dol(equity)}</div></div>
-            <div><div style="color:{COLORS['text_secondary']};font-size:0.85rem;">Fees</div><div style="color:{COLORS['negative']};font-size:1.1rem;font-weight:600;">{fees}</div></div>
-            <div><div style="color:{COLORS['text_secondary']};font-size:0.85rem;">Holdings</div><div style="color:{COLORS['positive']};font-size:1.1rem;font-weight:600;">{fmt_dol(total_value)}</div></div>
-            <div><div style="color:{COLORS['text_secondary']};font-size:0.85rem;">Net Profit</div><div style="color:{COLORS['text']};font-size:1.1rem;font-weight:600;">{net_profit}</div></div>
-            <div><div style="color:{COLORS['text_secondary']};font-size:0.85rem;">PSR</div><div style="color:{COLORS['text']};font-size:1.1rem;font-weight:600;">{psr}</div></div>
-            <div><div style="color:{COLORS['text_secondary']};font-size:0.85rem;">Unrealized</div><div style="color:{COLORS['positive'] if total_unrealized>=0 else COLORS['negative']};font-size:1.1rem;font-weight:600;">{fmt_dol(total_unrealized)}</div></div>
-            <div><div style="color:{COLORS['text_secondary']};font-size:0.85rem;">Cash</div><div style="color:{COLORS['text']};font-size:1.1rem;font-weight:600;">{fmt_dol(cash)}</div></div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    metrics = [
+        ("Equity", fmt_dol(equity)),
+        ("Fees", fees),
+        ("Holdings", fmt_dol(total_value)),
+        ("Net Profit", net_profit),
+        ("PSR", psr),
+        ("Unrealized", fmt_dol(total_unrealized)),
+        ("Cash", fmt_dol(cash)),
+    ]
+    cols = st.columns(len(metrics))
+    for col, (label, value) in zip(cols, metrics):
+        col.metric(label, value)
 
 
 def render_server_stats_box(stats: Dict) -> None:
     st.markdown(
         f"""
-        <div style="background:{COLORS['surface']};border:1px solid #333;border-radius:4px;padding:15px;margin-bottom:15px;">
-            <div style="color:{COLORS['text']};font-weight:600;border-bottom:1px solid #444;padding-bottom:8px;margin-bottom:10px;font-size:0.95rem;">Server Statistics</div>
+        <div class="panel-card">
+            <div class="panel-title">Server Statistics</div>
             <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.9rem;color:{COLORS['text_secondary']};"><span>CPU</span><span>{stats.get('cpu',0)}%</span></div>
             <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.9rem;color:{COLORS['text_secondary']};"><span>RAM</span><span>{stats.get('ram_used',0)} MB / {stats.get('ram_total',0)} MB</span></div>
             <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.9rem;color:{COLORS['text_secondary']};"><span>Host</span><span>Local</span></div>
-            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.9rem;color:{COLORS['text_secondary']};"><span>Up Time</span><span>{stats.get('uptime','')}</span></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.9rem;color:{COLORS['text_secondary']};"><span>Uptime</span><span>{stats.get('uptime','')}</span></div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -150,7 +293,7 @@ def render_session_selector(sessions: List[str], current_session: Optional[str])
 
 
 def render_settings_panel() -> Tuple[bool, int, bool]:
-    with st.expander("?? Settings", expanded=False):
+    with st.expander("Settings", expanded=False):
         auto_refresh = st.checkbox("Auto-Refresh", value=False)
         refresh_rate = st.slider("Rate (s)", 5, 60, 10)
         manual_refresh = st.button("Manual Refresh", use_container_width=True)
@@ -159,7 +302,7 @@ def render_settings_panel() -> Tuple[bool, int, bool]:
 
 def render_stop_button(container_id: str, check_container_running, terminate_container) -> None:
     if container_id and check_container_running(container_id):
-        if st.button("?? STOP ALGO", type="primary", use_container_width=True):
+        if st.button("Stop Algo", type="primary", use_container_width=True):
             success, msg = terminate_container(container_id)
             if success:
                 st.success("Stopped")
@@ -168,4 +311,4 @@ def render_stop_button(container_id: str, check_container_running, terminate_con
 
 
 def render_chart_selector() -> str:
-    return st.radio("Select View", ["Strategy Equity", "Benchmark", "Portfolio Margin"], label_visibility="collapsed")
+    return st.radio("View", ["Strategy Equity", "Benchmark", "Portfolio Margin"], label_visibility="collapsed")

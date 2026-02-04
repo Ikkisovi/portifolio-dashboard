@@ -1,0 +1,5 @@
+# Local secrets
+secrets.local.txt
+secrets.local.ps1
+storage/
+.worktrees/
