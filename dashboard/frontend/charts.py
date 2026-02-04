@@ -23,6 +23,10 @@ def _debug_log(hypothesis_id: str, location: str, message: str, data: dict) -> N
     return
 
 
+def get_plotly_template_name() -> str:
+    return "plotly_white"
+
+
 def render_equity_chart(equity_df: pd.DataFrame) -> None:
     # region agent log
     _debug_log(
@@ -255,19 +259,21 @@ def render_equity_chart(equity_df: pd.DataFrame) -> None:
             ), row=2, col=1)
 
             fig_price.update_layout(
-                template="plotly_dark",
+                template=get_plotly_template_name(),
                 height=CHART_HEIGHTS.get("equity", 500),
                 margin=dict(l=10, r=10, t=10, b=10),
                 showlegend=False,
                 xaxis=dict(type="date"),
                 bargap=0.02,
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
             )
             fig_price.update_yaxes(
                 title_text="Equity (Indexed, base=100)",
                 tickformat=",.2f",
                 range=[y_min - pad, y_max + pad],
                 zeroline=True,
-                zerolinecolor="#444",
+                zerolinecolor="#dcdcd7",
                 row=1, col=1,
             )
             fig_price.update_yaxes(
@@ -288,18 +294,20 @@ def render_equity_chart(equity_df: pd.DataFrame) -> None:
                 showlegend=False,
             ))
             fig_price.update_layout(
-                template="plotly_dark",
+                template=get_plotly_template_name(),
                 height=CHART_HEIGHTS.get("equity", 500),
                 margin=dict(l=10, r=10, t=10, b=10),
                 showlegend=False,
                 xaxis=dict(type="date"),
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
             )
             fig_price.update_yaxes(
                 title_text="Equity (Indexed, base=100)",
                 tickformat=",.2f",
                 autorange=True,
                 zeroline=True,
-                zerolinecolor="#444",
+                zerolinecolor="#dcdcd7",
             )
             fig_price.update_xaxes(rangeslider_visible=False)
 
@@ -394,11 +402,13 @@ def render_equity_chart(equity_df: pd.DataFrame) -> None:
                 name="Return %"
             ))
             fig_returns.update_layout(
-                template="plotly_dark",
+                template=get_plotly_template_name(),
                 height=max(int(CHART_HEIGHTS.get("equity", 500) * 0.35), 160),
                 margin=dict(l=10, r=10, t=10, b=10),
                 showlegend=False,
                 xaxis=dict(type="date"),
+                paper_bgcolor="rgba(0,0,0,0)",
+                plot_bgcolor="rgba(0,0,0,0)",
             )
             fig_returns.update_yaxes(title_text="Return %", ticksuffix="%", zeroline=True, zerolinecolor="#444")
 
@@ -486,10 +496,12 @@ def render_benchmark_chart(equity_df: pd.DataFrame, benchmark_df: pd.DataFrame) 
         ))
 
     fig.update_layout(
-        template="plotly_dark",
+        template=get_plotly_template_name(),
         height=CHART_HEIGHTS.get("benchmark", 450),
         margin=dict(l=10, r=10, t=10, b=10),
         legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -507,9 +519,11 @@ def render_margin_chart(margin_df: pd.DataFrame) -> None:
         line=dict(color=COLORS["warning"], width=2)
     ))
     fig.update_layout(
-        template="plotly_dark",
+        template=get_plotly_template_name(),
         height=CHART_HEIGHTS.get("margin", 450),
         margin=dict(l=10, r=10, t=10, b=10),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -530,9 +544,11 @@ def render_insights_barchart(insights_df: pd.DataFrame) -> None:
         name="Insights"
     ))
     fig.update_layout(
-        template="plotly_dark",
+        template=get_plotly_template_name(),
         height=CHART_HEIGHTS.get("aligned", 500),
         margin=dict(l=10, r=10, t=10, b=10),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
     )
     st.plotly_chart(fig, use_container_width=True)
 

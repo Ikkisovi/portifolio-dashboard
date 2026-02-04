@@ -35,6 +35,7 @@ try:
     from .backend.data_processor import load_equity_data, get_all_orders_from_logs, get_all_insights_from_logs
     from .backend.session_manager import terminate_container, check_container_running
     from .frontend.components import (
+        inject_global_styles,
         render_metrics_bar,
         render_server_stats_box,
         render_holdings_table,
@@ -85,6 +86,7 @@ except ImportError:
     from dashboard.backend.data_processor import load_equity_data, get_all_orders_from_logs, get_all_insights_from_logs
     from dashboard.backend.session_manager import terminate_container, check_container_running
     from dashboard.frontend.components import (
+        inject_global_styles,
         render_metrics_bar,
         render_server_stats_box,
         render_holdings_table,
@@ -133,6 +135,7 @@ def _debug_log(hypothesis_id: str, location: str, message: str, data: dict) -> N
 
 def main() -> None:
     st.set_page_config(**config.PAGE_CONFIG)
+    inject_global_styles()
 
     # Ensure Plotly candlestick defaults for deployments without env vars
     os.environ.setdefault("DASHBOARD_USE_PLOTLY", "1")
@@ -219,6 +222,8 @@ def main() -> None:
                 equity_df = pd.DataFrame(load_example_equity())
             except Exception:
                 equity_df = pd.DataFrame()
+            if not equity_df.empty:
+                st.caption("Example data: MU, SNDK, CDE, RKLB (daily)")
         else:
             equity_df = load_equity_data(results)
 

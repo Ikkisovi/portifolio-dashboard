@@ -13,3 +13,9 @@ def test_example_positions_real_tickers():
     positions = data_loader.load_example_positions()
     symbols = {p["symbol"] for p in positions}
     assert {"MU", "SNDK", "CDE", "RKLB"}.issubset(symbols)
+
+
+def test_example_account_has_runtime_stats():
+    account = data_loader.load_example_account()
+    stats = account.get("runtimeStatistics", {})
+    assert "Equity" in stats and "Holdings" in stats
