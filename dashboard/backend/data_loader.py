@@ -6,9 +6,12 @@ Handles loading of configs, results, orders, logs, and other data sources.
 import json
 import time
 import re
+import zipfile
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, Dict, List, Tuple
+
+import pandas as pd
 
 from . import models
 from .. import config
@@ -19,14 +22,21 @@ CACHE_PATH = config.CACHE_PATH
 OBJECT_STORE_PATH = config.OBJECT_STORE_PATH
 FEATURE_STORE_DIR = config.FEATURE_STORE_DIR
 EXAMPLE_DATA_DIR = config.EXAMPLE_DATA_DIR
+EQUITY_DATA_DIR = config.EQUITY_DATA_DIR
 COMMANDS_FOLDER = config.COMMANDS_FOLDER
 SELL_ORDERS_FILE = config.SELL_ORDERS_FILE
 EQUITY_CACHE_FILE = config.EQUITY_CACHE_FILE
+EXAMPLE_TICKERS = config.EXAMPLE_TICKERS
+EXAMPLE_START_DATE = config.EXAMPLE_START_DATE
+EXAMPLE_END_DATE = config.EXAMPLE_END_DATE
+EXAMPLE_BASE_CAPITAL = config.EXAMPLE_BASE_CAPITAL
+EXAMPLE_PRICE_SCALE = config.EXAMPLE_PRICE_SCALE
 
 SESSION_ID_SEPARATOR = "::"
 DEFAULT_ROOT_NAME = "root"
 STRATEGY_ROOT_PREFIX = "S_"
 ROOT_SESSION_NAME = "__root__"
+_EXAMPLE_BUNDLE_CACHE: Optional[Dict] = None
 
 
 def list_strategy_roots() -> List[str]:
@@ -458,22 +468,225 @@ def load_example_json(name: str):
         return None
 
 
+def _parse_example_date(date_value: str) -> Optional[datetime]:
+    if not date_value or date_value.lower() == "latest":
+        return None
+    try:
+        return datetime.fromisoformat(date_value)
+    except ValueError:
+        return None
+
+
+def _resolve_equity_dir() -> Path:
+    candidates = []
+    if EQUITY_DATA_DIR:
+        candidates.append(EQUITY_DATA_DIR)
+    base = BASE_PATH
+    for _ in range(4):
+        candidate = base.parent / "data" / "equity" / "usa" / "daily"
+        if candidate not in candidates:
+            candidates.append(candidate)
+        base = base.parent
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return EQUITY_DATA_DIR
+
+
+def _read_equity_zip(ticker: str) -> Optional[pd.DataFrame]:
+    equity_dir = _resolve_equity_dir()
+    zip_path = equity_dir / f"{ticker.lower()}.zip"
+    if not zip_path.exists():
+        return None
+    try:
+        with zipfile.ZipFile(zip_path) as handle:
+            names = [name for name in handle.namelist() if name.lower().endswith(".csv")]
+            if not names:
+                return None
+            with handle.open(names[0]) as csv_handle:
+                df = pd.read_csv(
+                    csv_handle,
+                    header=None,
+                    names=["datetime", "open", "high", "low", "close", "volume"],
+                )
+    except Exception:
+        return None
+
+    df["datetime"] = pd.to_datetime(
+        df["datetime"].astype(str).str.strip(),
+        format="%Y%m%d %H:%M",
+        errors="coerce",
+    )
+    for col in ["open", "high", "low", "close"]:
+        df[col] = pd.to_numeric(df[col], errors="coerce") / float(EXAMPLE_PRICE_SCALE)
+    df["volume"] = pd.to_numeric(df["volume"], errors="coerce").fillna(0)
+    df = df.dropna(subset=["datetime", "close"]).sort_values("datetime")
+    if df.empty:
+        return None
+    return df
+
+
+def build_example_portfolio_bundle() -> Optional[Dict]:
+    tickers = list(EXAMPLE_TICKERS or [])
+    if not tickers:
+        return None
+
+    start_dt = _parse_example_date(EXAMPLE_START_DATE)
+    end_dt = _parse_example_date(EXAMPLE_END_DATE)
+
+    frames: Dict[str, pd.DataFrame] = {}
+    for ticker in tickers:
+        df = _read_equity_zip(ticker)
+        if df is None or df.empty:
+            return None
+        if start_dt is not None:
+            df = df[df["datetime"] >= start_dt]
+        if end_dt is not None:
+            df = df[df["datetime"] <= end_dt]
+        df = df.dropna(subset=["datetime", "close"]).sort_values("datetime")
+        if df.empty:
+            return None
+        frames[ticker] = df.set_index("datetime")
+
+    common_index = None
+    for df in frames.values():
+        common_index = df.index if common_index is None else common_index.intersection(df.index)
+    if common_index is None or common_index.empty:
+        return None
+    common_index = common_index.sort_values()
+
+    allocation_dt = common_index[0]
+    per_ticker = float(EXAMPLE_BASE_CAPITAL) / len(tickers)
+    shares: Dict[str, float] = {}
+    for ticker, df in frames.items():
+        start_close = float(df.loc[allocation_dt, "close"])
+        if start_close <= 0:
+            return None
+        shares[ticker] = per_ticker / start_close
+
+    portfolio = pd.DataFrame(index=common_index)
+    for field in ["open", "high", "low", "close"]:
+        total = None
+        for ticker, df in frames.items():
+            series = df.loc[common_index, field].astype(float) * shares[ticker]
+            total = series if total is None else total.add(series, fill_value=0)
+        portfolio[field] = total
+
+    equity = [
+        {
+            "datetime": idx.isoformat(),
+            "open": float(row["open"]),
+            "high": float(row["high"]),
+            "low": float(row["low"]),
+            "close": float(row["close"]),
+        }
+        for idx, row in portfolio.iterrows()
+    ]
+
+    last_dt = common_index[-1]
+    positions = []
+    holdings_total = 0.0
+    unrealized_total = 0.0
+    initial_invested = 0.0
+    for ticker, df in frames.items():
+        avg = float(df.loc[allocation_dt, "close"])
+        cur = float(df.loc[last_dt, "close"])
+        qty = float(shares[ticker])
+        value = qty * cur
+        unrealized = (cur - avg) * qty
+        holdings_total += value
+        unrealized_total += unrealized
+        initial_invested += qty * avg
+        pnl_pct = (cur / avg - 1) * 100 if avg else 0.0
+        positions.append({
+            "symbol": ticker,
+            "q": qty,
+            "a": avg,
+            "p": cur,
+            "v": value,
+            "u": unrealized,
+            "up": pnl_pct,
+            "fx": 1,
+        })
+
+    cash = float(EXAMPLE_BASE_CAPITAL) - initial_invested
+    equity_value = holdings_total + cash
+    net_profit = equity_value - float(EXAMPLE_BASE_CAPITAL)
+    return_pct = (net_profit / float(EXAMPLE_BASE_CAPITAL) * 100) if EXAMPLE_BASE_CAPITAL else 0.0
+
+    runtime_stats = {
+        "Equity": f"${equity_value:,.2f}",
+        "Fees": "$0.00",
+        "Holdings": f"${holdings_total:,.2f}",
+        "Net Profit": f"{'+' if net_profit >= 0 else '-'}${abs(net_profit):,.2f}",
+        "Probabilistic Sharpe Ratio": "0%",
+        "Return": f"{return_pct:+.2f} %",
+        "Unrealized": f"{'+' if unrealized_total >= 0 else '-'}${abs(unrealized_total):,.2f}",
+        "Volume": "$0",
+    }
+
+    account = {
+        "account_currency": "USD",
+        "cash": cash,
+        "holdings": holdings_total,
+        "equity": equity_value,
+        "runtimeStatistics": runtime_stats,
+    }
+
+    benchmark = []
+    spy_df = _read_equity_zip("SPY")
+    if spy_df is not None and not spy_df.empty:
+        spy_df = spy_df.set_index("datetime").reindex(common_index).dropna(subset=["close"])
+        benchmark = [
+            {"datetime": idx.isoformat(), "close": float(row["close"])}
+            for idx, row in spy_df.iterrows()
+        ]
+
+    return {
+        "equity": equity,
+        "positions": positions,
+        "account": account,
+        "benchmarks": benchmark,
+    }
+
+
+def _get_example_bundle() -> Dict:
+    global _EXAMPLE_BUNDLE_CACHE
+    if _EXAMPLE_BUNDLE_CACHE is not None:
+        return _EXAMPLE_BUNDLE_CACHE
+    bundle = build_example_portfolio_bundle()
+    _EXAMPLE_BUNDLE_CACHE = bundle or {}
+    return _EXAMPLE_BUNDLE_CACHE
+
+
 def load_example_account() -> Dict:
+    bundle = _get_example_bundle()
+    if "account" in bundle:
+        return bundle["account"]
     data = load_example_json("account.json")
     return data if isinstance(data, dict) else {}
 
 
 def load_example_positions() -> List[Dict]:
+    bundle = _get_example_bundle()
+    if "positions" in bundle:
+        return bundle["positions"]
     data = load_example_json("positions.json")
     return data if isinstance(data, list) else []
 
 
 def load_example_equity() -> List[Dict]:
+    bundle = _get_example_bundle()
+    if "equity" in bundle:
+        return bundle["equity"]
     data = load_example_json("equity.json")
     return data if isinstance(data, list) else []
 
 
 def load_example_benchmarks() -> List[Dict]:
+    bundle = _get_example_bundle()
+    if "benchmarks" in bundle:
+        return bundle["benchmarks"]
     data = load_example_json("benchmarks.json")
     return data if isinstance(data, list) else []
 
