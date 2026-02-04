@@ -23,6 +23,7 @@ try:
         parse_margin_from_logs,
         fetch_benchmark_data,
         parse_server_stats,
+        get_example_data_status,
         load_example_account,
         load_example_positions,
         load_example_orders,
@@ -74,6 +75,7 @@ except ImportError:
         parse_margin_from_logs,
         fetch_benchmark_data,
         parse_server_stats,
+        get_example_data_status,
         load_example_account,
         load_example_positions,
         load_example_orders,
@@ -158,6 +160,9 @@ def main() -> None:
     if example_mode:
         sessions = ["example"]
         selected_session = "example"
+        status = get_example_data_status()
+        if status.get("source") == "json":
+            st.warning(f"Example data fallback to JSON. Equity path not found: {status.get('equity_dir')}")
     else:
         sessions = get_live_sessions()
         if not sessions:

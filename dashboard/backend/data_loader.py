@@ -37,6 +37,7 @@ DEFAULT_ROOT_NAME = "root"
 STRATEGY_ROOT_PREFIX = "S_"
 ROOT_SESSION_NAME = "__root__"
 _EXAMPLE_BUNDLE_CACHE: Optional[Dict] = None
+_EXAMPLE_BUNDLE_STATUS: Dict[str, str] = {}
 
 
 def list_strategy_roots() -> List[str]:
@@ -538,6 +539,7 @@ def build_example_portfolio_bundle() -> Optional[Dict]:
     for ticker in tickers:
         df = _read_equity_zip(ticker)
         if df is None or df.empty:
+            _EXAMPLE_BUNDLE_STATUS["reason"] = f"missing data for {ticker}"
             return None
         if start_dt is not None:
             df = df[df["datetime"] >= start_dt]
@@ -545,6 +547,7 @@ def build_example_portfolio_bundle() -> Optional[Dict]:
             df = df[df["datetime"] <= end_dt]
         df = df.dropna(subset=["datetime", "close"]).sort_values("datetime")
         if df.empty:
+            _EXAMPLE_BUNDLE_STATUS["reason"] = f"no rows for {ticker} in range"
             return None
         frames[ticker] = df.set_index("datetime")
 
@@ -552,6 +555,7 @@ def build_example_portfolio_bundle() -> Optional[Dict]:
     for df in frames.values():
         common_index = df.index if common_index is None else common_index.intersection(df.index)
     if common_index is None or common_index.empty:
+        _EXAMPLE_BUNDLE_STATUS["reason"] = "no overlapping dates"
         return None
     common_index = common_index.sort_values()
 
@@ -561,6 +565,7 @@ def build_example_portfolio_bundle() -> Optional[Dict]:
     for ticker, df in frames.items():
         start_close = float(df.loc[allocation_dt, "close"])
         if start_close <= 0:
+            _EXAMPLE_BUNDLE_STATUS["reason"] = "invalid start price"
             return None
         shares[ticker] = per_ticker / start_close
 
@@ -647,16 +652,37 @@ def build_example_portfolio_bundle() -> Optional[Dict]:
         "positions": positions,
         "account": account,
         "benchmarks": benchmark,
+        "source": "real",
     }
 
 
 def _get_example_bundle() -> Dict:
     global _EXAMPLE_BUNDLE_CACHE
-    if _EXAMPLE_BUNDLE_CACHE is not None:
-        return _EXAMPLE_BUNDLE_CACHE
+    if _EXAMPLE_BUNDLE_CACHE:
+        positions = _EXAMPLE_BUNDLE_CACHE.get("positions") or []
+        symbols = {p.get("symbol") for p in positions if isinstance(p, dict)}
+        if set(EXAMPLE_TICKERS).issubset(symbols):
+            return _EXAMPLE_BUNDLE_CACHE
     bundle = build_example_portfolio_bundle()
-    _EXAMPLE_BUNDLE_CACHE = bundle or {}
+    if bundle:
+        _EXAMPLE_BUNDLE_CACHE = bundle
+        _EXAMPLE_BUNDLE_STATUS["source"] = "real"
+        return _EXAMPLE_BUNDLE_CACHE
+    _EXAMPLE_BUNDLE_STATUS["source"] = "json"
+    if "reason" not in _EXAMPLE_BUNDLE_STATUS:
+        _EXAMPLE_BUNDLE_STATUS["reason"] = "fallback to example json"
+    _EXAMPLE_BUNDLE_CACHE = {}
     return _EXAMPLE_BUNDLE_CACHE
+
+
+def get_example_data_status() -> Dict[str, str]:
+    equity_dir = _resolve_equity_dir()
+    status = {
+        "source": _EXAMPLE_BUNDLE_STATUS.get("source", "unknown"),
+        "reason": _EXAMPLE_BUNDLE_STATUS.get("reason", ""),
+        "equity_dir": str(equity_dir),
+    }
+    return status
 
 
 def load_example_account() -> Dict:
@@ -692,16 +718,48 @@ def load_example_benchmarks() -> List[Dict]:
 
 
 def load_example_orders() -> List[Dict]:
+    bundle = _get_example_bundle()
+    positions = bundle.get("positions") if isinstance(bundle, dict) else None
+    if positions:
+        orders: List[Dict] = []
+        for idx, pos in enumerate(positions, start=1):
+            orders.append({
+                "id": idx,
+                "symbol": pos.get("symbol"),
+                "status": 3,
+                "direction": 0,
+                "quantity": round(float(pos.get("q", 0) or 0), 2),
+                "price": round(float(pos.get("a", 0) or 0), 2),
+            })
+        return orders
     data = load_example_json("orders.json")
     return data if isinstance(data, list) else []
 
 
 def load_example_insights() -> List[Dict]:
+    bundle = _get_example_bundle()
+    positions = bundle.get("positions") if isinstance(bundle, dict) else None
+    if positions:
+        insights: List[Dict] = []
+        for pos in positions:
+            insights.append({
+                "symbol": pos.get("symbol"),
+                "direction": "Up",
+                "magnitude": 0.5,
+                "confidence": 0.6,
+            })
+        return insights
     data = load_example_json("insights.json")
     return data if isinstance(data, list) else []
 
 
 def load_example_logs() -> List[str]:
+    bundle = _get_example_bundle()
+    if bundle:
+        return [
+            "Example mode enabled",
+            "Using real equity data for MU, SNDK, CDE, RKLB",
+        ]
     data = load_example_json("logs.json")
     return data if isinstance(data, list) else []
 
