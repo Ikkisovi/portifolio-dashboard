@@ -56,29 +56,33 @@
   <a href="index.html">← All Reports</a>
   <span style="color:var(--text-muted)">AlphaSAGE Daily Factor Report</span>
 </div>
-<div class="meta">Generated on 2026-03-05 16:06 · qwen3.5:397b-cloud via Ollama</div>
+<div class="meta">Generated on 2026-03-06 11:38 · qwen3.5:397b-cloud via Ollama</div>
 <h1>Daily Factor Report -- 2026-03-05</h1>
 
-<p>Generated at 2026-03-05 16:06:44 by qwen3.5:397b-cloud via ollama</p>
+<p>Generated at 2026-03-06 11:37:39 by qwen3.5:397b-cloud via ollama</p>
 
 <hr>
 
-<p><strong>Daily Model Review – 2026-03-05</strong></p>
+<p><strong>Factor Regime and CMA Objective Health</strong></p>
+<p>The CMA objective total stands at 25.030159, driven predominantly by weighted_fitness (24.304890) rather than weighted_log_ret (0.668366) or weighted_ic (0.056902). This indicates the runtime eval window (80 days) prioritizes stability over raw return. Capital concentration is high: alpha_1 (0.418577), alpha_5 (0.392435), and alpha_11 (0.158248) constitute 96.9% of total weight. However, factor health is deteriorating; alpha_1 shows a 20d ICIR of -0.29038 and alpha_5 shows -0.371337, both marked "Degrading." Despite positive runtime log_ret (alpha_1: 0.382271, alpha_5: 0.327972), recent 20d signal quality is fading.</p>
 
-<p><strong>Factor Regime & CMA Objective Health</strong></p>
-<p>The CMA objective total=33.30 is dominated by weighted_fitness=32.53, significantly outweighing weighted_ic=0.06 and weighted_log_ret=0.71. This fitness-heavy optimization explains the divergence between recent IC performance and current allocation. Active factors alpha_1 (weight 0.327), alpha_4 (0.281), and alpha_5 (0.280) all exhibit negative 20d ICIR (-0.249, -0.273, and -0.288 respectively) and are marked "Degrading." Conversely, inactive factors alpha_12 (ICIR 0.368) and alpha_3 (ICIR 0.292) hold zero weight despite positive IC trends. This indicates that over the 60d optimization window, these high-IC factors likely suffered negative log_ret or fitness scores sufficient to zero out their weights. Note uncertainty on inactive factors alpha_10–12 and alpha_8–9, which are flagged <code class="inline">interpretation_stale</code>.</p>
+<p><strong>Top 3 Divergence Factors</strong></p>
+<p>Three factors exhibit significant divergence between 20d health and zero CMA weight:</p>
+<p>1.  <strong>alpha_12:</strong> Weight 0.0. Despite a healthy 20d ICIR of 0.348949 and positive runtime log_ret of 0.154907, it receives no allocation. This suggests potential correlation redundancy with top-weighted factors despite standalone strength.</p>
+<p>2.  <strong>alpha_3:</strong> Weight 0.0. Shows a healthy 20d ICIR of 0.354028 but negative runtime log_ret of -0.222668. The negative eval window return overrides recent ICIR strength.</p>
+<p>3.  <strong>alpha_2:</strong> Weight 0.0. Similar profile with 20d ICIR of 0.238927 (Healthy) but negative runtime log_ret of -0.050448.</p>
 
-<p><strong>Timing Risk & Actionable Signals</strong></p>
-<p>While specific actionable factor tables are not present in this snapshot, microstructure anomalies provide the timing overlay evidence. The market shows a tactical divergence: daily win_rate=0.676 suggests a short-term bounce, but weekly win_rate=0.397 and weekly mean=-0.024 indicate underlying bearish pressure. Liquidity risks are elevated for specific names; CDE shows an illiquidity spike with amihud_range TS_Z=3.70, and CAT shows a spike with TS_Z=2.47. Additionally, TSLA exhibits a momentum reversal signal (drift_factor CS_Z=4.31), aligning with its bottom rank=68/68.</p>
+<p><strong>Actionable Factor Health and Timing Risk</strong></p>
+<p>Timing risk signals are stable with no forced trades. The timing risk section reports exits: (none) and restores: (none), utilizing the actionable_composite score source. The model scored 69 assets with bottom_n=8. The lack of exit/restore triggers suggests the actionable factors (1d forward) do not currently indicate extreme short-term momentum shifts requiring overlay intervention. However, the broader market context is negative; mean return is -0.012225 with 49 decliners versus 19 advancers.</p>
 
 <p><strong>Stock-Level Moves</strong></p>
-<p>Bucket transitions confirm model conviction on downside risks for specific holdings. DY transitioned top_to_bottom, consistent with its low score=0.32 and rank=64/68 alongside Ret1d=-0.032. On the upside, USAR holds the top rank=1/68 with score=0.84, though it lacks supporting microstructure anomalies in this snapshot. ORGO shows a liquidity surge (amihud_mean CS_Z=7.75) but remains ranked 25/68, suggesting mixed signals between microstructure and alpha scoring.</p>
+<p>Specific stock movements show divergence from model scores. OKTA posted a 1d return of 0.10659 but holds a low model score of 0.188388 (Rank 68/69). This price-score divergence indicates a possibility of mean reversion (low confidence), as the factor model does not support the rally. Conversely, USAR holds the top score of 0.907285 with a flat 1d return of -0.00288, suggesting potential latent alpha not yet realized in price. Microstructure anomalies note an illiquidity spike for GOOGL (amihud_range TS_Z 3.2027), warranting caution on size.</p>
 
-<p><strong>Recommendations</strong></p>
+<p><strong>Actionable Steps</strong></p>
 <ul>
-<li>  <strong>Maintain Defensive Stance:</strong> Despite daily win_rate=0.676, keep hedges active due to weekly mean=-0.024 and degrading status on 88% of weighted alpha factors.</li>
-<li>  <strong>Liquidity Avoidance:</strong> Reduce or exit positions in CDE and CAT immediately due to illiquidity spikes (TS_Z > 2.0) which threaten execution quality.</li>
-<li>  <strong>Factor Review:</strong> Investigate 60d fitness metrics for alpha_12 and alpha_3; their high 20d ICIR (0.37, 0.29) suggests potential for re-inclusion if longer-window decay has stabilized.</li>
+<li>  <strong>Monitor Alpha Degradation:</strong> Track alpha_1 and alpha_5 closely; their negative 20d ICIR (-0.29038, -0.371337) despite high weight poses regime risk.</li>
+<li>  <strong>Investigate Alpha_12 Exclusion:</strong> Review correlation matrices for alpha_12 (ICIR_20d 0.348949) to understand why positive health yields zero weight.</li>
+<li>  <strong>Watch OKTA Reversion:</strong> Consider reducing exposure to OKTA given the divergence between Ret1d (0.10659) and Score (0.188388).</li>
 </ul>
 
 <hr>
@@ -91,361 +95,512 @@
   "requested_date": "2026-03-05",
   "report_date": "2026-03-05",
   "data_as_of_date": "2026-03-05",
-  "strict_date": false,
-  "allow_stale_cache": true,
-  "max_date_lag_days": 1,
+  "strict_date": true,
+  "allow_stale_cache": false,
+  "max_date_lag_days": 0,
   "requested_equals_data_date": true,
   "cma_source": "exact",
   "section_dates": {
     "cma_daily": "2026-03-05",
+    "timing_daily": "2026-03-05",
     "market_summary_daily": "2026-03-05",
     "market_summary_weekly": "2026-03-05"
   },
-  "scored_universe_size": 68,
+  "scored_universe_size": 69,
+  "per_factor_cma_metrics": [
+    {
+      "factor": "alpha_0",
+      "weight": 0.0,
+      "log_ret": 0.09357828079300089,
+      "ic_mean": 0.00392493763342183,
+      "icir": 0.026031176481885646,
+      "fitness": 2.053270794390094,
+      "sharpe": 1.2666586601577026,
+      "annual_return": 0.3284605979398059,
+      "cma_total": 2.150774012816517
+    },
+    {
+      "factor": "alpha_1",
+      "weight": 0.4185767012493311,
+      "log_ret": 0.38227050251670647,
+      "ic_mean": 0.023399253934885046,
+      "icir": 0.14815098514325523,
+      "fitness": 10.01142080052565,
+      "sharpe": 3.114289416182185,
+      "annual_return": 1.2917649766762243,
+      "cma_total": 10.417090556977241
+    },
+    {
+      "factor": "alpha_2",
+      "weight": 0.0,
+      "log_ret": -0.050448128694125585,
+      "ic_mean": 0.0015203208705860255,
+      "icir": 0.008806444610626006,
+      "fitness": -0.22393346112059204,
+      "sharpe": -0.25899947867269363,
+      "annual_return": -0.09344374130392323,
+      "cma_total": -0.2728612689441316
+    },
+    {
+      "factor": "alpha_3",
+      "weight": 0.0,
+      "log_ret": -0.222668387909912,
+      "ic_mean": -0.00699990309829801,
+      "icir": -0.040372494640133774,
+      "fitness": -4.242420538979055,
+      "sharpe": -1.872627642163714,
+      "annual_return": -0.6415560233777032,
+      "cma_total": -4.472492554933666
+    },
+    {
+      "factor": "alpha_4",
+      "weight": 0.0,
+      "log_ret": 0.24363121877212546,
+      "ic_mean": 0.02025410221101287,
+      "icir": 0.1553027414795352,
+      "fitness": 7.3548310277716995,
+      "sharpe": 2.8947375281233825,
+      "annual_return": 0.8069321687892762,
+      "cma_total": 7.6187163487548375
+    },
+    {
+      "factor": "alpha_5",
+      "weight": 0.392435054245494,
+      "log_ret": 0.3279719701791014,
+      "ic_mean": 0.05273058033989593,
+      "icir": 0.35960045685080005,
+      "fitness": 9.858172889669993,
+      "sharpe": 3.3413331755814166,
+      "annual_return": 1.0880862151559585,
+      "cma_total": 10.23887544018899
+    },
+    {
+      "factor": "alpha_6",
+      "weight": 0.030740481827951527,
+      "log_ret": 0.19653705679964406,
+      "ic_mean": 0.01296395861041339,
+      "icir": 0.0758227441547178,
+      "fitness": 3.9177370703211936,
+      "sharpe": 1.6391042773975566,
+      "annual_return": 0.7141137868283327,
+      "cma_total": 4.127238085731251
+    },
+    {
+      "factor": "alpha_7",
+      "weight": 0.0,
+      "log_ret": 0.024448016086522764,
+      "ic_mean": 0.010271148763533786,
+      "icir": 0.07285948894754134,
+      "fitness": 0.406272808493138,
+      "sharpe": 0.40306421136733783,
+      "annual_return": 0.12699804899036973,
+      "cma_total": 0.44099197334319457
+    },
+    {
+      "factor": "alpha_8",
+      "weight": 0.0,
+      "log_ret": 0.045570951596744985,
+      "ic_mean": -0.011062892420198431,
+      "icir": -0.08100290059052824,
+      "fitness": 0.7809428608814089,
+      "sharpe": 0.6420601027456981,
+      "annual_return": 0.18492565400763009,
+      "cma_total": 0.8146408910520501
+    },
+    {
+      "factor": "alpha_9",
+      "weight": 0.0,
+      "log_ret": 0.32129100221869067,
+      "ic_mean": 0.021335660826013753,
+      "icir": 0.11858413036651066,
+      "fitness": 10.62736009112503,
+      "sharpe": 3.6573802968234155,
+      "annual_return": 1.0554084417512988,
+      "cma_total": 10.969986754169735
+    },
+    {
+      "factor": "alpha_10",
+      "weight": 0.0,
+      "log_ret": 0.24119886361167603,
+      "ic_mean": 0.022805807513191355,
+      "icir": 0.08526077041100297,
+      "fitness": 4.6375899521615205,
+      "sharpe": 1.7345947982156737,
+      "annual_return": 0.8935083727839811,
+      "cma_total": 4.901594623286388
+    },
+    {
+      "factor": "alpha_11",
+      "weight": 0.1582477626772232,
+      "log_ret": 0.10195183256167521,
+      "ic_mean": 0.01673059043549437,
+      "icir": 0.14465932284287064,
+      "fitness": 2.410228669425921,
+      "sharpe": 1.4371197447805737,
+      "annual_return": 0.35159330489649887,
+      "cma_total": 2.5289110924230904
+    },
+    {
+      "factor": "alpha_12",
+      "weight": 0.0,
+      "log_ret": 0.15490733199704085,
+      "ic_mean": 0.0006425969418908855,
+      "icir": 0.003916316662427002,
+      "fitness": 3.1148700071271884,
+      "sharpe": 1.4724261469301498,
+      "annual_return": 0.5594004676327224,
+      "cma_total": 3.27041993606612
+    }
+  ],
+  "per_factor_cma_metrics_meta": {
+    "window_days_used": 80,
+    "score_mode": "full",
+    "available": true,
+    "unavailable_reason": ""
+  },
   "stock_alerts": [
     {
-      "symbol": "DY",
-      "score": 0.319755,
-      "rank": "64/68",
-      "delta_1d": -0.39939,
-      "consensus": "5/13",
-      "return_1d": -0.03231,
-      "return_5d": -0.06999,
-      "vol_ratio": 3.26
-    },
-    {
-      "symbol": "EZPW",
-      "score": 0.434327,
-      "rank": "46/68",
-      "delta_1d": -0.318791,
-      "consensus": "6/13",
-      "return_1d": -0.00433,
-      "return_5d": 0.0038,
-      "vol_ratio": 0.51
-    },
-    {
-      "symbol": "ORGO",
-      "score": 0.561866,
-      "rank": "25/68",
-      "delta_1d": -0.275458,
-      "consensus": "9/13",
-      "return_1d": -0.00175,
-      "return_5d": -0.24069,
-      "vol_ratio": 1.4
-    },
-    {
-      "symbol": "USAR",
-      "score": 0.844904,
-      "rank": "1/68",
-      "delta_1d": 0.258478,
-      "consensus": "8/13",
-      "return_1d": -0.00823,
-      "return_5d": -0.04823,
-      "vol_ratio": 0.7
+      "symbol": "INCY",
+      "score": 0.177062,
+      "rank": "69/69",
+      "delta_1d": -0.316443,
+      "consensus": "1/13",
+      "return_1d": -0.01546,
+      "return_5d": -0.03886,
+      "vol_ratio": 0.84
     },
     {
       "symbol": "RKLB",
-      "score": 0.560338,
-      "rank": "26/68",
-      "delta_1d": 0.256291,
-      "consensus": "2/13",
-      "return_1d": 0.02624,
-      "return_5d": -0.00336,
-      "vol_ratio": 1.14
-    },
-    {
-      "symbol": "PL",
-      "score": 0.644019,
-      "rank": "12/68",
-      "delta_1d": 0.2284,
-      "consensus": "4/13",
-      "return_1d": 0.02925,
-      "return_5d": 0.01679,
-      "vol_ratio": 1.04
-    },
-    {
-      "symbol": "CRDO",
-      "score": 0.320808,
-      "rank": "63/68",
-      "delta_1d": -0.222921,
+      "score": 0.257603,
+      "rank": "65/69",
+      "delta_1d": -0.302736,
       "consensus": "3/13",
-      "return_1d": 0.05401,
-      "return_5d": -0.1045,
-      "vol_ratio": 1.37
-    },
-    {
-      "symbol": "HOOD",
-      "score": 0.480818,
-      "rank": "37/68",
-      "delta_1d": 0.194972,
-      "consensus": "4/13",
-      "return_1d": 0.07908,
-      "return_5d": 0.0384,
-      "vol_ratio": 1.17
-    },
-    {
-      "symbol": "TWLO",
-      "score": 0.567364,
-      "rank": "22/68",
-      "delta_1d": -0.193475,
-      "consensus": "2/13",
-      "return_1d": -0.00591,
-      "return_5d": 0.02692,
-      "vol_ratio": 0.79
-    },
-    {
-      "symbol": "PPC",
-      "score": 0.539966,
-      "rank": "29/68",
-      "delta_1d": 0.193248,
-      "consensus": "5/13",
-      "return_1d": -0.0099,
-      "return_5d": 0.00109,
-      "vol_ratio": 0.75
-    },
-    {
-      "symbol": "TTMI",
-      "score": 0.710093,
-      "rank": "5/68",
-      "delta_1d": 0.190549,
-      "consensus": "5/13",
-      "return_1d": 0.01636,
-      "return_5d": -0.01845,
-      "vol_ratio": 0.87
+      "return_1d": -0.03216,
+      "return_5d": 0.01749,
+      "vol_ratio": 0.98
     },
     {
       "symbol": "OKTA",
-      "score": 0.474473,
-      "rank": "40/68",
-      "delta_1d": 0.169517,
+      "score": 0.188388,
+      "rank": "68/69",
+      "delta_1d": -0.286086,
+      "consensus": "4/13",
+      "return_1d": 0.10659,
+      "return_5d": 0.09383,
+      "vol_ratio": 2.5
+    },
+    {
+      "symbol": "PARR",
+      "score": 0.37969,
+      "rank": "53/69",
+      "delta_1d": -0.282766,
       "consensus": "5/13",
-      "return_1d": 0.0009,
-      "return_5d": -0.04041,
-      "vol_ratio": 1.7
+      "return_1d": 0.0015,
+      "return_5d": 0.17461,
+      "vol_ratio": 2.29
     },
     {
-      "symbol": "UBER",
-      "score": 0.414771,
-      "rank": "49/68",
-      "delta_1d": 0.163703,
-      "consensus": "1/13",
-      "return_1d": 0.00721,
-      "return_5d": 0.02589,
-      "vol_ratio": 0.87
+      "symbol": "DY",
+      "score": 0.596,
+      "rank": "22/69",
+      "delta_1d": 0.276245,
+      "consensus": "5/13",
+      "return_1d": -0.05835,
+      "return_5d": -0.11921,
+      "vol_ratio": 2.35
     },
     {
-      "symbol": "RCL",
-      "score": 0.284527,
-      "rank": "67/68",
-      "delta_1d": -0.163547,
-      "consensus": "0/13",
-      "return_1d": -0.05364,
-      "return_5d": -0.09636,
-      "vol_ratio": 0.97
+      "symbol": "LRN",
+      "score": 0.44623,
+      "rank": "44/69",
+      "delta_1d": -0.254329,
+      "consensus": "5/13",
+      "return_1d": 0.00377,
+      "return_5d": 0.02143,
+      "vol_ratio": 1.22
     },
     {
-      "symbol": "VRT",
-      "score": 0.300424,
-      "rank": "65/68",
-      "delta_1d": -0.15928,
-      "consensus": "1/13",
-      "return_1d": 0.0272,
-      "return_5d": -0.02614,
-      "vol_ratio": 0.61
-    },
-    {
-      "symbol": "V",
-      "score": 0.441907,
-      "rank": "44/68",
-      "delta_1d": 0.157594,
-      "consensus": "1/13",
-      "return_1d": 3e-05,
-      "return_5d": 0.01339,
-      "vol_ratio": 0.71
-    },
-    {
-      "symbol": "B",
-      "score": 0.65263,
-      "rank": "11/68",
-      "delta_1d": 0.15399,
+      "symbol": "AMD",
+      "score": 0.596243,
+      "rank": "21/69",
+      "delta_1d": 0.226839,
       "consensus": "2/13",
-      "return_1d": 0.01168,
-      "return_5d": -0.0675,
-      "vol_ratio": 0.63
+      "return_1d": -0.01155,
+      "return_5d": -0.00631,
+      "vol_ratio": 1.06
     },
     {
-      "symbol": "SFM",
-      "score": 0.538678,
-      "rank": "30/68",
-      "delta_1d": -0.152305,
-      "consensus": "1/13",
-      "return_1d": -0.0165,
-      "return_5d": 0.00936,
-      "vol_ratio": 0.97
+      "symbol": "PL",
+      "score": 0.421931,
+      "rank": "48/69",
+      "delta_1d": -0.222088,
+      "consensus": "4/13",
+      "return_1d": -0.05328,
+      "return_5d": 0.02891,
+      "vol_ratio": 1.19
     },
     {
-      "symbol": "QTWO",
-      "score": 0.579196,
-      "rank": "20/68",
-      "delta_1d": -0.138475,
-      "consensus": "3/13",
-      "return_1d": -0.0051,
-      "return_5d": 0.03378,
-      "vol_ratio": 1.88
-    },
-    {
-      "symbol": "PYPL",
-      "score": 0.400448,
-      "rank": "53/68",
-      "delta_1d": 0.134016,
-      "consensus": "6/13",
-      "return_1d": 0.0115,
-      "return_5d": 0.03315,
-      "vol_ratio": 0.5
-    },
-    {
-      "symbol": "WLDN",
-      "score": 0.810616,
-      "rank": "2/68",
-      "delta_1d": 0.0,
-      "consensus": "9/13",
-      "return_1d": -0.02267,
-      "return_5d": -0.29797,
-      "vol_ratio": 0.99
-    },
-    {
-      "symbol": "POWL",
-      "score": 0.800433,
-      "rank": "3/68",
-      "delta_1d": 0.0,
-      "consensus": "7/13",
-      "return_1d": 0.00303,
-      "return_5d": -0.02622,
-      "vol_ratio": 1.37
-    },
-    {
-      "symbol": "CDE",
-      "score": 0.750184,
-      "rank": "4/68",
-      "delta_1d": 0.0,
+      "symbol": "PPC",
+      "score": 0.323888,
+      "rank": "57/69",
+      "delta_1d": -0.216078,
       "consensus": "5/13",
-      "return_1d": -0.00916,
-      "return_5d": -0.09922,
+      "return_1d": -0.01578,
+      "return_5d": -0.05263,
+      "vol_ratio": 0.96
+    },
+    {
+      "symbol": "SKYW",
+      "score": 0.666096,
+      "rank": "12/69",
+      "delta_1d": 0.197382,
+      "consensus": "5/13",
+      "return_1d": -0.05299,
+      "return_5d": -0.08207,
+      "vol_ratio": 1.51
+    },
+    {
+      "symbol": "APP",
+      "score": 0.540329,
+      "rank": "33/69",
+      "delta_1d": 0.18359,
+      "consensus": "3/13",
+      "return_1d": 0.05338,
+      "return_5d": 0.17754,
+      "vol_ratio": 1.13
+    },
+    {
+      "symbol": "CRDO",
+      "score": 0.504248,
+      "rank": "37/69",
+      "delta_1d": 0.18344,
+      "consensus": "5/13",
+      "return_1d": 0.1102,
+      "return_5d": 0.01991,
+      "vol_ratio": 1.71
+    },
+    {
+      "symbol": "CRM",
+      "score": 0.587614,
+      "rank": "23/69",
+      "delta_1d": 0.18109,
+      "consensus": "0/13",
+      "return_1d": 0.04309,
+      "return_5d": 0.04298,
+      "vol_ratio": 1.23
+    },
+    {
+      "symbol": "EZPW",
+      "score": 0.608921,
+      "rank": "18/69",
+      "delta_1d": 0.174593,
+      "consensus": "8/13",
+      "return_1d": -0.04839,
+      "return_5d": -0.04911,
       "vol_ratio": 0.77
     },
     {
-      "symbol": "CAT",
-      "score": 0.294516,
-      "rank": "66/68",
-      "delta_1d": 0.0,
+      "symbol": "GOOGL",
+      "score": 0.541996,
+      "rank": "32/69",
+      "delta_1d": 0.174307,
       "consensus": "0/13",
-      "return_1d": 0.01537,
-      "return_5d": -0.0255,
-      "vol_ratio": 1.03
+      "return_1d": -0.00843,
+      "return_5d": -0.03041,
+      "vol_ratio": 1.14
     },
     {
-      "symbol": "TSLA",
-      "score": 0.202391,
-      "rank": "68/68",
-      "delta_1d": 0.0,
+      "symbol": "IREN",
+      "score": 0.756615,
+      "rank": "6/69",
+      "delta_1d": 0.172979,
+      "consensus": "5/13",
+      "return_1d": -0.08448,
+      "return_5d": -0.01128,
+      "vol_ratio": 1.53
+    },
+    {
+      "symbol": "EOSE",
+      "score": 0.798419,
+      "rank": "4/69",
+      "delta_1d": 0.170629,
+      "consensus": "8/13",
+      "return_1d": 0.00675,
+      "return_5d": 0.19561,
+      "vol_ratio": 0.82
+    },
+    {
+      "symbol": "TWLO",
+      "score": 0.399299,
+      "rank": "52/69",
+      "delta_1d": -0.168064,
       "consensus": "1/13",
-      "return_1d": 0.0332,
-      "return_5d": -0.00859,
-      "vol_ratio": 1.25
+      "return_1d": 0.02548,
+      "return_5d": 0.04844,
+      "vol_ratio": 0.77
+    },
+    {
+      "symbol": "KGC",
+      "score": 0.403962,
+      "rank": "51/69",
+      "delta_1d": -0.16182,
+      "consensus": "2/13",
+      "return_1d": -0.03912,
+      "return_5d": -0.11583,
+      "vol_ratio": 1.16
+    },
+    {
+      "symbol": "PYPL",
+      "score": 0.245057,
+      "rank": "67/69",
+      "delta_1d": -0.155391,
+      "consensus": "5/13",
+      "return_1d": 0.01504,
+      "return_5d": 0.03416,
+      "vol_ratio": 0.63
+    },
+    {
+      "symbol": "USAR",
+      "score": 0.907285,
+      "rank": "1/69",
+      "delta_1d": 0.0,
+      "consensus": "9/13",
+      "return_1d": -0.00288,
+      "return_5d": 0.01624,
+      "vol_ratio": 0.77
+    },
+    {
+      "symbol": "WLDN",
+      "score": 0.883284,
+      "rank": "2/69",
+      "delta_1d": 0.0,
+      "consensus": "8/13",
+      "return_1d": -0.0161,
+      "return_5d": -0.07164,
+      "vol_ratio": 0.93
+    },
+    {
+      "symbol": "POWL",
+      "score": 0.870243,
+      "rank": "3/69",
+      "delta_1d": 0.0,
+      "consensus": "8/13",
+      "return_1d": -0.02015,
+      "return_5d": -0.03782,
+      "vol_ratio": 1.43
+    },
+    {
+      "symbol": "CDE",
+      "score": 0.757016,
+      "rank": "5/69",
+      "delta_1d": 0.0,
+      "consensus": "5/13",
+      "return_1d": -0.05108,
+      "return_5d": -0.167,
+      "vol_ratio": 1.4
+    },
+    {
+      "symbol": "CCL",
+      "score": 0.254761,
+      "rank": "66/69",
+      "delta_1d": 0.0,
+      "consensus": "3/13",
+      "return_1d": -0.0327,
+      "return_5d": -0.14188,
+      "vol_ratio": 1.49
     }
   ],
-  "stock_alert_universe_size": 68,
+  "stock_alert_universe_size": 69,
   "bucket_transitions": {
-    "top_to_bottom": [
-      "DY"
-    ],
+    "top_to_bottom": [],
     "bottom_to_top": []
   },
   "rebalance_today": true,
   "score_mode": "full",
   "factor_health": [
     {
-      "factor": "alpha_1",
-      "weight": 0.327287,
-      "weight_pct": 32.73,
-      "effective_direction": 1,
-      "expr_hash": "b8804399e2ec",
-      "latest_ic": -0.298333,
-      "ic_mean_20d": -0.089554,
-      "ic_std_20d": 0.35977,
-      "icir_20d": -0.248919,
-      "ic_trend_slope": -0.128228,
-      "ic_trend": "-",
-      "sharpe_20d": 1.119885,
-      "fitness_20d": 1.889392,
-      "ls_cum_20d": 0.028238,
-      "contribution": 0.081468,
-      "status": "Degrading",
-      "interpretation": "Medium-horizon volume momentum percentile via rolling quantile.",
-      "direction_note": "Higher effective score implies improving volume trend persistence.",
-      "interpretation_stale": false
-    },
-    {
       "factor": "alpha_5",
-      "weight": 0.279562,
-      "weight_pct": 27.96,
+      "weight": 0.392435,
+      "weight_pct": 39.24,
       "effective_direction": 1,
       "expr_hash": "3e3f92d55847",
-      "latest_ic": -0.068344,
-      "ic_mean_20d": -0.101172,
-      "ic_std_20d": 0.350763,
-      "icir_20d": -0.288433,
-      "ic_trend_slope": -0.011899,
-      "ic_trend": "-",
-      "sharpe_20d": 0.889196,
-      "fitness_20d": 1.27547,
-      "ls_cum_20d": 0.020412,
-      "contribution": 0.080635,
+      "latest_ic": -0.088665,
+      "ic_mean_20d": -0.12379,
+      "ic_std_20d": 0.333362,
+      "icir_20d": -0.371337,
+      "ic_trend_slope": 0.038594,
+      "ic_trend": "+",
+      "sharpe_20d": -1.922098,
+      "fitness_20d": -3.457701,
+      "ls_cum_20d": -0.032104,
+      "contribution": 0.145726,
       "status": "Degrading",
       "interpretation": "Capital flow intensity from log-money relative spread structure.",
       "direction_note": "Higher effective score implies stronger capital-flow support.",
       "interpretation_stale": false
     },
     {
-      "factor": "alpha_4",
-      "weight": 0.281479,
-      "weight_pct": 28.15,
+      "factor": "alpha_1",
+      "weight": 0.418577,
+      "weight_pct": 41.86,
       "effective_direction": 1,
-      "expr_hash": "39139fe8f291",
-      "latest_ic": -0.026159,
-      "ic_mean_20d": -0.088173,
-      "ic_std_20d": 0.323009,
-      "icir_20d": -0.272973,
-      "ic_trend_slope": -0.020037,
+      "expr_hash": "b8804399e2ec",
+      "latest_ic": -0.028978,
+      "ic_mean_20d": -0.102333,
+      "ic_std_20d": 0.352412,
+      "icir_20d": -0.29038,
+      "ic_trend_slope": -0.039922,
       "ic_trend": "-",
-      "sharpe_20d": 4.823816,
-      "fitness_20d": 15.471946,
-      "ls_cum_20d": 0.102058,
-      "contribution": 0.076836,
+      "sharpe_20d": -1.699211,
+      "fitness_20d": -3.203095,
+      "ls_cum_20d": -0.035252,
+      "contribution": 0.121546,
       "status": "Degrading",
-      "interpretation": "Liquidity and FFT-ranked activity blend penalizing weak microstructure quality.",
-      "direction_note": "Higher effective score implies healthier liquidity-adjusted activity.",
+      "interpretation": "Medium-horizon volume momentum percentile via rolling quantile.",
+      "direction_note": "Higher effective score implies improving volume trend persistence.",
       "interpretation_stale": false
     },
     {
-      "factor": "alpha_2",
-      "weight": 0.111672,
-      "weight_pct": 11.17,
+      "factor": "alpha_11",
+      "weight": 0.158248,
+      "weight_pct": 15.82,
       "effective_direction": 1,
-      "expr_hash": "b232be3cd9d5",
-      "latest_ic": 0.330569,
-      "ic_mean_20d": 0.072587,
-      "ic_std_20d": 0.380452,
-      "icir_20d": 0.190792,
-      "ic_trend_slope": 0.129936,
+      "expr_hash": "ab1728904fcf",
+      "latest_ic": 0.099468,
+      "ic_mean_20d": -0.064006,
+      "ic_std_20d": 0.340341,
+      "icir_20d": -0.188063,
+      "ic_trend_slope": 0.058733,
       "ic_trend": "+",
-      "sharpe_20d": -0.286447,
-      "fitness_20d": -0.243992,
-      "ls_cum_20d": -0.007198,
-      "contribution": 0.021306,
+      "sharpe_20d": 0.482082,
+      "fitness_20d": 0.449277,
+      "ls_cum_20d": 0.008616,
+      "contribution": 0.029761,
       "status": "Degrading",
-      "interpretation": "Relative log-volume minus log-close pressure through quantile filtering.",
-      "direction_note": "Higher effective score implies stronger demand versus price level.",
+      "interpretation": "Time-series MAD of log-volume capturing abnormal participation dispersion.",
+      "direction_note": "Higher effective score implies favorable dispersion regime.",
+      "interpretation_stale": true,
+      "interpretation_warning": "expr_hash mismatch (expected=5ef699416b1e, got=ab1728904fcf)"
+    },
+    {
+      "factor": "alpha_6",
+      "weight": 0.03074,
+      "weight_pct": 3.07,
+      "effective_direction": 1,
+      "expr_hash": "29e9a456b3cc",
+      "latest_ic": -0.060375,
+      "ic_mean_20d": 0.107628,
+      "ic_std_20d": 0.350236,
+      "icir_20d": 0.307302,
+      "ic_trend_slope": 0.034772,
+      "ic_trend": "+",
+      "sharpe_20d": 0.476673,
+      "fitness_20d": 0.476885,
+      "ls_cum_20d": 0.009929,
+      "contribution": 0.009447,
+      "status": "Healthy",
+      "interpretation": "Price-location ratio between high and VWAP with rank normalization.",
+      "direction_note": "Higher effective score implies stronger close location quality.",
       "interpretation_stale": false
     },
     {
@@ -454,15 +609,15 @@
       "weight_pct": 0.0,
       "effective_direction": 1,
       "expr_hash": "d6511af1f613",
-      "latest_ic": -0.271287,
-      "ic_mean_20d": -0.077702,
-      "ic_std_20d": 0.363273,
-      "icir_20d": -0.213894,
-      "ic_trend_slope": -0.08783,
+      "latest_ic": -0.110889,
+      "ic_mean_20d": -0.099873,
+      "ic_std_20d": 0.350214,
+      "icir_20d": -0.285177,
+      "ic_trend_slope": -0.018838,
       "ic_trend": "-",
-      "sharpe_20d": 1.77352,
-      "fitness_20d": 3.65559,
-      "ls_cum_20d": 0.042148,
+      "sharpe_20d": -1.357079,
+      "fitness_20d": -2.200471,
+      "ls_cum_20d": -0.026083,
       "contribution": 0.0,
       "status": "Degrading",
       "interpretation": "Volume dislocation factor comparing log-volume to a nonlinear baseline.",
@@ -475,15 +630,15 @@
       "weight_pct": 0.0,
       "effective_direction": 1,
       "expr_hash": "5ef699416b1e",
-      "latest_ic": 0.504622,
-      "ic_mean_20d": -0.086581,
-      "ic_std_20d": 0.448774,
-      "icir_20d": -0.192928,
-      "ic_trend_slope": 0.177355,
+      "latest_ic": 0.13841,
+      "ic_mean_20d": -0.050736,
+      "ic_std_20d": 0.43586,
+      "icir_20d": -0.116405,
+      "ic_trend_slope": 0.112278,
       "ic_trend": "+",
-      "sharpe_20d": 0.892122,
-      "fitness_20d": 1.726201,
-      "ls_cum_20d": 0.037143,
+      "sharpe_20d": 3.238649,
+      "fitness_20d": 11.003992,
+      "ls_cum_20d": 0.114528,
       "contribution": 0.0,
       "status": "Degrading",
       "interpretation": "Inverse low-quantile open-return effect targeting short-term oversold rebounds.",
@@ -492,42 +647,20 @@
       "interpretation_warning": "expr_hash mismatch (expected=54462453f581, got=5ef699416b1e)"
     },
     {
-      "factor": "alpha_11",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "ab1728904fcf",
-      "latest_ic": -0.0141,
-      "ic_mean_20d": -0.072492,
-      "ic_std_20d": 0.338159,
-      "icir_20d": -0.214373,
-      "ic_trend_slope": 0.036244,
-      "ic_trend": "+",
-      "sharpe_20d": -0.63012,
-      "fitness_20d": -0.668424,
-      "ls_cum_20d": -0.011163,
-      "contribution": 0.0,
-      "status": "Degrading",
-      "interpretation": "Time-series MAD of log-volume capturing abnormal participation dispersion.",
-      "direction_note": "Higher effective score implies favorable dispersion regime.",
-      "interpretation_stale": true,
-      "interpretation_warning": "expr_hash mismatch (expected=5ef699416b1e, got=ab1728904fcf)"
-    },
-    {
       "factor": "alpha_12",
       "weight": 0.0,
       "weight_pct": 0.0,
       "effective_direction": 1,
       "expr_hash": "ef9be7ef82f5",
-      "latest_ic": -0.03073,
-      "ic_mean_20d": 0.115397,
-      "ic_std_20d": 0.313376,
-      "icir_20d": 0.368237,
-      "ic_trend_slope": 0.008273,
-      "ic_trend": "+",
-      "sharpe_20d": 2.963048,
-      "fitness_20d": 5.57365,
-      "ls_cum_20d": 0.035103,
+      "latest_ic": -0.148458,
+      "ic_mean_20d": 0.110555,
+      "ic_std_20d": 0.316822,
+      "icir_20d": 0.348949,
+      "ic_trend_slope": -0.039867,
+      "ic_trend": "-",
+      "sharpe_20d": 2.108428,
+      "fitness_20d": 3.481453,
+      "ls_cum_20d": 0.027048,
       "contribution": 0.0,
       "status": "Healthy",
       "interpretation": "OHLC gap relation adjusted by volume-chip support correlation.",
@@ -536,20 +669,41 @@
       "interpretation_warning": "expr_hash mismatch (expected=ab1728904fcf, got=ef9be7ef82f5)"
     },
     {
+      "factor": "alpha_2",
+      "weight": 0.0,
+      "weight_pct": 0.0,
+      "effective_direction": 1,
+      "expr_hash": "b232be3cd9d5",
+      "latest_ic": 0.008313,
+      "ic_mean_20d": 0.088447,
+      "ic_std_20d": 0.370186,
+      "icir_20d": 0.238927,
+      "ic_trend_slope": 0.042132,
+      "ic_trend": "+",
+      "sharpe_20d": 2.031264,
+      "fitness_20d": 4.247138,
+      "ls_cum_20d": 0.043371,
+      "contribution": 0.0,
+      "status": "Healthy",
+      "interpretation": "Relative log-volume minus log-close pressure through quantile filtering.",
+      "direction_note": "Higher effective score implies stronger demand versus price level.",
+      "interpretation_stale": false
+    },
+    {
       "factor": "alpha_3",
       "weight": 0.0,
       "weight_pct": 0.0,
       "effective_direction": 1,
       "expr_hash": "94bd1aea62d8",
-      "latest_ic": 0.142635,
-      "ic_mean_20d": 0.095123,
-      "ic_std_20d": 0.32563,
-      "icir_20d": 0.292121,
-      "ic_trend_slope": 0.034164,
+      "latest_ic": 0.232824,
+      "ic_mean_20d": 0.113975,
+      "ic_std_20d": 0.321938,
+      "icir_20d": 0.354028,
+      "ic_trend_slope": 0.043604,
       "ic_trend": "+",
-      "sharpe_20d": 3.250314,
-      "fitness_20d": 8.071429,
-      "ls_cum_20d": 0.061177,
+      "sharpe_20d": 9.728924,
+      "fitness_20d": 34.372599,
+      "ls_cum_20d": 0.123832,
       "contribution": 0.0,
       "status": "Healthy",
       "interpretation": "Inverse correlation of volume/open ratio with lows, emphasizing stress-reversal patterns.",
@@ -557,24 +711,24 @@
       "interpretation_stale": false
     },
     {
-      "factor": "alpha_6",
+      "factor": "alpha_4",
       "weight": 0.0,
       "weight_pct": 0.0,
       "effective_direction": 1,
-      "expr_hash": "29e9a456b3cc",
-      "latest_ic": 0.132148,
-      "ic_mean_20d": 0.107839,
-      "ic_std_20d": 0.35013,
-      "icir_20d": 0.307997,
-      "ic_trend_slope": 0.06681,
+      "expr_hash": "39139fe8f291",
+      "latest_ic": -0.050016,
+      "ic_mean_20d": -0.093496,
+      "ic_std_20d": 0.321374,
+      "icir_20d": -0.290926,
+      "ic_trend_slope": 0.006046,
       "ic_trend": "+",
-      "sharpe_20d": 0.439253,
-      "fitness_20d": 0.421933,
-      "ls_cum_20d": 0.009154,
+      "sharpe_20d": 4.212809,
+      "fitness_20d": 12.382344,
+      "ls_cum_20d": 0.085704,
       "contribution": 0.0,
-      "status": "Healthy",
-      "interpretation": "Price-location ratio between high and VWAP with rank normalization.",
-      "direction_note": "Higher effective score implies stronger close location quality.",
+      "status": "Degrading",
+      "interpretation": "Liquidity and FFT-ranked activity blend penalizing weak microstructure quality.",
+      "direction_note": "Higher effective score implies healthier liquidity-adjusted activity.",
       "interpretation_stale": false
     },
     {
@@ -583,15 +737,15 @@
       "weight_pct": 0.0,
       "effective_direction": 1,
       "expr_hash": "517d4b6e31c5",
-      "latest_ic": 0.045814,
-      "ic_mean_20d": -0.086541,
-      "ic_std_20d": 0.345131,
-      "icir_20d": -0.250748,
-      "ic_trend_slope": 0.075891,
+      "latest_ic": -0.065803,
+      "ic_mean_20d": -0.087432,
+      "ic_std_20d": 0.345049,
+      "icir_20d": -0.253391,
+      "ic_trend_slope": 0.031371,
       "ic_trend": "+",
-      "sharpe_20d": -2.89627,
-      "fitness_20d": -7.310689,
-      "ls_cum_20d": -0.063209,
+      "sharpe_20d": -2.885584,
+      "fitness_20d": -7.269353,
+      "ls_cum_20d": -0.06296,
       "contribution": 0.0,
       "status": "Degrading",
       "interpretation": "Rolling MAD of log-money to capture regime-dependent flow volatility.",
@@ -604,15 +758,15 @@
       "weight_pct": 0.0,
       "effective_direction": 1,
       "expr_hash": "188949ffc8be",
-      "latest_ic": -0.153771,
-      "ic_mean_20d": -0.087474,
-      "ic_std_20d": 0.333556,
-      "icir_20d": -0.262247,
-      "ic_trend_slope": -0.014234,
-      "ic_trend": "-",
-      "sharpe_20d": 4.77445,
-      "fitness_20d": 13.257759,
-      "ls_cum_20d": 0.076495,
+      "latest_ic": 0.033465,
+      "ic_mean_20d": -0.084788,
+      "ic_std_20d": 0.334342,
+      "icir_20d": -0.253597,
+      "ic_trend_slope": 0.045024,
+      "ic_trend": "+",
+      "sharpe_20d": 5.256733,
+      "fitness_20d": 15.185314,
+      "ls_cum_20d": 0.082786,
       "contribution": 0.0,
       "status": "Degrading",
       "interpretation": "Composite microstructure blend of Amihud, chip-vwap correlation, and gap geometry.",
@@ -626,15 +780,15 @@
       "weight_pct": 0.0,
       "effective_direction": 1,
       "expr_hash": "54462453f581",
-      "latest_ic": -0.068748,
-      "ic_mean_20d": -0.077935,
-      "ic_std_20d": 0.337812,
-      "icir_20d": -0.230706,
-      "ic_trend_slope": -0.012433,
+      "latest_ic": -0.147996,
+      "ic_mean_20d": -0.080219,
+      "ic_std_20d": 0.33814,
+      "icir_20d": -0.237237,
+      "ic_trend_slope": -0.011186,
       "ic_trend": "-",
-      "sharpe_20d": 1.324408,
-      "fitness_20d": 2.264866,
-      "ls_cum_20d": 0.029012,
+      "sharpe_20d": 3.240619,
+      "fitness_20d": 7.760643,
+      "ls_cum_20d": 0.056896,
       "contribution": 0.0,
       "status": "Degrading",
       "interpretation": "Nested nonlinear gap-geometry factor with quantile and transform interactions.",
@@ -645,41 +799,41 @@
   ],
   "cma_breakdown": {
     "raw_terms": {
-      "log_ret": 0.709326371114898,
-      "ic_mean": 0.058950237270178715,
-      "ic_std": 0.15332591745165908,
-      "icir": 0.3844766390783103,
-      "fitness": 32.529067280847094,
-      "sharpe": 7.601823112687098,
-      "annual_return": 2.2888520181502345,
-      "turnover": 0.06774611777502144
+      "log_ret": 0.6683664991016354,
+      "ic_mean": 0.056902090759285415,
+      "ic_std": 0.15819133917264333,
+      "icir": 0.35970418772511314,
+      "fitness": 24.304890311561074,
+      "sharpe": 5.815190157097359,
+      "annual_return": 2.1835819836936436,
+      "turnover": 0.0
     },
     "penalties": {
       "icir_shortfall": 0.0
     },
     "weighted_terms": {
-      "log_ret": 0.709326371114898,
-      "ic": 0.058950237270178715,
-      "fitness": 32.529067280847094
+      "log_ret": 0.6683664991016354,
+      "ic": 0.056902090759285415,
+      "fitness": 24.304890311561074
     },
     "penalty_terms": {
-      "turnover_penalty": 0.0006774611777502145,
+      "turnover_penalty": 0.0,
       "icir_penalty": 0.0
     },
-    "total": 33.29666642805442,
-    "log_ret_raw": 0.709326371114898,
-    "ic_mean_raw": 0.058950237270178715,
-    "ic_std_raw": 0.15332591745165908,
-    "icir_raw": 0.3844766390783103,
-    "fitness_raw": 32.529067280847094,
-    "sharpe_raw": 7.601823112687098,
-    "annual_return_raw": 2.2888520181502345,
-    "turnover_raw": 0.06774611777502144,
+    "total": 25.030158901421995,
+    "log_ret_raw": 0.6683664991016354,
+    "ic_mean_raw": 0.056902090759285415,
+    "ic_std_raw": 0.15819133917264333,
+    "icir_raw": 0.35970418772511314,
+    "fitness_raw": 24.304890311561074,
+    "sharpe_raw": 5.815190157097359,
+    "annual_return_raw": 2.1835819836936436,
+    "turnover_raw": 0.0,
     "icir_penalty_raw": 0.0,
-    "weighted_log_ret": 0.709326371114898,
-    "weighted_ic": 0.058950237270178715,
-    "weighted_fitness": 32.529067280847094,
-    "turnover_penalty_term": 0.0006774611777502145,
+    "weighted_log_ret": 0.6683664991016354,
+    "weighted_ic": 0.056902090759285415,
+    "weighted_fitness": 24.304890311561074,
+    "turnover_penalty_term": 0.0,
     "icir_penalty_term": 0.0
   },
   "objective_config": {
@@ -693,59 +847,73 @@
     "turnover_floor": 0.125,
     "cma_top_bottom": 8,
     "cma_forward_horizon": 20,
-    "cma_min_valid_days": 60
+    "cma_min_valid_days": 60,
+    "eval_window": 80
+  },
+  "timing_daily": {
+    "score_source": "actionable_composite",
+    "fallback_reason": "",
+    "bottom_n": 8,
+    "total_scored": 69,
+    "exits": [],
+    "restores": [],
+    "blocked": [],
+    "deferred_restores": [],
+    "date_match": true,
+    "source": "exact",
+    "data_as_of_date": "2026-03-05"
   },
   "market_summary_daily": {
     "as_of_date": "2026-03-05",
     "data_as_of_date": "2026-03-05",
     "window_days": 1,
-    "universe_mean_ret": 0.019335416263763512,
-    "universe_median_ret": 0.011755245150713245,
-    "win_rate": 0.6764705882352942,
-    "advancers": 46,
-    "decliners": 22,
+    "universe_mean_ret": -0.012224996580405916,
+    "universe_median_ret": -0.01493130205988591,
+    "win_rate": 0.27941176470588236,
+    "advancers": 19,
+    "decliners": 49,
     "unchanged": 0,
     "total_scored": 68,
     "best_5": {
-      "SSRM": 0.14602844259451953,
-      "IREN": 0.12491992312620126,
-      "EOSE": 0.10519183673469401,
-      "APP": 0.10224740925242504,
-      "PARR": 0.09079995634617499
+      "CRDO": 0.11019912152269407,
+      "OKTA": 0.10659439927732617,
+      "APP": 0.053383365121486115,
+      "CRM": 0.043085188820581655,
+      "QTWO": 0.03725841801155627
     },
     "worst_5": {
-      "UAL": -0.02215677478496625,
-      "WLDN": -0.022668997668997548,
-      "EAT": -0.02795515822335748,
-      "DY": -0.03231475637074721,
-      "RCL": -0.053638611413312165
+      "DY": -0.05834654934261008,
+      "SSRM": -0.0623486682808716,
+      "TTMI": -0.06414504828630951,
+      "AGX": -0.07071713147410352,
+      "IREN": -0.0844806378132118
     },
     "sector_winners": [
       {
-        "sector": "Energy",
-        "return": 0.09079995634617499
+        "sector": "Utilities",
+        "return": 0.023918761852327552
       },
       {
         "sector": "Information Technology",
-        "return": 0.04269536696500402
+        "return": 0.010377584688605414
       },
       {
-        "sector": "Materials",
-        "return": 0.037857641072025355
+        "sector": "Energy",
+        "return": 0.0015007503751875984
       }
     ],
     "sector_losers": [
       {
-        "sector": "Consumer Discretionary",
-        "return": -0.005403820622165378
+        "sector": "Health Care",
+        "return": -0.014610783045119091
       },
       {
-        "sector": "Unknown",
-        "return": -0.008233587232499007
+        "sector": "Industrials",
+        "return": -0.03428523348398458
       },
       {
-        "sector": "Consumer Defensive",
-        "return": -0.011026983981977878
+        "sector": "Materials",
+        "return": -0.04468173522611141
       }
     ],
     "date_match": true,
@@ -755,53 +923,53 @@
     "as_of_date": "2026-03-05",
     "data_as_of_date": "2026-03-05",
     "window_days": 5,
-    "universe_mean_ret": -0.024568641929400677,
-    "universe_median_ret": -0.02760457070404232,
-    "win_rate": 0.39705882352941174,
-    "advancers": 27,
-    "decliners": 41,
+    "universe_mean_ret": -0.03980833840080189,
+    "universe_median_ret": -0.03639523742118084,
+    "win_rate": 0.27941176470588236,
+    "advancers": 19,
+    "decliners": 49,
     "unchanged": 0,
     "total_scored": 68,
     "best_5": {
-      "PARR": 0.28668898043254365,
-      "SEZL": 0.20609951845906904,
-      "APP": 0.14989987603699828,
-      "SSRM": 0.08505747126436791,
-      "HOOD": 0.06440963231486285
+      "PARR": 0.23321424171491922,
+      "APP": 0.14555292526208996,
+      "QTWO": 0.07229660144181271,
+      "ANET": 0.07045472002457953,
+      "OKTA": 0.06187904247516163
     },
     "worst_5": {
-      "CCL": -0.11441683810729542,
-      "CRDO": -0.1744893437008984,
-      "WLDN": -0.2835814519746257,
-      "ORGO": -0.30787878787878786,
-      "EOSE": -0.39276807980049877
+      "ARQT": -0.15865724381625446,
+      "CCL": -0.17029429797670126,
+      "UAL": -0.18164230438521067,
+      "ORGO": -0.23271276595744683,
+      "WLDN": -0.30927061723185845
     },
     "sector_winners": [
       {
         "sector": "Energy",
-        "return": 0.28668898043254365
+        "return": 0.23321424171491922
+      },
+      {
+        "sector": "Communication Services",
+        "return": 0.0031491647242285897
       },
       {
         "sector": "Consumer Defensive",
-        "return": 0.026245350486863384
-      },
-      {
-        "sector": "Financials",
-        "return": 0.01912354685748994
+        "return": 0.00151975511477076
       }
     ],
     "sector_losers": [
       {
-        "sector": "Utilities",
-        "return": -0.06944839756361354
-      },
-      {
         "sector": "Industrials",
-        "return": -0.08276563593840394
+        "return": -0.0840607959561067
       },
       {
         "sector": "Health Care",
-        "return": -0.08568694532517165
+        "return": -0.09283595304219805
+      },
+      {
+        "sector": "Materials",
+        "return": -0.09646303667936978
       }
     ],
     "date_match": true,
@@ -809,145 +977,161 @@
   },
   "microstructure_anomalies": [
     {
-      "symbol": "CDE",
+      "symbol": "INTC",
       "feature": "amihud_range",
-      "value": 0.376573,
-      "ts_z": 3.7004,
-      "cs_z": -0.0708,
+      "value": 0.004527,
+      "ts_z": 3.6374,
+      "cs_z": -0.2984,
       "signal": "Illiquidity spike"
     },
     {
-      "symbol": "CAT",
+      "symbol": "GOOGL",
       "feature": "amihud_range",
-      "value": 0.024029,
-      "ts_z": 2.4699,
-      "cs_z": -0.1503,
+      "value": 0.000942,
+      "ts_z": 3.2027,
+      "cs_z": -0.3035,
       "signal": "Illiquidity spike"
     },
     {
-      "symbol": "OKTA",
-      "feature": "amihud_range",
-      "value": 0.891082,
-      "ts_z": 2.1614,
-      "cs_z": 0.0453,
-      "signal": "Illiquidity spike"
-    },
-    {
-      "symbol": "CDE",
-      "feature": "amihud_mean",
-      "value": 0.002818,
-      "ts_z": 2.1026,
-      "cs_z": -0.1976,
-      "signal": "Liquidity drop"
+      "symbol": "TSLA",
+      "feature": "vol_fft",
+      "value": 0.554628,
+      "ts_z": 2.3217,
+      "cs_z": 0.2552,
+      "signal": "HF volume spike"
     },
     {
       "symbol": "UBER",
       "feature": "amihud_mean",
-      "value": 0.000354,
-      "ts_z": 2.0179,
-      "cs_z": -0.2263,
+      "value": 0.000387,
+      "ts_z": 2.2834,
+      "cs_z": -0.268,
       "signal": "Liquidity drop"
     },
     {
-      "symbol": "MU",
-      "feature": "drift_factor",
-      "value": 1116857943.113534,
-      "ts_z": 0.7552,
-      "cs_z": 3.1895,
-      "signal": "Momentum surge"
+      "symbol": "SYF",
+      "feature": "amihud_mean",
+      "value": 0.002844,
+      "ts_z": 2.0156,
+      "cs_z": -0.2301,
+      "signal": "Liquidity drop"
     },
     {
-      "symbol": "HOOD",
+      "symbol": "NVDA",
       "feature": "vol_fft",
-      "value": 0.254565,
-      "ts_z": -0.6947,
-      "cs_z": -2.0033,
+      "value": 0.190493,
+      "ts_z": -1.4234,
+      "cs_z": -2.3889,
+      "signal": "HF volume drop"
+    },
+    {
+      "symbol": "AMD",
+      "feature": "vol_fft",
+      "value": 0.208931,
+      "ts_z": -1.1322,
+      "cs_z": -2.255,
+      "signal": "HF volume drop"
+    },
+    {
+      "symbol": "MSGS",
+      "feature": "vol_fft",
+      "value": 0.149831,
+      "ts_z": -0.7983,
+      "cs_z": -2.6842,
       "signal": "HF volume drop"
     },
     {
       "symbol": "ORGO",
       "feature": "amihud_mean",
-      "value": 0.685453,
-      "ts_z": -0.4989,
-      "cs_z": 7.7545,
+      "value": 0.504081,
+      "ts_z": -0.572,
+      "cs_z": 7.5008,
       "signal": "Liquidity surge"
     },
     {
-      "symbol": "MU",
-      "feature": "vol_fft",
-      "value": 0.222282,
-      "ts_z": -0.4754,
-      "cs_z": -2.2535,
-      "signal": "HF volume drop"
-    },
-    {
-      "symbol": "NVDA",
-      "feature": "drift_factor",
-      "value": 1093859472.094513,
-      "ts_z": 0.4088,
-      "cs_z": 3.1173,
-      "signal": "Momentum surge"
+      "symbol": "CAAP",
+      "feature": "amihud_mean",
+      "value": 0.173344,
+      "ts_z": -0.4957,
+      "cs_z": 2.3996,
+      "signal": "Liquidity surge"
     },
     {
       "symbol": "TSLA",
       "feature": "drift_factor",
-      "value": 1474249600.794701,
-      "ts_z": -0.3636,
-      "cs_z": 4.3119,
+      "value": 1020287785.225536,
+      "ts_z": -0.4324,
+      "cs_z": 3.8293,
       "signal": "Momentum reversal"
+    },
+    {
+      "symbol": "NVDA",
+      "feature": "drift_factor",
+      "value": 1512451049.166931,
+      "ts_z": 0.4258,
+      "cs_z": 5.7006,
+      "signal": "Momentum surge"
     },
     {
       "symbol": "ORGO",
       "feature": "amihud_range",
-      "value": 36.622154,
-      "ts_z": -0.1755,
-      "cs_z": 8.1062,
+      "value": 5.353246,
+      "ts_z": -0.4232,
+      "cs_z": 7.3346,
       "signal": "Illiquidity drop"
     },
     {
-      "symbol": "AMZN",
+      "symbol": "MU",
+      "feature": "vol_fft",
+      "value": 0.233072,
+      "ts_z": -0.3941,
+      "cs_z": -2.0797,
+      "signal": "HF volume drop"
+    },
+    {
+      "symbol": "SNDK",
       "feature": "drift_factor",
-      "value": 1304034621.767063,
-      "ts_z": -0.1425,
-      "cs_z": 3.7774,
-      "signal": "Momentum reversal"
+      "value": -878244327.3518,
+      "ts_z": 0.3871,
+      "cs_z": -3.3895,
+      "signal": "Momentum surge"
     }
   ],
   "ohlcv_returns": {
-    "mean": 0.019291,
-    "std": 0.037047,
+    "mean": -0.012225,
+    "std": 0.034677,
     "best_5": {
-      "SSRM": 0.146028,
-      "IREN": 0.12492,
-      "EOSE": 0.105192,
-      "APP": 0.102247,
-      "PARR": 0.0908
+      "CRDO": 0.110199,
+      "OKTA": 0.106594,
+      "APP": 0.053383,
+      "CRM": 0.043085,
+      "QTWO": 0.037258
     },
     "worst_5": {
-      "UAL": -0.022157,
-      "WLDN": -0.022669,
-      "EAT": -0.027955,
-      "DY": -0.032315,
-      "RCL": -0.053639
+      "DY": -0.058347,
+      "SSRM": -0.062349,
+      "TTMI": -0.064145,
+      "AGX": -0.070717,
+      "IREN": -0.084481
     },
-    "advancers": 46,
-    "decliners": 22
+    "advancers": 19,
+    "decliners": 49
   },
   "cma_weights": {
     "last_train_date": "2026-03-05",
     "weights": {
-      "alpha_1": 0.327287,
-      "alpha_4": 0.281479,
-      "alpha_5": 0.279562,
-      "alpha_2": 0.111672,
+      "alpha_1": 0.418577,
+      "alpha_5": 0.392435,
+      "alpha_11": 0.158248,
+      "alpha_6": 0.03074,
       "alpha_0": 0.0,
+      "alpha_2": 0.0,
       "alpha_3": 0.0,
-      "alpha_6": 0.0,
+      "alpha_4": 0.0,
       "alpha_7": 0.0,
       "alpha_8": 0.0,
       "alpha_9": 0.0,
       "alpha_10": 0.0,
-      "alpha_11": 0.0,
       "alpha_12": 0.0
     }
   },
