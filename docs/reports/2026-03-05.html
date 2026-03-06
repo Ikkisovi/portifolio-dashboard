@@ -56,33 +56,33 @@
   <a href="index.html">← All Reports</a>
   <span style="color:var(--text-muted)">AlphaSAGE Daily Factor Report</span>
 </div>
-<div class="meta">Generated on 2026-03-06 11:38 · qwen3.5:397b-cloud via Ollama</div>
+<div class="meta">Generated on 2026-03-06 12:09 · qwen3.5:397b-cloud via Ollama</div>
 <h1>Daily Factor Report -- 2026-03-05</h1>
 
-<p>Generated at 2026-03-06 11:37:39 by qwen3.5:397b-cloud via ollama</p>
+<p>Generated at 2026-03-06 12:09:42 by qwen3.5:397b-cloud via ollama</p>
 
 <hr>
 
-<p><strong>Factor Regime and CMA Objective Health</strong></p>
-<p>The CMA objective total stands at 25.030159, driven predominantly by weighted_fitness (24.304890) rather than weighted_log_ret (0.668366) or weighted_ic (0.056902). This indicates the runtime eval window (80 days) prioritizes stability over raw return. Capital concentration is high: alpha_1 (0.418577), alpha_5 (0.392435), and alpha_11 (0.158248) constitute 96.9% of total weight. However, factor health is deteriorating; alpha_1 shows a 20d ICIR of -0.29038 and alpha_5 shows -0.371337, both marked "Degrading." Despite positive runtime log_ret (alpha_1: 0.382271, alpha_5: 0.327972), recent 20d signal quality is fading.</p>
+<p>1. Factor Regime & CMA Objective Health</p>
+<p>The CMA objective total stands at 25.030159 as of 2026-03-05. The market regime shows stress with a universe mean return of -1.22% and a win rate of 27.94%. Portfolio construction relies heavily on alpha_1 with a selected weight of 0.418577 and alpha_5 with a selected weight of 0.392435. Both factors currently report a status of Degrading with 20-day ICIR values of -0.29038 and -0.371337 respectively. Alpha_11 holds a weight of 0.158248 despite a stale interpretation hash.</p>
 
-<p><strong>Top 3 Divergence Factors</strong></p>
-<p>Three factors exhibit significant divergence between 20d health and zero CMA weight:</p>
-<p>1.  <strong>alpha_12:</strong> Weight 0.0. Despite a healthy 20d ICIR of 0.348949 and positive runtime log_ret of 0.154907, it receives no allocation. This suggests potential correlation redundancy with top-weighted factors despite standalone strength.</p>
-<p>2.  <strong>alpha_3:</strong> Weight 0.0. Shows a healthy 20d ICIR of 0.354028 but negative runtime log_ret of -0.222668. The negative eval window return overrides recent ICIR strength.</p>
-<p>3.  <strong>alpha_2:</strong> Weight 0.0. Similar profile with 20d ICIR of 0.238927 (Healthy) but negative runtime log_ret of -0.050448.</p>
+<p>2. Top Divergence Factors</p>
+<p>Top divergence factors exhibit positive standalone health but zero selected weight. Alpha_9 leads with a standalone_cma_total of 10.969987 against a selected_weight of 0.0. Alpha_4 follows with a standalone_cma_total of 7.618716 and selected_weight of 0.0. Alpha_10 shows a standalone_cma_total of 4.901595 with selected_weight of 0.0. This exclusion is possibly due to competition from higher-weighted factors like alpha_1 (0.418577) and alpha_5 (0.392435), as optimizer traces are unavailable.</p>
 
-<p><strong>Actionable Factor Health and Timing Risk</strong></p>
-<p>Timing risk signals are stable with no forced trades. The timing risk section reports exits: (none) and restores: (none), utilizing the actionable_composite score source. The model scored 69 assets with bottom_n=8. The lack of exit/restore triggers suggests the actionable factors (1d forward) do not currently indicate extreme short-term momentum shifts requiring overlay intervention. However, the broader market context is negative; mean return is -0.012225 with 49 decliners versus 19 advancers.</p>
+<p>3. Actionable Factor Health & Timing Risk</p>
+<p>Actionable factor health indicates mixed timing signals within the actionable_composite score source. Actionable_alpha_4 displays strong health with a fitness of 6.233837 and a weight of 0.222222. Actionable_alpha_9 also contributes positively with a fitness of 3.239042 and a weight of 0.194444. Conversely, actionable_alpha_10 presents significant risk with a fitness of -8.004413 and a weight of 0.027778. Actionable_alpha_3 remains negative with a fitness of -4.301756 and a weight of 0.055556.</p>
 
-<p><strong>Stock-Level Moves</strong></p>
-<p>Specific stock movements show divergence from model scores. OKTA posted a 1d return of 0.10659 but holds a low model score of 0.188388 (Rank 68/69). This price-score divergence indicates a possibility of mean reversion (low confidence), as the factor model does not support the rally. Conversely, USAR holds the top score of 0.907285 with a flat 1d return of -0.00288, suggesting potential latent alpha not yet realized in price. Microstructure anomalies note an illiquidity spike for GOOGL (amihud_range TS_Z 3.2027), warranting caution on size.</p>
+<p>4. Stock-Level Evidence</p>
+<p>Stock-level evidence highlights severe dispersion in the scored universe of 69 names. INCY ranks last at 69/69 with a cma_score of 0.177062 and a 1-day return of -1.55%. OKTA ranks 68/69 with a cma_score of 0.188388 despite a 1-day return of 10.66%. On the upper end, DY ranks 22/69 with a cma_score of 0.596 and AMD ranks 21/69 with a cma_score of 0.596243. Dragging factors for low-ranked stocks frequently include alpha_5 and alpha_1 with negative contributions.</p>
 
-<p><strong>Actionable Steps</strong></p>
+<p>5. Data Quality Notes</p>
+<p>Data quality monitoring flagged 9 issues with a highest severity of warning. Five warnings relate to interpretation_stale status for factors alpha_11, alpha_10, alpha_12, alpha_8, and alpha_9. Specific evidence includes an expr_hash mismatch for alpha_11 where expected=5ef699416b1e and got=ab1728904fcf. Missing inputs such as amihud_mean and vol_fft are noted across multiple factor contexts.</p>
+
+<p>6. Actionable Items</p>
 <ul>
-<li>  <strong>Monitor Alpha Degradation:</strong> Track alpha_1 and alpha_5 closely; their negative 20d ICIR (-0.29038, -0.371337) despite high weight poses regime risk.</li>
-<li>  <strong>Investigate Alpha_12 Exclusion:</strong> Review correlation matrices for alpha_12 (ICIR_20d 0.348949) to understand why positive health yields zero weight.</li>
-<li>  <strong>Watch OKTA Reversion:</strong> Consider reducing exposure to OKTA given the divergence between Ret1d (0.10659) and Score (0.188388).</li>
+<li>  Monitor alpha_9 and alpha_4 for potential inclusion given standalone_cma_totals above 7.6.</li>
+<li>  Review stale interpretation hashes for alpha_11 and alpha_10 before next rebalance.</li>
+<li>  Assess risk exposure to actionable_alpha_10 given fitness of -8.004413.</li>
 </ul>
 
 <hr>
@@ -92,1051 +92,1550 @@
 
 <pre><code class="language-json">
 {
+  "mode": "agentic_v1",
   "requested_date": "2026-03-05",
-  "report_date": "2026-03-05",
-  "data_as_of_date": "2026-03-05",
-  "strict_date": true,
-  "allow_stale_cache": false,
-  "max_date_lag_days": 0,
-  "requested_equals_data_date": true,
-  "cma_source": "exact",
-  "section_dates": {
-    "cma_daily": "2026-03-05",
-    "timing_daily": "2026-03-05",
-    "market_summary_daily": "2026-03-05",
-    "market_summary_weekly": "2026-03-05"
+  "resolved_date": "2026-03-05",
+  "meta": {
+    "tool": "get_report_meta",
+    "data": {
+      "requested_date": "2026-03-05",
+      "data_as_of_date": "2026-03-05",
+      "requested_equals_data_date": true,
+      "cma_source": "exact",
+      "score_mode": "full",
+      "rebalance_today": true,
+      "scored_universe_size": 69,
+      "objective_config": {
+        "cma_obj_logret_weight": 1.0,
+        "cma_obj_ic_weight": 1.0,
+        "cma_obj_fitness_weight": 1.0,
+        "cma_turnover_penalty": 0.01,
+        "cma_icir_penalty": 0.01,
+        "cma_icir_floor": 0.0,
+        "annualization": 252,
+        "turnover_floor": 0.125,
+        "cma_top_bottom": 8,
+        "cma_forward_horizon": 20,
+        "cma_min_valid_days": 60,
+        "eval_window": 80
+      },
+      "section_dates": {
+        "cma_daily": "2026-03-05",
+        "factor_health": "2026-03-05",
+        "timing_daily": "2026-03-05",
+        "market_summary_daily": "2026-03-05",
+        "market_summary_weekly": "2026-03-05"
+      },
+      "section_sources": {
+        "cma_daily": "E:\\factor\\lean_project\\Pensive Tan Bull Local\\storage\\alphasage\\deployments\\20260130T174105Z\\reports\\cma_daily\\2026-03-05.json",
+        "timing_daily": "E:\\factor\\lean_project\\Pensive Tan Bull Local\\storage\\alphasage\\deployments\\20260130T174105Z\\reports\\timing_daily\\2026-03-05.json"
+      },
+      "section_availability": {
+        "cma_daily": true,
+        "timing_daily": true,
+        "market_summary_daily": true,
+        "market_summary_weekly": true,
+        "factor_health": true
+      },
+      "timing_summary": {
+        "score_source": "actionable_composite",
+        "fallback_reason": "",
+        "bottom_n": 8,
+        "total_scored": 69
+      },
+      "legacy_schema": {}
+    }
   },
-  "scored_universe_size": 69,
-  "per_factor_cma_metrics": [
+  "timing": {
+    "tool": "get_timing_cutoff_context",
+    "data": {
+      "score_source": "actionable_composite",
+      "fallback_reason": "",
+      "bottom_n": 8,
+      "total_scored": 69,
+      "exits": [],
+      "restores": [],
+      "blocked": [],
+      "deferred_restores": [],
+      "actionable_factor_health": [
+        {
+          "name": "actionable_alpha_3",
+          "fitness": -4.301756,
+          "sharpe": -3.161007,
+          "weight": 0.055556,
+          "annual_return": -0.2315,
+          "coverage": 0.9975
+        },
+        {
+          "name": "actionable_alpha_4",
+          "fitness": 6.233837,
+          "sharpe": 3.276844,
+          "weight": 0.222222,
+          "annual_return": 0.452386,
+          "coverage": 1.0
+        },
+        {
+          "name": "actionable_alpha_5",
+          "fitness": 2.724597,
+          "sharpe": 1.890226,
+          "weight": 0.166667,
+          "annual_return": 0.259709,
+          "coverage": 1.0
+        },
+        {
+          "name": "actionable_alpha_9",
+          "fitness": 3.239042,
+          "sharpe": 2.43553,
+          "weight": 0.194444,
+          "annual_return": 0.252599,
+          "coverage": 1.0
+        },
+        {
+          "name": "actionable_alpha_10",
+          "fitness": -8.004413,
+          "sharpe": -4.952982,
+          "weight": 0.027778,
+          "annual_return": -0.326464,
+          "coverage": 0.9975
+        }
+      ],
+      "actionable_eval_window": 40,
+      "actionable_prediction_horizon": 1,
+      "boundary_context": {
+        "available": false,
+        "cutoff_rank": null,
+        "cutoff_score": null,
+        "near_miss_symbols": null,
+        "bottom_bucket_symbols": null,
+        "unavailable_reason": "timing_boundary_scores_not_persisted"
+      }
+    }
+  },
+  "data_quality": {
+    "tool": "get_data_quality_issues",
+    "data": {
+      "summary": {
+        "issue_count": 9,
+        "highest_severity": "warning",
+        "severity_counts": {
+          "critical": 0,
+          "warning": 5,
+          "info": 4
+        }
+      },
+      "issues": [
+        {
+          "severity": "warning",
+          "code": "interpretation_stale",
+          "scope": "factor",
+          "entity_type": "factor",
+          "entity_id": "alpha_11",
+          "message": "Factor interpretation hash is stale.",
+          "evidence": {
+            "expr_hash": "ab1728904fcf",
+            "warning": "expr_hash mismatch (expected=5ef699416b1e, got=ab1728904fcf)"
+          },
+          "source": "E:\\factor\\lean_project\\Pensive Tan Bull Local\\scripts\\factor_interpretation.json"
+        },
+        {
+          "severity": "warning",
+          "code": "interpretation_stale",
+          "scope": "factor",
+          "entity_type": "factor",
+          "entity_id": "alpha_10",
+          "message": "Factor interpretation hash is stale.",
+          "evidence": {
+            "expr_hash": "5ef699416b1e",
+            "warning": "expr_hash mismatch (expected=54462453f581, got=5ef699416b1e)"
+          },
+          "source": "E:\\factor\\lean_project\\Pensive Tan Bull Local\\scripts\\factor_interpretation.json"
+        },
+        {
+          "severity": "warning",
+          "code": "interpretation_stale",
+          "scope": "factor",
+          "entity_type": "factor",
+          "entity_id": "alpha_12",
+          "message": "Factor interpretation hash is stale.",
+          "evidence": {
+            "expr_hash": "ef9be7ef82f5",
+            "warning": "expr_hash mismatch (expected=ab1728904fcf, got=ef9be7ef82f5)"
+          },
+          "source": "E:\\factor\\lean_project\\Pensive Tan Bull Local\\scripts\\factor_interpretation.json"
+        },
+        {
+          "severity": "warning",
+          "code": "interpretation_stale",
+          "scope": "factor",
+          "entity_type": "factor",
+          "entity_id": "alpha_8",
+          "message": "Factor interpretation hash is stale.",
+          "evidence": {
+            "expr_hash": "188949ffc8be",
+            "warning": "expr_hash mismatch (expected=69e8bdec0f10, got=188949ffc8be)"
+          },
+          "source": "E:\\factor\\lean_project\\Pensive Tan Bull Local\\scripts\\factor_interpretation.json"
+        },
+        {
+          "severity": "warning",
+          "code": "interpretation_stale",
+          "scope": "factor",
+          "entity_type": "factor",
+          "entity_id": "alpha_9",
+          "message": "Factor interpretation hash is stale.",
+          "evidence": {
+            "expr_hash": "54462453f581",
+            "warning": "expr_hash mismatch (expected=188949ffc8be, got=54462453f581)"
+          },
+          "source": "E:\\factor\\lean_project\\Pensive Tan Bull Local\\scripts\\factor_interpretation.json"
+        }
+      ]
+    }
+  },
+  "divergence": {
+    "tool": "get_top_divergence_factors",
+    "ok": true,
+    "resolved_date": "2026-03-05",
+    "warnings": [],
+    "error": null,
+    "data": {
+      "top_k_requested": 3,
+      "candidate_count": 9,
+      "ranking_policy": "standalone_cma_total_desc_then_max_icir_desc_then_factor_asc",
+      "candidates": [
+        {
+          "factor": "alpha_9",
+          "selected_weight": 0.0,
+          "weight_rank": 13,
+          "standalone_cma_total": 10.969987,
+          "standalone_icir": 0.118584,
+          "health_icir_20d": -0.237237,
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "cma_total": 10.417091,
+              "cma_total_rank": 2,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "cma_total": 10.238875,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "cma_total": 2.528911,
+              "cma_total_rank": 8,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ],
+          "pairwise_correlation_available": false,
+          "optimizer_trace_available": false
+        },
+        {
+          "factor": "alpha_4",
+          "selected_weight": 0.0,
+          "weight_rank": 10,
+          "standalone_cma_total": 7.618716,
+          "standalone_icir": 0.155303,
+          "health_icir_20d": -0.290926,
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "cma_total": 10.417091,
+              "cma_total_rank": 2,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "cma_total": 10.238875,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "cma_total": 2.528911,
+              "cma_total_rank": 8,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ],
+          "pairwise_correlation_available": false,
+          "optimizer_trace_available": false
+        },
+        {
+          "factor": "alpha_10",
+          "selected_weight": 0.0,
+          "weight_rank": 6,
+          "standalone_cma_total": 4.901595,
+          "standalone_icir": 0.085261,
+          "health_icir_20d": -0.116405,
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "cma_total": 10.417091,
+              "cma_total_rank": 2,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "cma_total": 10.238875,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "cma_total": 2.528911,
+              "cma_total_rank": 8,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ],
+          "pairwise_correlation_available": false,
+          "optimizer_trace_available": false
+        }
+      ]
+    }
+  },
+  "factor_details": [
     {
-      "factor": "alpha_0",
-      "weight": 0.0,
-      "log_ret": 0.09357828079300089,
-      "ic_mean": 0.00392493763342183,
-      "icir": 0.026031176481885646,
-      "fitness": 2.053270794390094,
-      "sharpe": 1.2666586601577026,
-      "annual_return": 0.3284605979398059,
-      "cma_total": 2.150774012816517
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_9",
+        "selection": {
+          "selected_weight": 0.0,
+          "selected_weight_pct": 0.0,
+          "weight_rank": 13,
+          "selected": false
+        },
+        "standalone_cma": {
+          "log_ret": 0.321291,
+          "ic_mean": 0.021336,
+          "icir": 0.118584,
+          "fitness": 10.62736,
+          "sharpe": 3.65738,
+          "annual_return": 1.055408,
+          "cma_total": 10.969987,
+          "cma_total_rank": 1
+        },
+        "health_20d": {
+          "latest_ic": -0.147996,
+          "ic_mean_20d": -0.080219,
+          "ic_std_20d": 0.33814,
+          "icir_20d": -0.237237,
+          "ic_trend": "-",
+          "ic_trend_slope": -0.011186,
+          "sharpe_20d": 3.240619,
+          "fitness_20d": 7.760643,
+          "ls_cum_20d": 0.056896,
+          "status": "Degrading"
+        },
+        "optimizer_context": {
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "cma_total": 10.417091,
+              "cma_total_rank": 2,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "cma_total": 10.238875,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "cma_total": 2.528911,
+              "cma_total_rank": 8,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 375,
+          "ls_points_used": 375,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": true,
+          "missing_inputs": [
+            "amihud_mean",
+            "amihud_range",
+            "drift_factor",
+            "vol_fft"
+          ]
+        }
+      }
     },
     {
-      "factor": "alpha_1",
-      "weight": 0.4185767012493311,
-      "log_ret": 0.38227050251670647,
-      "ic_mean": 0.023399253934885046,
-      "icir": 0.14815098514325523,
-      "fitness": 10.01142080052565,
-      "sharpe": 3.114289416182185,
-      "annual_return": 1.2917649766762243,
-      "cma_total": 10.417090556977241
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_4",
+        "selection": {
+          "selected_weight": 0.0,
+          "selected_weight_pct": 0.0,
+          "weight_rank": 10,
+          "selected": false
+        },
+        "standalone_cma": {
+          "log_ret": 0.243631,
+          "ic_mean": 0.020254,
+          "icir": 0.155303,
+          "fitness": 7.354831,
+          "sharpe": 2.894738,
+          "annual_return": 0.806932,
+          "cma_total": 7.618716,
+          "cma_total_rank": 4
+        },
+        "health_20d": {
+          "latest_ic": -0.050016,
+          "ic_mean_20d": -0.093496,
+          "ic_std_20d": 0.321374,
+          "icir_20d": -0.290926,
+          "ic_trend": "+",
+          "ic_trend_slope": 0.006046,
+          "sharpe_20d": 4.212809,
+          "fitness_20d": 12.382344,
+          "ls_cum_20d": 0.085704,
+          "status": "Degrading"
+        },
+        "optimizer_context": {
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "cma_total": 10.417091,
+              "cma_total_rank": 2,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "cma_total": 10.238875,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "cma_total": 2.528911,
+              "cma_total_rank": 8,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 375,
+          "ls_points_used": 375,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": false,
+          "missing_inputs": [
+            "amihud_mean",
+            "amihud_range",
+            "drift_factor",
+            "vol_fft"
+          ]
+        }
+      }
     },
     {
-      "factor": "alpha_2",
-      "weight": 0.0,
-      "log_ret": -0.050448128694125585,
-      "ic_mean": 0.0015203208705860255,
-      "icir": 0.008806444610626006,
-      "fitness": -0.22393346112059204,
-      "sharpe": -0.25899947867269363,
-      "annual_return": -0.09344374130392323,
-      "cma_total": -0.2728612689441316
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_10",
+        "selection": {
+          "selected_weight": 0.0,
+          "selected_weight_pct": 0.0,
+          "weight_rank": 6,
+          "selected": false
+        },
+        "standalone_cma": {
+          "log_ret": 0.241199,
+          "ic_mean": 0.022806,
+          "icir": 0.085261,
+          "fitness": 4.63759,
+          "sharpe": 1.734595,
+          "annual_return": 0.893508,
+          "cma_total": 4.901595,
+          "cma_total_rank": 5
+        },
+        "health_20d": {
+          "latest_ic": 0.13841,
+          "ic_mean_20d": -0.050736,
+          "ic_std_20d": 0.43586,
+          "icir_20d": -0.116405,
+          "ic_trend": "+",
+          "ic_trend_slope": 0.112278,
+          "sharpe_20d": 3.238649,
+          "fitness_20d": 11.003992,
+          "ls_cum_20d": 0.114528,
+          "status": "Degrading"
+        },
+        "optimizer_context": {
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "cma_total": 10.417091,
+              "cma_total_rank": 2,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "cma_total": 10.238875,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "cma_total": 2.528911,
+              "cma_total_rank": 8,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 375,
+          "ls_points_used": 375,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": true,
+          "missing_inputs": [
+            "amihud_mean",
+            "amihud_range",
+            "drift_factor",
+            "vol_fft"
+          ]
+        }
+      }
     },
     {
-      "factor": "alpha_3",
-      "weight": 0.0,
-      "log_ret": -0.222668387909912,
-      "ic_mean": -0.00699990309829801,
-      "icir": -0.040372494640133774,
-      "fitness": -4.242420538979055,
-      "sharpe": -1.872627642163714,
-      "annual_return": -0.6415560233777032,
-      "cma_total": -4.472492554933666
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_1",
+        "selection": {
+          "selected_weight": 0.418577,
+          "selected_weight_pct": 41.86,
+          "weight_rank": 1,
+          "selected": true
+        },
+        "standalone_cma": {
+          "log_ret": 0.382271,
+          "ic_mean": 0.023399,
+          "icir": 0.148151,
+          "fitness": 10.011421,
+          "sharpe": 3.114289,
+          "annual_return": 1.291765,
+          "cma_total": 10.417091,
+          "cma_total_rank": 2
+        },
+        "health_20d": {
+          "latest_ic": -0.028978,
+          "ic_mean_20d": -0.102333,
+          "ic_std_20d": 0.352412,
+          "icir_20d": -0.29038,
+          "ic_trend": "-",
+          "ic_trend_slope": -0.039922,
+          "sharpe_20d": -1.699211,
+          "fitness_20d": -3.203095,
+          "ls_cum_20d": -0.035252,
+          "status": "Degrading"
+        },
+        "optimizer_context": {
+          "reason_code": "selected",
+          "reason_detail": "Factor has non-zero selected weight in current CMA output.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "cma_total": 10.238875,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "cma_total": 2.528911,
+              "cma_total_rank": 8,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_6",
+              "selected_weight": 0.03074,
+              "cma_total": 4.127238,
+              "cma_total_rank": 6,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 375,
+          "ls_points_used": 375,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": false,
+          "missing_inputs": [
+            "amihud_mean",
+            "amihud_range",
+            "drift_factor",
+            "vol_fft"
+          ]
+        }
+      }
     },
     {
-      "factor": "alpha_4",
-      "weight": 0.0,
-      "log_ret": 0.24363121877212546,
-      "ic_mean": 0.02025410221101287,
-      "icir": 0.1553027414795352,
-      "fitness": 7.3548310277716995,
-      "sharpe": 2.8947375281233825,
-      "annual_return": 0.8069321687892762,
-      "cma_total": 7.6187163487548375
-    },
-    {
-      "factor": "alpha_5",
-      "weight": 0.392435054245494,
-      "log_ret": 0.3279719701791014,
-      "ic_mean": 0.05273058033989593,
-      "icir": 0.35960045685080005,
-      "fitness": 9.858172889669993,
-      "sharpe": 3.3413331755814166,
-      "annual_return": 1.0880862151559585,
-      "cma_total": 10.23887544018899
-    },
-    {
-      "factor": "alpha_6",
-      "weight": 0.030740481827951527,
-      "log_ret": 0.19653705679964406,
-      "ic_mean": 0.01296395861041339,
-      "icir": 0.0758227441547178,
-      "fitness": 3.9177370703211936,
-      "sharpe": 1.6391042773975566,
-      "annual_return": 0.7141137868283327,
-      "cma_total": 4.127238085731251
-    },
-    {
-      "factor": "alpha_7",
-      "weight": 0.0,
-      "log_ret": 0.024448016086522764,
-      "ic_mean": 0.010271148763533786,
-      "icir": 0.07285948894754134,
-      "fitness": 0.406272808493138,
-      "sharpe": 0.40306421136733783,
-      "annual_return": 0.12699804899036973,
-      "cma_total": 0.44099197334319457
-    },
-    {
-      "factor": "alpha_8",
-      "weight": 0.0,
-      "log_ret": 0.045570951596744985,
-      "ic_mean": -0.011062892420198431,
-      "icir": -0.08100290059052824,
-      "fitness": 0.7809428608814089,
-      "sharpe": 0.6420601027456981,
-      "annual_return": 0.18492565400763009,
-      "cma_total": 0.8146408910520501
-    },
-    {
-      "factor": "alpha_9",
-      "weight": 0.0,
-      "log_ret": 0.32129100221869067,
-      "ic_mean": 0.021335660826013753,
-      "icir": 0.11858413036651066,
-      "fitness": 10.62736009112503,
-      "sharpe": 3.6573802968234155,
-      "annual_return": 1.0554084417512988,
-      "cma_total": 10.969986754169735
-    },
-    {
-      "factor": "alpha_10",
-      "weight": 0.0,
-      "log_ret": 0.24119886361167603,
-      "ic_mean": 0.022805807513191355,
-      "icir": 0.08526077041100297,
-      "fitness": 4.6375899521615205,
-      "sharpe": 1.7345947982156737,
-      "annual_return": 0.8935083727839811,
-      "cma_total": 4.901594623286388
-    },
-    {
-      "factor": "alpha_11",
-      "weight": 0.1582477626772232,
-      "log_ret": 0.10195183256167521,
-      "ic_mean": 0.01673059043549437,
-      "icir": 0.14465932284287064,
-      "fitness": 2.410228669425921,
-      "sharpe": 1.4371197447805737,
-      "annual_return": 0.35159330489649887,
-      "cma_total": 2.5289110924230904
-    },
-    {
-      "factor": "alpha_12",
-      "weight": 0.0,
-      "log_ret": 0.15490733199704085,
-      "ic_mean": 0.0006425969418908855,
-      "icir": 0.003916316662427002,
-      "fitness": 3.1148700071271884,
-      "sharpe": 1.4724261469301498,
-      "annual_return": 0.5594004676327224,
-      "cma_total": 3.27041993606612
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_5",
+        "selection": {
+          "selected_weight": 0.392435,
+          "selected_weight_pct": 39.24,
+          "weight_rank": 2,
+          "selected": true
+        },
+        "standalone_cma": {
+          "log_ret": 0.327972,
+          "ic_mean": 0.052731,
+          "icir": 0.3596,
+          "fitness": 9.858173,
+          "sharpe": 3.341333,
+          "annual_return": 1.088086,
+          "cma_total": 10.238875,
+          "cma_total_rank": 3
+        },
+        "health_20d": {
+          "latest_ic": -0.088665,
+          "ic_mean_20d": -0.12379,
+          "ic_std_20d": 0.333362,
+          "icir_20d": -0.371337,
+          "ic_trend": "+",
+          "ic_trend_slope": 0.038594,
+          "sharpe_20d": -1.922098,
+          "fitness_20d": -3.457701,
+          "ls_cum_20d": -0.032104,
+          "status": "Degrading"
+        },
+        "optimizer_context": {
+          "reason_code": "selected",
+          "reason_detail": "Factor has non-zero selected weight in current CMA output.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "cma_total": 10.417091,
+              "cma_total_rank": 2,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "cma_total": 2.528911,
+              "cma_total_rank": 8,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_6",
+              "selected_weight": 0.03074,
+              "cma_total": 4.127238,
+              "cma_total_rank": 6,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 375,
+          "ls_points_used": 375,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": false,
+          "missing_inputs": [
+            "amihud_mean",
+            "amihud_range",
+            "drift_factor",
+            "vol_fft"
+          ]
+        }
+      }
     }
   ],
-  "per_factor_cma_metrics_meta": {
-    "window_days_used": 80,
-    "score_mode": "full",
-    "available": true,
-    "unavailable_reason": ""
-  },
-  "stock_alerts": [
+  "symbol_details": [
     {
-      "symbol": "INCY",
-      "score": 0.177062,
-      "rank": "69/69",
-      "delta_1d": -0.316443,
-      "consensus": "1/13",
-      "return_1d": -0.01546,
-      "return_5d": -0.03886,
-      "vol_ratio": 0.84
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "INCY",
+        "inside_scored_universe": true,
+        "cma_score": 0.177062,
+        "score_rank": 69,
+        "score_percentile": 0.014493,
+        "score_delta_1d": -0.316443,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": -0.015459,
+          "return_5d": -0.038864,
+          "vol_ratio": 0.837231
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 1,
+          "consensus_total": 13,
+          "top_supporting_factors": [],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "percentile_rank": 0.161765,
+              "contribution": -0.132735
+            },
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "percentile_rank": 0.183824,
+              "contribution": -0.132344
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "percentile_rank": 0.117647,
+              "contribution": -0.060507
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
     },
     {
-      "symbol": "RKLB",
-      "score": 0.257603,
-      "rank": "65/69",
-      "delta_1d": -0.302736,
-      "consensus": "3/13",
-      "return_1d": -0.03216,
-      "return_5d": 0.01749,
-      "vol_ratio": 0.98
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "RKLB",
+        "inside_scored_universe": true,
+        "cma_score": 0.257603,
+        "score_rank": 65,
+        "score_percentile": 0.072464,
+        "score_delta_1d": -0.302736,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": -0.032155,
+          "return_5d": 0.017485,
+          "vol_ratio": 0.980011
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 3,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_6",
+              "selected_weight": 0.03074,
+              "percentile_rank": 0.676471,
+              "contribution": 0.005425
+            }
+          ],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "percentile_rank": 0.117647,
+              "contribution": -0.150049
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "percentile_rank": 0.058824,
+              "contribution": -0.069815
+            },
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "percentile_rank": 0.426471,
+              "contribution": -0.030778
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
     },
     {
-      "symbol": "OKTA",
-      "score": 0.188388,
-      "rank": "68/69",
-      "delta_1d": -0.286086,
-      "consensus": "4/13",
-      "return_1d": 0.10659,
-      "return_5d": 0.09383,
-      "vol_ratio": 2.5
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "OKTA",
+        "inside_scored_universe": true,
+        "cma_score": 0.188388,
+        "score_rank": 68,
+        "score_percentile": 0.028986,
+        "score_delta_1d": -0.286086,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": 0.106594,
+          "return_5d": 0.093825,
+          "vol_ratio": 2.504018
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 4,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "percentile_rank": 0.808824,
+              "contribution": 0.048871
+            },
+            {
+              "factor": "alpha_6",
+              "selected_weight": 0.03074,
+              "percentile_rank": 0.588235,
+              "contribution": 0.002712
+            }
+          ],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "percentile_rank": 0.036765,
+              "contribution": -0.193899
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "percentile_rank": 0.058824,
+              "contribution": -0.173133
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
     },
     {
-      "symbol": "PARR",
-      "score": 0.37969,
-      "rank": "53/69",
-      "delta_1d": -0.282766,
-      "consensus": "5/13",
-      "return_1d": 0.0015,
-      "return_5d": 0.17461,
-      "vol_ratio": 2.29
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "PARR",
+        "inside_scored_universe": true,
+        "cma_score": 0.37969,
+        "score_rank": 53,
+        "score_percentile": 0.246377,
+        "score_delta_1d": -0.282766,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": 0.001501,
+          "return_5d": 0.174607,
+          "vol_ratio": 2.285454
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 5,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "percentile_rank": 0.75,
+              "contribution": 0.039562
+            },
+            {
+              "factor": "alpha_6",
+              "selected_weight": 0.03074,
+              "percentile_rank": 0.735294,
+              "contribution": 0.007233
+            }
+          ],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "percentile_rank": 0.220588,
+              "contribution": -0.109651
+            },
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "percentile_rank": 0.360294,
+              "contribution": -0.058478
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
     },
     {
-      "symbol": "DY",
-      "score": 0.596,
-      "rank": "22/69",
-      "delta_1d": 0.276245,
-      "consensus": "5/13",
-      "return_1d": -0.05835,
-      "return_5d": -0.11921,
-      "vol_ratio": 2.35
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "DY",
+        "inside_scored_universe": true,
+        "cma_score": 0.596,
+        "score_rank": 22,
+        "score_percentile": 0.695652,
+        "score_delta_1d": 0.276245,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": -0.058347,
+          "return_5d": -0.119211,
+          "vol_ratio": 2.348235
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 5,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "percentile_rank": 0.852941,
+              "contribution": 0.138506
+            },
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "percentile_rank": 0.882353,
+              "contribution": 0.060507
+            }
+          ],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "percentile_rank": 0.279412,
+              "contribution": -0.092333
+            },
+            {
+              "factor": "alpha_6",
+              "selected_weight": 0.03074,
+              "percentile_rank": 0.161765,
+              "contribution": -0.010398
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
     },
     {
-      "symbol": "LRN",
-      "score": 0.44623,
-      "rank": "44/69",
-      "delta_1d": -0.254329,
-      "consensus": "5/13",
-      "return_1d": 0.00377,
-      "return_5d": 0.02143,
-      "vol_ratio": 1.22
-    },
-    {
-      "symbol": "AMD",
-      "score": 0.596243,
-      "rank": "21/69",
-      "delta_1d": 0.226839,
-      "consensus": "2/13",
-      "return_1d": -0.01155,
-      "return_5d": -0.00631,
-      "vol_ratio": 1.06
-    },
-    {
-      "symbol": "PL",
-      "score": 0.421931,
-      "rank": "48/69",
-      "delta_1d": -0.222088,
-      "consensus": "4/13",
-      "return_1d": -0.05328,
-      "return_5d": 0.02891,
-      "vol_ratio": 1.19
-    },
-    {
-      "symbol": "PPC",
-      "score": 0.323888,
-      "rank": "57/69",
-      "delta_1d": -0.216078,
-      "consensus": "5/13",
-      "return_1d": -0.01578,
-      "return_5d": -0.05263,
-      "vol_ratio": 0.96
-    },
-    {
-      "symbol": "SKYW",
-      "score": 0.666096,
-      "rank": "12/69",
-      "delta_1d": 0.197382,
-      "consensus": "5/13",
-      "return_1d": -0.05299,
-      "return_5d": -0.08207,
-      "vol_ratio": 1.51
-    },
-    {
-      "symbol": "APP",
-      "score": 0.540329,
-      "rank": "33/69",
-      "delta_1d": 0.18359,
-      "consensus": "3/13",
-      "return_1d": 0.05338,
-      "return_5d": 0.17754,
-      "vol_ratio": 1.13
-    },
-    {
-      "symbol": "CRDO",
-      "score": 0.504248,
-      "rank": "37/69",
-      "delta_1d": 0.18344,
-      "consensus": "5/13",
-      "return_1d": 0.1102,
-      "return_5d": 0.01991,
-      "vol_ratio": 1.71
-    },
-    {
-      "symbol": "CRM",
-      "score": 0.587614,
-      "rank": "23/69",
-      "delta_1d": 0.18109,
-      "consensus": "0/13",
-      "return_1d": 0.04309,
-      "return_5d": 0.04298,
-      "vol_ratio": 1.23
-    },
-    {
-      "symbol": "EZPW",
-      "score": 0.608921,
-      "rank": "18/69",
-      "delta_1d": 0.174593,
-      "consensus": "8/13",
-      "return_1d": -0.04839,
-      "return_5d": -0.04911,
-      "vol_ratio": 0.77
-    },
-    {
-      "symbol": "GOOGL",
-      "score": 0.541996,
-      "rank": "32/69",
-      "delta_1d": 0.174307,
-      "consensus": "0/13",
-      "return_1d": -0.00843,
-      "return_5d": -0.03041,
-      "vol_ratio": 1.14
-    },
-    {
-      "symbol": "IREN",
-      "score": 0.756615,
-      "rank": "6/69",
-      "delta_1d": 0.172979,
-      "consensus": "5/13",
-      "return_1d": -0.08448,
-      "return_5d": -0.01128,
-      "vol_ratio": 1.53
-    },
-    {
-      "symbol": "EOSE",
-      "score": 0.798419,
-      "rank": "4/69",
-      "delta_1d": 0.170629,
-      "consensus": "8/13",
-      "return_1d": 0.00675,
-      "return_5d": 0.19561,
-      "vol_ratio": 0.82
-    },
-    {
-      "symbol": "TWLO",
-      "score": 0.399299,
-      "rank": "52/69",
-      "delta_1d": -0.168064,
-      "consensus": "1/13",
-      "return_1d": 0.02548,
-      "return_5d": 0.04844,
-      "vol_ratio": 0.77
-    },
-    {
-      "symbol": "KGC",
-      "score": 0.403962,
-      "rank": "51/69",
-      "delta_1d": -0.16182,
-      "consensus": "2/13",
-      "return_1d": -0.03912,
-      "return_5d": -0.11583,
-      "vol_ratio": 1.16
-    },
-    {
-      "symbol": "PYPL",
-      "score": 0.245057,
-      "rank": "67/69",
-      "delta_1d": -0.155391,
-      "consensus": "5/13",
-      "return_1d": 0.01504,
-      "return_5d": 0.03416,
-      "vol_ratio": 0.63
-    },
-    {
-      "symbol": "USAR",
-      "score": 0.907285,
-      "rank": "1/69",
-      "delta_1d": 0.0,
-      "consensus": "9/13",
-      "return_1d": -0.00288,
-      "return_5d": 0.01624,
-      "vol_ratio": 0.77
-    },
-    {
-      "symbol": "WLDN",
-      "score": 0.883284,
-      "rank": "2/69",
-      "delta_1d": 0.0,
-      "consensus": "8/13",
-      "return_1d": -0.0161,
-      "return_5d": -0.07164,
-      "vol_ratio": 0.93
-    },
-    {
-      "symbol": "POWL",
-      "score": 0.870243,
-      "rank": "3/69",
-      "delta_1d": 0.0,
-      "consensus": "8/13",
-      "return_1d": -0.02015,
-      "return_5d": -0.03782,
-      "vol_ratio": 1.43
-    },
-    {
-      "symbol": "CDE",
-      "score": 0.757016,
-      "rank": "5/69",
-      "delta_1d": 0.0,
-      "consensus": "5/13",
-      "return_1d": -0.05108,
-      "return_5d": -0.167,
-      "vol_ratio": 1.4
-    },
-    {
-      "symbol": "CCL",
-      "score": 0.254761,
-      "rank": "66/69",
-      "delta_1d": 0.0,
-      "consensus": "3/13",
-      "return_1d": -0.0327,
-      "return_5d": -0.14188,
-      "vol_ratio": 1.49
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "LRN",
+        "inside_scored_universe": true,
+        "cma_score": 0.44623,
+        "score_rank": 44,
+        "score_percentile": 0.376812,
+        "score_delta_1d": -0.254329,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": 0.003772,
+          "return_5d": 0.021434,
+          "vol_ratio": 1.224484
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 5,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_11",
+              "selected_weight": 0.158248,
+              "percentile_rank": 0.970588,
+              "contribution": 0.074469
+            },
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.418577,
+              "percentile_rank": 0.639706,
+              "contribution": 0.058478
+            },
+            {
+              "factor": "alpha_6",
+              "selected_weight": 0.03074,
+              "percentile_rank": 0.544118,
+              "contribution": 0.001356
+            }
+          ],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.392435,
+              "percentile_rank": 0.014706,
+              "contribution": -0.190446
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
     }
   ],
-  "stock_alert_universe_size": 69,
-  "bucket_transitions": {
-    "top_to_bottom": [],
-    "bottom_to_top": []
-  },
-  "rebalance_today": true,
-  "score_mode": "full",
-  "factor_health": [
-    {
-      "factor": "alpha_5",
-      "weight": 0.392435,
-      "weight_pct": 39.24,
-      "effective_direction": 1,
-      "expr_hash": "3e3f92d55847",
-      "latest_ic": -0.088665,
-      "ic_mean_20d": -0.12379,
-      "ic_std_20d": 0.333362,
-      "icir_20d": -0.371337,
-      "ic_trend_slope": 0.038594,
-      "ic_trend": "+",
-      "sharpe_20d": -1.922098,
-      "fitness_20d": -3.457701,
-      "ls_cum_20d": -0.032104,
-      "contribution": 0.145726,
-      "status": "Degrading",
-      "interpretation": "Capital flow intensity from log-money relative spread structure.",
-      "direction_note": "Higher effective score implies stronger capital-flow support.",
-      "interpretation_stale": false
+  "supplemental_context": {
+    "objective_breakdown": {
+      "total": 25.030158901421995,
+      "weighted_terms": {
+        "log_ret": 0.6683664991016354,
+        "ic": 0.056902090759285415,
+        "fitness": 24.304890311561074
+      },
+      "raw_terms": {
+        "log_ret": 0.6683664991016354,
+        "ic_mean": 0.056902090759285415,
+        "ic_std": 0.15819133917264333,
+        "icir": 0.35970418772511314,
+        "fitness": 24.304890311561074,
+        "sharpe": 5.815190157097359,
+        "annual_return": 2.1835819836936436,
+        "turnover": 0.0
+      },
+      "penalty_terms": {
+        "turnover_penalty": 0.0,
+        "icir_penalty": 0.0
+      }
     },
-    {
-      "factor": "alpha_1",
-      "weight": 0.418577,
-      "weight_pct": 41.86,
-      "effective_direction": 1,
-      "expr_hash": "b8804399e2ec",
-      "latest_ic": -0.028978,
-      "ic_mean_20d": -0.102333,
-      "ic_std_20d": 0.352412,
-      "icir_20d": -0.29038,
-      "ic_trend_slope": -0.039922,
-      "ic_trend": "-",
-      "sharpe_20d": -1.699211,
-      "fitness_20d": -3.203095,
-      "ls_cum_20d": -0.035252,
-      "contribution": 0.121546,
-      "status": "Degrading",
-      "interpretation": "Medium-horizon volume momentum percentile via rolling quantile.",
-      "direction_note": "Higher effective score implies improving volume trend persistence.",
-      "interpretation_stale": false
-    },
-    {
-      "factor": "alpha_11",
-      "weight": 0.158248,
-      "weight_pct": 15.82,
-      "effective_direction": 1,
-      "expr_hash": "ab1728904fcf",
-      "latest_ic": 0.099468,
-      "ic_mean_20d": -0.064006,
-      "ic_std_20d": 0.340341,
-      "icir_20d": -0.188063,
-      "ic_trend_slope": 0.058733,
-      "ic_trend": "+",
-      "sharpe_20d": 0.482082,
-      "fitness_20d": 0.449277,
-      "ls_cum_20d": 0.008616,
-      "contribution": 0.029761,
-      "status": "Degrading",
-      "interpretation": "Time-series MAD of log-volume capturing abnormal participation dispersion.",
-      "direction_note": "Higher effective score implies favorable dispersion regime.",
-      "interpretation_stale": true,
-      "interpretation_warning": "expr_hash mismatch (expected=5ef699416b1e, got=ab1728904fcf)"
-    },
-    {
-      "factor": "alpha_6",
-      "weight": 0.03074,
-      "weight_pct": 3.07,
-      "effective_direction": 1,
-      "expr_hash": "29e9a456b3cc",
-      "latest_ic": -0.060375,
-      "ic_mean_20d": 0.107628,
-      "ic_std_20d": 0.350236,
-      "icir_20d": 0.307302,
-      "ic_trend_slope": 0.034772,
-      "ic_trend": "+",
-      "sharpe_20d": 0.476673,
-      "fitness_20d": 0.476885,
-      "ls_cum_20d": 0.009929,
-      "contribution": 0.009447,
-      "status": "Healthy",
-      "interpretation": "Price-location ratio between high and VWAP with rank normalization.",
-      "direction_note": "Higher effective score implies stronger close location quality.",
-      "interpretation_stale": false
-    },
-    {
-      "factor": "alpha_0",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "d6511af1f613",
-      "latest_ic": -0.110889,
-      "ic_mean_20d": -0.099873,
-      "ic_std_20d": 0.350214,
-      "icir_20d": -0.285177,
-      "ic_trend_slope": -0.018838,
-      "ic_trend": "-",
-      "sharpe_20d": -1.357079,
-      "fitness_20d": -2.200471,
-      "ls_cum_20d": -0.026083,
-      "contribution": 0.0,
-      "status": "Degrading",
-      "interpretation": "Volume dislocation factor comparing log-volume to a nonlinear baseline.",
-      "direction_note": "Higher effective score implies stronger accumulation/participation quality.",
-      "interpretation_stale": false
-    },
-    {
-      "factor": "alpha_10",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "5ef699416b1e",
-      "latest_ic": 0.13841,
-      "ic_mean_20d": -0.050736,
-      "ic_std_20d": 0.43586,
-      "icir_20d": -0.116405,
-      "ic_trend_slope": 0.112278,
-      "ic_trend": "+",
-      "sharpe_20d": 3.238649,
-      "fitness_20d": 11.003992,
-      "ls_cum_20d": 0.114528,
-      "contribution": 0.0,
-      "status": "Degrading",
-      "interpretation": "Inverse low-quantile open-return effect targeting short-term oversold rebounds.",
-      "direction_note": "Higher effective score implies rebound-favorable short-term setup.",
-      "interpretation_stale": true,
-      "interpretation_warning": "expr_hash mismatch (expected=54462453f581, got=5ef699416b1e)"
-    },
-    {
-      "factor": "alpha_12",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "ef9be7ef82f5",
-      "latest_ic": -0.148458,
-      "ic_mean_20d": 0.110555,
-      "ic_std_20d": 0.316822,
-      "icir_20d": 0.348949,
-      "ic_trend_slope": -0.039867,
-      "ic_trend": "-",
-      "sharpe_20d": 2.108428,
-      "fitness_20d": 3.481453,
-      "ls_cum_20d": 0.027048,
-      "contribution": 0.0,
-      "status": "Healthy",
-      "interpretation": "OHLC gap relation adjusted by volume-chip support correlation.",
-      "direction_note": "Higher effective score implies supportive price-structure versus volume-chip behavior.",
-      "interpretation_stale": true,
-      "interpretation_warning": "expr_hash mismatch (expected=ab1728904fcf, got=ef9be7ef82f5)"
-    },
-    {
-      "factor": "alpha_2",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "b232be3cd9d5",
-      "latest_ic": 0.008313,
-      "ic_mean_20d": 0.088447,
-      "ic_std_20d": 0.370186,
-      "icir_20d": 0.238927,
-      "ic_trend_slope": 0.042132,
-      "ic_trend": "+",
-      "sharpe_20d": 2.031264,
-      "fitness_20d": 4.247138,
-      "ls_cum_20d": 0.043371,
-      "contribution": 0.0,
-      "status": "Healthy",
-      "interpretation": "Relative log-volume minus log-close pressure through quantile filtering.",
-      "direction_note": "Higher effective score implies stronger demand versus price level.",
-      "interpretation_stale": false
-    },
-    {
-      "factor": "alpha_3",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "94bd1aea62d8",
-      "latest_ic": 0.232824,
-      "ic_mean_20d": 0.113975,
-      "ic_std_20d": 0.321938,
-      "icir_20d": 0.354028,
-      "ic_trend_slope": 0.043604,
-      "ic_trend": "+",
-      "sharpe_20d": 9.728924,
-      "fitness_20d": 34.372599,
-      "ls_cum_20d": 0.123832,
-      "contribution": 0.0,
-      "status": "Healthy",
-      "interpretation": "Inverse correlation of volume/open ratio with lows, emphasizing stress-reversal patterns.",
-      "direction_note": "Higher effective score implies better mean-reversion support after stress.",
-      "interpretation_stale": false
-    },
-    {
-      "factor": "alpha_4",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "39139fe8f291",
-      "latest_ic": -0.050016,
-      "ic_mean_20d": -0.093496,
-      "ic_std_20d": 0.321374,
-      "icir_20d": -0.290926,
-      "ic_trend_slope": 0.006046,
-      "ic_trend": "+",
-      "sharpe_20d": 4.212809,
-      "fitness_20d": 12.382344,
-      "ls_cum_20d": 0.085704,
-      "contribution": 0.0,
-      "status": "Degrading",
-      "interpretation": "Liquidity and FFT-ranked activity blend penalizing weak microstructure quality.",
-      "direction_note": "Higher effective score implies healthier liquidity-adjusted activity.",
-      "interpretation_stale": false
-    },
-    {
-      "factor": "alpha_7",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "517d4b6e31c5",
-      "latest_ic": -0.065803,
-      "ic_mean_20d": -0.087432,
-      "ic_std_20d": 0.345049,
-      "icir_20d": -0.253391,
-      "ic_trend_slope": 0.031371,
-      "ic_trend": "+",
-      "sharpe_20d": -2.885584,
-      "fitness_20d": -7.269353,
-      "ls_cum_20d": -0.06296,
-      "contribution": 0.0,
-      "status": "Degrading",
-      "interpretation": "Rolling MAD of log-money to capture regime-dependent flow volatility.",
-      "direction_note": "Higher effective score implies favorable flow-volatility regime.",
-      "interpretation_stale": false
-    },
-    {
-      "factor": "alpha_8",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "188949ffc8be",
-      "latest_ic": 0.033465,
-      "ic_mean_20d": -0.084788,
-      "ic_std_20d": 0.334342,
-      "icir_20d": -0.253597,
-      "ic_trend_slope": 0.045024,
-      "ic_trend": "+",
-      "sharpe_20d": 5.256733,
-      "fitness_20d": 15.185314,
-      "ls_cum_20d": 0.082786,
-      "contribution": 0.0,
-      "status": "Degrading",
-      "interpretation": "Composite microstructure blend of Amihud, chip-vwap correlation, and gap geometry.",
-      "direction_note": "Higher effective score implies broad microstructure confirmation.",
-      "interpretation_stale": true,
-      "interpretation_warning": "expr_hash mismatch (expected=69e8bdec0f10, got=188949ffc8be)"
-    },
-    {
-      "factor": "alpha_9",
-      "weight": 0.0,
-      "weight_pct": 0.0,
-      "effective_direction": 1,
-      "expr_hash": "54462453f581",
-      "latest_ic": -0.147996,
-      "ic_mean_20d": -0.080219,
-      "ic_std_20d": 0.33814,
-      "icir_20d": -0.237237,
-      "ic_trend_slope": -0.011186,
-      "ic_trend": "-",
-      "sharpe_20d": 3.240619,
-      "fitness_20d": 7.760643,
-      "ls_cum_20d": 0.056896,
-      "contribution": 0.0,
-      "status": "Degrading",
-      "interpretation": "Nested nonlinear gap-geometry factor with quantile and transform interactions.",
-      "direction_note": "Higher effective score implies constructive price-path geometry.",
-      "interpretation_stale": true,
-      "interpretation_warning": "expr_hash mismatch (expected=188949ffc8be, got=54462453f581)"
-    }
-  ],
-  "cma_breakdown": {
-    "raw_terms": {
-      "log_ret": 0.6683664991016354,
-      "ic_mean": 0.056902090759285415,
-      "ic_std": 0.15819133917264333,
-      "icir": 0.35970418772511314,
-      "fitness": 24.304890311561074,
-      "sharpe": 5.815190157097359,
-      "annual_return": 2.1835819836936436,
-      "turnover": 0.0
-    },
-    "penalties": {
-      "icir_shortfall": 0.0
-    },
-    "weighted_terms": {
-      "log_ret": 0.6683664991016354,
-      "ic": 0.056902090759285415,
-      "fitness": 24.304890311561074
-    },
-    "penalty_terms": {
-      "turnover_penalty": 0.0,
-      "icir_penalty": 0.0
-    },
-    "total": 25.030158901421995,
-    "log_ret_raw": 0.6683664991016354,
-    "ic_mean_raw": 0.056902090759285415,
-    "ic_std_raw": 0.15819133917264333,
-    "icir_raw": 0.35970418772511314,
-    "fitness_raw": 24.304890311561074,
-    "sharpe_raw": 5.815190157097359,
-    "annual_return_raw": 2.1835819836936436,
-    "turnover_raw": 0.0,
-    "icir_penalty_raw": 0.0,
-    "weighted_log_ret": 0.6683664991016354,
-    "weighted_ic": 0.056902090759285415,
-    "weighted_fitness": 24.304890311561074,
-    "turnover_penalty_term": 0.0,
-    "icir_penalty_term": 0.0
-  },
-  "objective_config": {
-    "cma_obj_logret_weight": 1.0,
-    "cma_obj_ic_weight": 1.0,
-    "cma_obj_fitness_weight": 1.0,
-    "cma_turnover_penalty": 0.01,
-    "cma_icir_penalty": 0.01,
-    "cma_icir_floor": 0.0,
-    "annualization": 252,
-    "turnover_floor": 0.125,
-    "cma_top_bottom": 8,
-    "cma_forward_horizon": 20,
-    "cma_min_valid_days": 60,
-    "eval_window": 80
-  },
-  "timing_daily": {
-    "score_source": "actionable_composite",
-    "fallback_reason": "",
-    "bottom_n": 8,
-    "total_scored": 69,
-    "exits": [],
-    "restores": [],
-    "blocked": [],
-    "deferred_restores": [],
-    "date_match": true,
-    "source": "exact",
-    "data_as_of_date": "2026-03-05"
-  },
-  "market_summary_daily": {
-    "as_of_date": "2026-03-05",
-    "data_as_of_date": "2026-03-05",
-    "window_days": 1,
-    "universe_mean_ret": -0.012224996580405916,
-    "universe_median_ret": -0.01493130205988591,
-    "win_rate": 0.27941176470588236,
-    "advancers": 19,
-    "decliners": 49,
-    "unchanged": 0,
-    "total_scored": 68,
-    "best_5": {
-      "CRDO": 0.11019912152269407,
-      "OKTA": 0.10659439927732617,
-      "APP": 0.053383365121486115,
-      "CRM": 0.043085188820581655,
-      "QTWO": 0.03725841801155627
-    },
-    "worst_5": {
-      "DY": -0.05834654934261008,
-      "SSRM": -0.0623486682808716,
-      "TTMI": -0.06414504828630951,
-      "AGX": -0.07071713147410352,
-      "IREN": -0.0844806378132118
-    },
-    "sector_winners": [
+    "factor_health": [
       {
-        "sector": "Utilities",
-        "return": 0.023918761852327552
+        "factor": "alpha_5",
+        "weight": 0.392435,
+        "weight_pct": 39.24,
+        "effective_direction": 1,
+        "expr_hash": "3e3f92d55847",
+        "latest_ic": -0.088665,
+        "ic_mean_20d": -0.12379,
+        "ic_std_20d": 0.333362,
+        "icir_20d": -0.371337,
+        "ic_trend_slope": 0.038594,
+        "ic_trend": "+",
+        "sharpe_20d": -1.922098,
+        "fitness_20d": -3.457701,
+        "ls_cum_20d": -0.032104,
+        "contribution": 0.145726,
+        "status": "Degrading",
+        "interpretation": "Capital flow intensity from log-money relative spread structure.",
+        "direction_note": "Higher effective score implies stronger capital-flow support.",
+        "interpretation_stale": false
       },
       {
-        "sector": "Information Technology",
-        "return": 0.010377584688605414
+        "factor": "alpha_1",
+        "weight": 0.418577,
+        "weight_pct": 41.86,
+        "effective_direction": 1,
+        "expr_hash": "b8804399e2ec",
+        "latest_ic": -0.028978,
+        "ic_mean_20d": -0.102333,
+        "ic_std_20d": 0.352412,
+        "icir_20d": -0.29038,
+        "ic_trend_slope": -0.039922,
+        "ic_trend": "-",
+        "sharpe_20d": -1.699211,
+        "fitness_20d": -3.203095,
+        "ls_cum_20d": -0.035252,
+        "contribution": 0.121546,
+        "status": "Degrading",
+        "interpretation": "Medium-horizon volume momentum percentile via rolling quantile.",
+        "direction_note": "Higher effective score implies improving volume trend persistence.",
+        "interpretation_stale": false
       },
       {
-        "sector": "Energy",
-        "return": 0.0015007503751875984
+        "factor": "alpha_11",
+        "weight": 0.158248,
+        "weight_pct": 15.82,
+        "effective_direction": 1,
+        "expr_hash": "ab1728904fcf",
+        "latest_ic": 0.099468,
+        "ic_mean_20d": -0.064006,
+        "ic_std_20d": 0.340341,
+        "icir_20d": -0.188063,
+        "ic_trend_slope": 0.058733,
+        "ic_trend": "+",
+        "sharpe_20d": 0.482082,
+        "fitness_20d": 0.449277,
+        "ls_cum_20d": 0.008616,
+        "contribution": 0.029761,
+        "status": "Degrading",
+        "interpretation": "Time-series MAD of log-volume capturing abnormal participation dispersion.",
+        "direction_note": "Higher effective score implies favorable dispersion regime.",
+        "interpretation_stale": true,
+        "interpretation_warning": "expr_hash mismatch (expected=5ef699416b1e, got=ab1728904fcf)"
+      },
+      {
+        "factor": "alpha_6",
+        "weight": 0.03074,
+        "weight_pct": 3.07,
+        "effective_direction": 1,
+        "expr_hash": "29e9a456b3cc",
+        "latest_ic": -0.060375,
+        "ic_mean_20d": 0.107628,
+        "ic_std_20d": 0.350236,
+        "icir_20d": 0.307302,
+        "ic_trend_slope": 0.034772,
+        "ic_trend": "+",
+        "sharpe_20d": 0.476673,
+        "fitness_20d": 0.476885,
+        "ls_cum_20d": 0.009929,
+        "contribution": 0.009447,
+        "status": "Healthy",
+        "interpretation": "Price-location ratio between high and VWAP with rank normalization.",
+        "direction_note": "Higher effective score implies stronger close location quality.",
+        "interpretation_stale": false
+      },
+      {
+        "factor": "alpha_0",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "d6511af1f613",
+        "latest_ic": -0.110889,
+        "ic_mean_20d": -0.099873,
+        "ic_std_20d": 0.350214,
+        "icir_20d": -0.285177,
+        "ic_trend_slope": -0.018838,
+        "ic_trend": "-",
+        "sharpe_20d": -1.357079,
+        "fitness_20d": -2.200471,
+        "ls_cum_20d": -0.026083,
+        "contribution": 0.0,
+        "status": "Degrading",
+        "interpretation": "Volume dislocation factor comparing log-volume to a nonlinear baseline.",
+        "direction_note": "Higher effective score implies stronger accumulation/participation quality.",
+        "interpretation_stale": false
+      },
+      {
+        "factor": "alpha_10",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "5ef699416b1e",
+        "latest_ic": 0.13841,
+        "ic_mean_20d": -0.050736,
+        "ic_std_20d": 0.43586,
+        "icir_20d": -0.116405,
+        "ic_trend_slope": 0.112278,
+        "ic_trend": "+",
+        "sharpe_20d": 3.238649,
+        "fitness_20d": 11.003992,
+        "ls_cum_20d": 0.114528,
+        "contribution": 0.0,
+        "status": "Degrading",
+        "interpretation": "Inverse low-quantile open-return effect targeting short-term oversold rebounds.",
+        "direction_note": "Higher effective score implies rebound-favorable short-term setup.",
+        "interpretation_stale": true,
+        "interpretation_warning": "expr_hash mismatch (expected=54462453f581, got=5ef699416b1e)"
+      },
+      {
+        "factor": "alpha_12",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "ef9be7ef82f5",
+        "latest_ic": -0.148458,
+        "ic_mean_20d": 0.110555,
+        "ic_std_20d": 0.316822,
+        "icir_20d": 0.348949,
+        "ic_trend_slope": -0.039867,
+        "ic_trend": "-",
+        "sharpe_20d": 2.108428,
+        "fitness_20d": 3.481453,
+        "ls_cum_20d": 0.027048,
+        "contribution": 0.0,
+        "status": "Healthy",
+        "interpretation": "OHLC gap relation adjusted by volume-chip support correlation.",
+        "direction_note": "Higher effective score implies supportive price-structure versus volume-chip behavior.",
+        "interpretation_stale": true,
+        "interpretation_warning": "expr_hash mismatch (expected=ab1728904fcf, got=ef9be7ef82f5)"
+      },
+      {
+        "factor": "alpha_2",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "b232be3cd9d5",
+        "latest_ic": 0.008313,
+        "ic_mean_20d": 0.088447,
+        "ic_std_20d": 0.370186,
+        "icir_20d": 0.238927,
+        "ic_trend_slope": 0.042132,
+        "ic_trend": "+",
+        "sharpe_20d": 2.031264,
+        "fitness_20d": 4.247138,
+        "ls_cum_20d": 0.043371,
+        "contribution": 0.0,
+        "status": "Healthy",
+        "interpretation": "Relative log-volume minus log-close pressure through quantile filtering.",
+        "direction_note": "Higher effective score implies stronger demand versus price level.",
+        "interpretation_stale": false
       }
     ],
-    "sector_losers": [
+    "market_summary_daily": {
+      "as_of_date": "2026-03-05",
+      "data_as_of_date": "2026-03-05",
+      "window_days": 1,
+      "universe_mean_ret": -0.012224996580405916,
+      "universe_median_ret": -0.01493130205988591,
+      "win_rate": 0.27941176470588236,
+      "advancers": 19,
+      "decliners": 49,
+      "unchanged": 0,
+      "total_scored": 68,
+      "best_5": {
+        "CRDO": 0.11019912152269407,
+        "OKTA": 0.10659439927732617,
+        "APP": 0.053383365121486115,
+        "CRM": 0.043085188820581655,
+        "QTWO": 0.03725841801155627
+      },
+      "worst_5": {
+        "DY": -0.05834654934261008,
+        "SSRM": -0.0623486682808716,
+        "TTMI": -0.06414504828630951,
+        "AGX": -0.07071713147410352,
+        "IREN": -0.0844806378132118
+      },
+      "sector_winners": [
+        {
+          "sector": "Utilities",
+          "return": 0.023918761852327552
+        },
+        {
+          "sector": "Information Technology",
+          "return": 0.010377584688605414
+        },
+        {
+          "sector": "Energy",
+          "return": 0.0015007503751875984
+        }
+      ],
+      "sector_losers": [
+        {
+          "sector": "Health Care",
+          "return": -0.014610783045119091
+        },
+        {
+          "sector": "Industrials",
+          "return": -0.03428523348398458
+        },
+        {
+          "sector": "Materials",
+          "return": -0.04468173522611141
+        }
+      ],
+      "date_match": true,
+      "source": "exact"
+    },
+    "market_summary_weekly": {
+      "as_of_date": "2026-03-05",
+      "data_as_of_date": "2026-03-05",
+      "window_days": 5,
+      "universe_mean_ret": -0.03980833840080189,
+      "universe_median_ret": -0.03639523742118084,
+      "win_rate": 0.27941176470588236,
+      "advancers": 19,
+      "decliners": 49,
+      "unchanged": 0,
+      "total_scored": 68,
+      "best_5": {
+        "PARR": 0.23321424171491922,
+        "APP": 0.14555292526208996,
+        "QTWO": 0.07229660144181271,
+        "ANET": 0.07045472002457953,
+        "OKTA": 0.06187904247516163
+      },
+      "worst_5": {
+        "ARQT": -0.15865724381625446,
+        "CCL": -0.17029429797670126,
+        "UAL": -0.18164230438521067,
+        "ORGO": -0.23271276595744683,
+        "WLDN": -0.30927061723185845
+      },
+      "sector_winners": [
+        {
+          "sector": "Energy",
+          "return": 0.23321424171491922
+        },
+        {
+          "sector": "Communication Services",
+          "return": 0.0031491647242285897
+        },
+        {
+          "sector": "Consumer Defensive",
+          "return": 0.00151975511477076
+        }
+      ],
+      "sector_losers": [
+        {
+          "sector": "Industrials",
+          "return": -0.0840607959561067
+        },
+        {
+          "sector": "Health Care",
+          "return": -0.09283595304219805
+        },
+        {
+          "sector": "Materials",
+          "return": -0.09646303667936978
+        }
+      ],
+      "date_match": true,
+      "source": "exact"
+    },
+    "microstructure_anomalies": [
       {
-        "sector": "Health Care",
-        "return": -0.014610783045119091
+        "symbol": "INTC",
+        "feature": "amihud_range",
+        "value": 0.004527,
+        "ts_z": 3.6374,
+        "cs_z": -0.2984,
+        "signal": "Illiquidity spike"
       },
       {
-        "sector": "Industrials",
-        "return": -0.03428523348398458
+        "symbol": "GOOGL",
+        "feature": "amihud_range",
+        "value": 0.000942,
+        "ts_z": 3.2027,
+        "cs_z": -0.3035,
+        "signal": "Illiquidity spike"
       },
       {
-        "sector": "Materials",
-        "return": -0.04468173522611141
+        "symbol": "TSLA",
+        "feature": "vol_fft",
+        "value": 0.554628,
+        "ts_z": 2.3217,
+        "cs_z": 0.2552,
+        "signal": "HF volume spike"
+      },
+      {
+        "symbol": "UBER",
+        "feature": "amihud_mean",
+        "value": 0.000387,
+        "ts_z": 2.2834,
+        "cs_z": -0.268,
+        "signal": "Liquidity drop"
+      },
+      {
+        "symbol": "SYF",
+        "feature": "amihud_mean",
+        "value": 0.002844,
+        "ts_z": 2.0156,
+        "cs_z": -0.2301,
+        "signal": "Liquidity drop"
+      },
+      {
+        "symbol": "NVDA",
+        "feature": "vol_fft",
+        "value": 0.190493,
+        "ts_z": -1.4234,
+        "cs_z": -2.3889,
+        "signal": "HF volume drop"
+      },
+      {
+        "symbol": "AMD",
+        "feature": "vol_fft",
+        "value": 0.208931,
+        "ts_z": -1.1322,
+        "cs_z": -2.255,
+        "signal": "HF volume drop"
+      },
+      {
+        "symbol": "MSGS",
+        "feature": "vol_fft",
+        "value": 0.149831,
+        "ts_z": -0.7983,
+        "cs_z": -2.6842,
+        "signal": "HF volume drop"
+      },
+      {
+        "symbol": "ORGO",
+        "feature": "amihud_mean",
+        "value": 0.504081,
+        "ts_z": -0.572,
+        "cs_z": 7.5008,
+        "signal": "Liquidity surge"
+      },
+      {
+        "symbol": "CAAP",
+        "feature": "amihud_mean",
+        "value": 0.173344,
+        "ts_z": -0.4957,
+        "cs_z": 2.3996,
+        "signal": "Liquidity surge"
+      },
+      {
+        "symbol": "TSLA",
+        "feature": "drift_factor",
+        "value": 1020287785.225536,
+        "ts_z": -0.4324,
+        "cs_z": 3.8293,
+        "signal": "Momentum reversal"
+      },
+      {
+        "symbol": "NVDA",
+        "feature": "drift_factor",
+        "value": 1512451049.166931,
+        "ts_z": 0.4258,
+        "cs_z": 5.7006,
+        "signal": "Momentum surge"
+      },
+      {
+        "symbol": "ORGO",
+        "feature": "amihud_range",
+        "value": 5.353246,
+        "ts_z": -0.4232,
+        "cs_z": 7.3346,
+        "signal": "Illiquidity drop"
+      },
+      {
+        "symbol": "MU",
+        "feature": "vol_fft",
+        "value": 0.233072,
+        "ts_z": -0.3941,
+        "cs_z": -2.0797,
+        "signal": "HF volume drop"
+      },
+      {
+        "symbol": "SNDK",
+        "feature": "drift_factor",
+        "value": -878244327.3518,
+        "ts_z": 0.3871,
+        "cs_z": -3.3895,
+        "signal": "Momentum surge"
       }
     ],
-    "date_match": true,
-    "source": "exact"
-  },
-  "market_summary_weekly": {
-    "as_of_date": "2026-03-05",
-    "data_as_of_date": "2026-03-05",
-    "window_days": 5,
-    "universe_mean_ret": -0.03980833840080189,
-    "universe_median_ret": -0.03639523742118084,
-    "win_rate": 0.27941176470588236,
-    "advancers": 19,
-    "decliners": 49,
-    "unchanged": 0,
-    "total_scored": 68,
-    "best_5": {
-      "PARR": 0.23321424171491922,
-      "APP": 0.14555292526208996,
-      "QTWO": 0.07229660144181271,
-      "ANET": 0.07045472002457953,
-      "OKTA": 0.06187904247516163
-    },
-    "worst_5": {
-      "ARQT": -0.15865724381625446,
-      "CCL": -0.17029429797670126,
-      "UAL": -0.18164230438521067,
-      "ORGO": -0.23271276595744683,
-      "WLDN": -0.30927061723185845
-    },
-    "sector_winners": [
+    "stock_alerts": [
       {
-        "sector": "Energy",
-        "return": 0.23321424171491922
+        "symbol": "INCY",
+        "score": 0.177062,
+        "rank": "69/69",
+        "delta_1d": -0.316443,
+        "consensus": "1/13",
+        "return_1d": -0.01546,
+        "return_5d": -0.03886,
+        "vol_ratio": 0.84
       },
       {
-        "sector": "Communication Services",
-        "return": 0.0031491647242285897
+        "symbol": "RKLB",
+        "score": 0.257603,
+        "rank": "65/69",
+        "delta_1d": -0.302736,
+        "consensus": "3/13",
+        "return_1d": -0.03216,
+        "return_5d": 0.01749,
+        "vol_ratio": 0.98
       },
       {
-        "sector": "Consumer Defensive",
-        "return": 0.00151975511477076
+        "symbol": "OKTA",
+        "score": 0.188388,
+        "rank": "68/69",
+        "delta_1d": -0.286086,
+        "consensus": "4/13",
+        "return_1d": 0.10659,
+        "return_5d": 0.09383,
+        "vol_ratio": 2.5
+      },
+      {
+        "symbol": "PARR",
+        "score": 0.37969,
+        "rank": "53/69",
+        "delta_1d": -0.282766,
+        "consensus": "5/13",
+        "return_1d": 0.0015,
+        "return_5d": 0.17461,
+        "vol_ratio": 2.29
+      },
+      {
+        "symbol": "DY",
+        "score": 0.596,
+        "rank": "22/69",
+        "delta_1d": 0.276245,
+        "consensus": "5/13",
+        "return_1d": -0.05835,
+        "return_5d": -0.11921,
+        "vol_ratio": 2.35
+      },
+      {
+        "symbol": "LRN",
+        "score": 0.44623,
+        "rank": "44/69",
+        "delta_1d": -0.254329,
+        "consensus": "5/13",
+        "return_1d": 0.00377,
+        "return_5d": 0.02143,
+        "vol_ratio": 1.22
+      },
+      {
+        "symbol": "AMD",
+        "score": 0.596243,
+        "rank": "21/69",
+        "delta_1d": 0.226839,
+        "consensus": "2/13",
+        "return_1d": -0.01155,
+        "return_5d": -0.00631,
+        "vol_ratio": 1.06
+      },
+      {
+        "symbol": "PL",
+        "score": 0.421931,
+        "rank": "48/69",
+        "delta_1d": -0.222088,
+        "consensus": "4/13",
+        "return_1d": -0.05328,
+        "return_5d": 0.02891,
+        "vol_ratio": 1.19
       }
     ],
-    "sector_losers": [
-      {
-        "sector": "Industrials",
-        "return": -0.0840607959561067
-      },
-      {
-        "sector": "Health Care",
-        "return": -0.09283595304219805
-      },
-      {
-        "sector": "Materials",
-        "return": -0.09646303667936978
-      }
-    ],
-    "date_match": true,
-    "source": "exact"
-  },
-  "microstructure_anomalies": [
-    {
-      "symbol": "INTC",
-      "feature": "amihud_range",
-      "value": 0.004527,
-      "ts_z": 3.6374,
-      "cs_z": -0.2984,
-      "signal": "Illiquidity spike"
-    },
-    {
-      "symbol": "GOOGL",
-      "feature": "amihud_range",
-      "value": 0.000942,
-      "ts_z": 3.2027,
-      "cs_z": -0.3035,
-      "signal": "Illiquidity spike"
-    },
-    {
-      "symbol": "TSLA",
-      "feature": "vol_fft",
-      "value": 0.554628,
-      "ts_z": 2.3217,
-      "cs_z": 0.2552,
-      "signal": "HF volume spike"
-    },
-    {
-      "symbol": "UBER",
-      "feature": "amihud_mean",
-      "value": 0.000387,
-      "ts_z": 2.2834,
-      "cs_z": -0.268,
-      "signal": "Liquidity drop"
-    },
-    {
-      "symbol": "SYF",
-      "feature": "amihud_mean",
-      "value": 0.002844,
-      "ts_z": 2.0156,
-      "cs_z": -0.2301,
-      "signal": "Liquidity drop"
-    },
-    {
-      "symbol": "NVDA",
-      "feature": "vol_fft",
-      "value": 0.190493,
-      "ts_z": -1.4234,
-      "cs_z": -2.3889,
-      "signal": "HF volume drop"
-    },
-    {
-      "symbol": "AMD",
-      "feature": "vol_fft",
-      "value": 0.208931,
-      "ts_z": -1.1322,
-      "cs_z": -2.255,
-      "signal": "HF volume drop"
-    },
-    {
-      "symbol": "MSGS",
-      "feature": "vol_fft",
-      "value": 0.149831,
-      "ts_z": -0.7983,
-      "cs_z": -2.6842,
-      "signal": "HF volume drop"
-    },
-    {
-      "symbol": "ORGO",
-      "feature": "amihud_mean",
-      "value": 0.504081,
-      "ts_z": -0.572,
-      "cs_z": 7.5008,
-      "signal": "Liquidity surge"
-    },
-    {
-      "symbol": "CAAP",
-      "feature": "amihud_mean",
-      "value": 0.173344,
-      "ts_z": -0.4957,
-      "cs_z": 2.3996,
-      "signal": "Liquidity surge"
-    },
-    {
-      "symbol": "TSLA",
-      "feature": "drift_factor",
-      "value": 1020287785.225536,
-      "ts_z": -0.4324,
-      "cs_z": 3.8293,
-      "signal": "Momentum reversal"
-    },
-    {
-      "symbol": "NVDA",
-      "feature": "drift_factor",
-      "value": 1512451049.166931,
-      "ts_z": 0.4258,
-      "cs_z": 5.7006,
-      "signal": "Momentum surge"
-    },
-    {
-      "symbol": "ORGO",
-      "feature": "amihud_range",
-      "value": 5.353246,
-      "ts_z": -0.4232,
-      "cs_z": 7.3346,
-      "signal": "Illiquidity drop"
-    },
-    {
-      "symbol": "MU",
-      "feature": "vol_fft",
-      "value": 0.233072,
-      "ts_z": -0.3941,
-      "cs_z": -2.0797,
-      "signal": "HF volume drop"
-    },
-    {
-      "symbol": "SNDK",
-      "feature": "drift_factor",
-      "value": -878244327.3518,
-      "ts_z": 0.3871,
-      "cs_z": -3.3895,
-      "signal": "Momentum surge"
-    }
-  ],
-  "ohlcv_returns": {
-    "mean": -0.012225,
-    "std": 0.034677,
-    "best_5": {
-      "CRDO": 0.110199,
-      "OKTA": 0.106594,
-      "APP": 0.053383,
-      "CRM": 0.043085,
-      "QTWO": 0.037258
-    },
-    "worst_5": {
-      "DY": -0.058347,
-      "SSRM": -0.062349,
-      "TTMI": -0.064145,
-      "AGX": -0.070717,
-      "IREN": -0.084481
-    },
-    "advancers": 19,
-    "decliners": 49
-  },
-  "cma_weights": {
-    "last_train_date": "2026-03-05",
-    "weights": {
-      "alpha_1": 0.418577,
-      "alpha_5": 0.392435,
-      "alpha_11": 0.158248,
-      "alpha_6": 0.03074,
-      "alpha_0": 0.0,
-      "alpha_2": 0.0,
-      "alpha_3": 0.0,
-      "alpha_4": 0.0,
-      "alpha_7": 0.0,
-      "alpha_8": 0.0,
-      "alpha_9": 0.0,
-      "alpha_10": 0.0,
-      "alpha_12": 0.0
+    "shortlists": {
+      "factor_names": [
+        "alpha_9",
+        "alpha_4",
+        "alpha_10",
+        "alpha_1",
+        "alpha_5"
+      ],
+      "symbol_names": [
+        "INCY",
+        "RKLB",
+        "OKTA",
+        "PARR",
+        "DY",
+        "LRN"
+      ]
     }
   },
   "_model": "qwen3.5:397b-cloud",
-  "_backend": "ollama"
+  "_backend": "ollama",
+  "_report_mode": "agentic"
 }
 </code></pre>
 
