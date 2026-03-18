@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using System.IO;
+using System.Collections;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Text;
@@ -59,6 +60,7 @@ namespace QuantConnect.AlpacaProxy
         private readonly Task _watchdogTask;
         private readonly SemaphoreSlim _sendLock = new(1, 1);
         private readonly SemaphoreSlim _optionsSendLock = new(1, 1);
+        private readonly HashSet<string> _stockLookupMissesLogged = new(StringComparer.Ordinal);
 
         private volatile bool _isConnected;
         private volatile bool _isAuthenticated;
@@ -750,6 +752,18 @@ namespace QuantConnect.AlpacaProxy
                 return;
             }
 
+            if (type == "subscription")
+            {
+                var summary = DescribeSubscriptionMessage(msg);
+                if (summary.Contains("invalid_trades=", StringComparison.Ordinal) &&
+                    !summary.EndsWith("invalid_trades=none invalid_quotes=none", StringComparison.Ordinal))
+                {
+                    var stream = isOptions ? "Options" : "Stock";
+                    Log.Error($"AlpacaProxy: {stream} subscription ack {summary}");
+                }
+                return;
+            }
+
             var symbolValue = GetString(msg, "S");
             if (string.IsNullOrEmpty(symbolValue))
             {
@@ -758,6 +772,7 @@ namespace QuantConnect.AlpacaProxy
 
             if (!_brokerageSymbolLookup.TryGetValue(symbolValue, out var symbol))
             {
+                MaybeLogStockLookupMiss(type, symbolValue);
                 return;
             }
 
@@ -775,6 +790,76 @@ namespace QuantConnect.AlpacaProxy
                     Interlocked.Exchange(ref _lastStockMessageTicks, DateTime.UtcNow.Ticks);
                     break;
             }
+        }
+
+        private void MaybeLogStockLookupMiss(string type, string symbolValue)
+        {
+            lock (_stockLookupMissesLogged)
+            {
+                if (_stockLookupMissesLogged.Count >= 10 || !_stockLookupMissesLogged.Add(symbolValue))
+                {
+                    return;
+                }
+            }
+
+            Log.Error(
+                $"AlpacaProxy: Stock payload dropped due to missing symbol lookup type={type} symbol={symbolValue} " +
+                $"known={_brokerageSymbolLookup.Count}"
+            );
+        }
+
+        private static string DescribeSubscriptionMessage(Dictionary<string, object> msg)
+        {
+            var trades = ExtractStringValues(msg.TryGetValue("trades", out var tradesValue) ? tradesValue : null);
+            var quotes = ExtractStringValues(msg.TryGetValue("quotes", out var quotesValue) ? quotesValue : null);
+            var invalidTrades = ExtractStringValues(msg.TryGetValue("invalid_trades", out var invalidTradesValue) ? invalidTradesValue : null);
+            var invalidQuotes = ExtractStringValues(msg.TryGetValue("invalid_quotes", out var invalidQuotesValue) ? invalidQuotesValue : null);
+
+            return
+                $"trades={trades.Count} quotes={quotes.Count} " +
+                $"invalid_trades={FormatSymbolList(invalidTrades)} invalid_quotes={FormatSymbolList(invalidQuotes)}";
+        }
+
+        private static List<string> ExtractStringValues(object? value)
+        {
+            var values = new List<string>();
+            if (value == null)
+            {
+                return values;
+            }
+
+            if (value is string scalar)
+            {
+                if (!string.IsNullOrWhiteSpace(scalar))
+                {
+                    values.Add(scalar);
+                }
+                return values;
+            }
+
+            if (value is IEnumerable enumerable)
+            {
+                foreach (var item in enumerable)
+                {
+                    if (item == null)
+                    {
+                        continue;
+                    }
+
+                    var text = item as string ?? item.ToString();
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        values.Add(text);
+                    }
+                }
+            }
+
+            return values;
+        }
+
+        private static string FormatSymbolList(List<string> values)
+        {
+            return values.Count == 0 ? "none" : string.Join(",", values);
         }
 
         private static string GetBrokerageSymbol(Symbol symbol)

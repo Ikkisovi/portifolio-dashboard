@@ -1,8 +1,30 @@
 param(
-    [string]$Image = "lean-alpaca-proxy:net10"
+    [string]$Image = "lean-alpaca-proxy:net10",
+    [string]$StrategyRepoRoot = ""
 )
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+function Resolve-StrategySourceRoot {
+    param(
+        [string]$CurrentRoot,
+        [string]$ExplicitRoot
+    )
+
+    if (-not [string]::IsNullOrWhiteSpace($ExplicitRoot)) {
+        if (-not (Test-Path -LiteralPath $ExplicitRoot)) {
+            throw "Explicit strategy repo root not found: $ExplicitRoot"
+        }
+        return (Resolve-Path -LiteralPath $ExplicitRoot).Path
+    }
+
+    $strategyRoot = Join-Path (Split-Path -Parent $root) "my_custom_lean"
+    if (Test-Path -LiteralPath $strategyRoot) {
+        return (Resolve-Path -LiteralPath $strategyRoot).Path
+    }
+
+    return $CurrentRoot
+}
 
 function Read-Choice {
     param(
@@ -668,7 +690,8 @@ if (Test-Path $secretsLocalTxtPath) {
 }
 $leanLocalNoAuth = Test-TruthyValue -Value $env:LEAN_LOCAL_NOAUTH -Default $false
 
-$strategyDirs = Get-ChildItem -Path $root -Directory -Filter "S_*" | Sort-Object Name
+$strategySourceRoot = Resolve-StrategySourceRoot -CurrentRoot $root -ExplicitRoot $StrategyRepoRoot
+$strategyDirs = Get-ChildItem -Path $strategySourceRoot -Directory -Filter "S_*" | Sort-Object Name
 if (-not $strategyDirs) {
     Write-Error "No strategy folders found (S_*)."
     exit 1
@@ -1226,6 +1249,40 @@ if ($leanEngineOverrideEnabled -and -not (Test-Path $engineOverrideDllCandidate)
     $leanEngineOverrideEnabled = $false
 }
 $engineOverrideDepsCandidate = Join-Path $modulesPath "QuantConnect.Lean.Engine.deps.json"
+$engineOverrideArtifactsPath = Join-Path $root "build\engine_override"
+$engineOverrideCompanionFiles = @(
+    "QuantConnect.Common.dll",
+    "QuantConnect.Common.pdb",
+    "QuantConnect.Common.deps.json",
+    "QuantConnect.Configuration.dll",
+    "QuantConnect.Configuration.pdb",
+    "QuantConnect.Configuration.deps.json",
+    "QuantConnect.Logging.dll",
+    "QuantConnect.Logging.pdb",
+    "QuantConnect.Logging.deps.json",
+    "QuantConnect.Compression.dll",
+    "QuantConnect.Compression.pdb",
+    "QuantConnect.Compression.deps.json",
+    "QuantConnect.Algorithm.dll",
+    "QuantConnect.Algorithm.pdb",
+    "QuantConnect.Algorithm.deps.json",
+    "QuantConnect.Algorithm.Framework.dll",
+    "QuantConnect.Algorithm.Framework.pdb",
+    "QuantConnect.Algorithm.Framework.deps.json",
+    "QuantConnect.AlgorithmFactory.dll",
+    "QuantConnect.AlgorithmFactory.pdb",
+    "QuantConnect.AlgorithmFactory.deps.json",
+    "QuantConnect.Algorithm.CSharp.dll",
+    "QuantConnect.Algorithm.CSharp.pdb",
+    "QuantConnect.Algorithm.CSharp.deps.json",
+    "QuantConnect.Brokerages.dll",
+    "QuantConnect.Brokerages.pdb",
+    "QuantConnect.Brokerages.deps.json",
+    "QuantConnect.Indicators.dll",
+    "QuantConnect.Indicators.pdb",
+    "QuantConnect.Indicators.deps.json"
+)
+$engineOverrideSourcePath = $modulesPath
 $forceIncompatibleOverride = Test-TruthyValue -Value $env:LEAN_ENGINE_OVERRIDE_FORCE -Default $false
 if ($leanEngineOverrideEnabled) {
     $runtimeTfMajor = Get-DotNetRuntimeMajor -Image $Image
@@ -1242,6 +1299,12 @@ if ($leanEngineOverrideEnabled) {
         ) -f $engineTfMajor, $runtimeTfMajor
         Write-Warning $runtimeMismatchWarning
         $leanEngineOverrideEnabled = $false
+    }
+    elseif (Test-Path (Join-Path $engineOverrideArtifactsPath "QuantConnect.Common.dll")) {
+        $engineOverrideSourcePath = $engineOverrideArtifactsPath
+    }
+    else {
+        Write-Warning "LEAN_ENGINE_OVERRIDE=1 but matching companion override artifacts were not found under $engineOverrideArtifactsPath. Falling back to $modulesPath for engine companion assemblies."
     }
 }
 $env:LEAN_ENGINE_OVERRIDE = if ($leanEngineOverrideEnabled) { "1" } else { "0" }
@@ -1436,6 +1499,12 @@ if ($leanEngineOverrideEnabled) {
         }
         if (Test-Path $engineOverrideDeps) {
             $dockerArgs += @("-v", "${engineOverrideDeps}:/Lean/Launcher/bin/Debug/QuantConnect.Lean.Engine.deps.json")
+        }
+        foreach ($overrideName in $engineOverrideCompanionFiles) {
+            $overridePath = Join-Path $engineOverrideSourcePath $overrideName
+            if (Test-Path $overridePath) {
+                $dockerArgs += @("-v", "${overridePath}:/Lean/Launcher/bin/Debug/$overrideName")
+            }
         }
         Write-Host "LEAN_ENGINE_OVERRIDE=1 -> mounting QuantConnect.Lean.Engine.dll override."
     }
