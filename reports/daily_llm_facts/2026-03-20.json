@@ -1,0 +1,5541 @@
+{
+  "mode": "agentic_v1",
+  "requested_date": "2026-03-20",
+  "resolved_date": "2026-03-20",
+  "meta": {
+    "tool": "get_report_meta",
+    "data": {
+      "requested_date": "2026-03-20",
+      "data_as_of_date": "2026-03-20",
+      "requested_equals_data_date": true,
+      "cma_source": "exact",
+      "score_mode": "light",
+      "rebalance_today": false,
+      "scored_universe_size": 67,
+      "objective_config": {
+        "cma_obj_logret_weight": 1.0,
+        "cma_obj_ic_weight": 1.0,
+        "cma_obj_fitness_weight": 1.0,
+        "cma_turnover_penalty": 0.01,
+        "cma_icir_penalty": 0.01,
+        "cma_icir_floor": 0.0,
+        "annualization": 252,
+        "turnover_floor": 0.125,
+        "cma_top_bottom": 8,
+        "cma_forward_horizon": 20,
+        "cma_min_valid_days": 60,
+        "eval_window": 80
+      },
+      "section_dates": {
+        "cma_daily": "2026-03-20",
+        "factor_health": "2026-03-20",
+        "timing_daily": "2026-03-20",
+        "market_summary_daily": "2026-03-20",
+        "market_summary_weekly": "2026-03-20"
+      },
+      "section_sources": {
+        "cma_daily": "E:\\factor\\lean_project\\Pensive Tan Bull Local\\storage\\alphasage\\deployments\\20260130T174105Z\\reports\\cma_daily\\2026-03-20.json",
+        "timing_daily": "E:\\factor\\lean_project\\Pensive Tan Bull Local\\storage\\alphasage\\deployments\\20260130T174105Z\\reports\\timing_daily\\2026-03-20.json"
+      },
+      "section_availability": {
+        "cma_daily": true,
+        "timing_daily": true,
+        "market_summary_daily": true,
+        "market_summary_weekly": true,
+        "factor_health": true
+      },
+      "timing_summary": {
+        "score_source": "market_regime_gate",
+        "fallback_reason": "",
+        "bottom_n": 0,
+        "total_scored": 0
+      },
+      "legacy_schema": {}
+    }
+  },
+  "timing": {
+    "tool": "get_timing_cutoff_context",
+    "data": {
+      "score_source": "market_regime_gate",
+      "fallback_reason": "",
+      "bottom_n": 0,
+      "total_scored": 0,
+      "exits": [],
+      "restores": [],
+      "blocked": [],
+      "deferred_restores": [],
+      "actionable_factor_health": [],
+      "actionable_eval_window": null,
+      "actionable_prediction_horizon": null,
+      "market_regime": {
+        "available": true,
+        "blocked": false,
+        "label": 2,
+        "blocked_labels": [
+          3
+        ],
+        "feature_set": [
+          "actionable_aggregate",
+          "TsMean(CSStd(TsRet($close,1)),20)",
+          "TsMean(CSBreadthPos(TsRet($close,5)),10)",
+          "TsZScore(CSQuantileSpread(TsRet($close,20),0.8,0.2),20)"
+        ],
+        "reason": "",
+        "restore_symbols": [],
+        "feature_snapshot": {
+          "actionable_aggregate": -0.104735,
+          "TsMean(CSStd(TsRet($close,1)),20)": 0.024762,
+          "TsMean(CSBreadthPos(TsRet($close,5)),10)": 0.390278,
+          "TsZScore(CSQuantileSpread(TsRet($close,20),0.8,0.2),20)": -0.331595
+        },
+        "feature_zscores": {
+          "actionable_aggregate": -0.72449,
+          "TsMean(CSStd(TsRet($close,1)),20)": -1.444308,
+          "TsMean(CSBreadthPos(TsRet($close,5)),10)": -1.58769,
+          "TsZScore(CSQuantileSpread(TsRet($close,20),0.8,0.2),20)": -0.215297
+        },
+        "cluster_profile": {
+          "label": 2,
+          "cluster_size": 69,
+          "sample_share": 0.27381,
+          "state_hint": "rangebound_compression",
+          "summary_tags": [
+            "mixed_actionable",
+            "contained_dispersion",
+            "mixed_breadth",
+            "compressed_spread"
+          ],
+          "feature_bias": [
+            {
+              "feature": "actionable_aggregate",
+              "raw_value": 0.001797,
+              "zscore": -0.348044,
+              "direction": "neutral",
+              "interpretation": "mixed short-horizon actionable aggregate"
+            },
+            {
+              "feature": "TsMean(CSStd(TsRet($close,1)),20)",
+              "raw_value": 0.027603,
+              "zscore": -0.663578,
+              "direction": "low",
+              "interpretation": "contained 1-day cross-sectional dispersion"
+            },
+            {
+              "feature": "TsMean(CSBreadthPos(TsRet($close,5)),10)",
+              "raw_value": 0.545773,
+              "zscore": -0.102147,
+              "direction": "neutral",
+              "interpretation": "mixed 5-day upside breadth"
+            },
+            {
+              "feature": "TsZScore(CSQuantileSpread(TsRet($close,20),0.8,0.2),20)",
+              "raw_value": -0.769312,
+              "zscore": -0.57899,
+              "direction": "low",
+              "interpretation": "compressed 20-day winner-loser spread"
+            }
+          ],
+          "possible_meanings": [
+            "Possible rangebound or compressed tape: dispersion and winner-loser spread are both muted."
+          ]
+        }
+      },
+      "boundary_context": {
+        "available": false,
+        "cutoff_rank": null,
+        "cutoff_score": null,
+        "near_miss_symbols": null,
+        "bottom_bucket_symbols": null,
+        "unavailable_reason": "timing_boundary_scores_not_persisted"
+      }
+    }
+  },
+  "data_quality": {
+    "tool": "get_data_quality_issues",
+    "data": {
+      "summary": {
+        "issue_count": 0,
+        "highest_severity": "info",
+        "severity_counts": {
+          "critical": 0,
+          "warning": 0,
+          "info": 0
+        }
+      },
+      "issues": []
+    }
+  },
+  "divergence": {
+    "tool": "get_top_divergence_factors",
+    "ok": true,
+    "resolved_date": "2026-03-20",
+    "warnings": [],
+    "error": null,
+    "data": {
+      "top_k_requested": 3,
+      "candidate_count": 10,
+      "ranking_policy": "standalone_cma_total_desc_then_max_icir_desc_then_factor_asc",
+      "candidates": [
+        {
+          "factor": "alpha_11",
+          "selected_weight": 0.0,
+          "weight_rank": 5,
+          "standalone_cma_total": 6.486108,
+          "standalone_icir": 0.076304,
+          "health_icir_20d": 0.002626,
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "cma_total": 5.408936,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "cma_total": 8.490904,
+              "cma_total_rank": 1,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ],
+          "pairwise_correlation_available": false,
+          "optimizer_trace_available": false
+        },
+        {
+          "factor": "alpha_12",
+          "selected_weight": 0.0,
+          "weight_rank": 6,
+          "standalone_cma_total": 3.099644,
+          "standalone_icir": 0.073307,
+          "health_icir_20d": 0.008805,
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "cma_total": 5.408936,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "cma_total": 8.490904,
+              "cma_total_rank": 1,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ],
+          "pairwise_correlation_available": false,
+          "optimizer_trace_available": false
+        },
+        {
+          "factor": "alpha_10",
+          "selected_weight": 0.0,
+          "weight_rank": 4,
+          "standalone_cma_total": 2.94878,
+          "standalone_icir": 0.019605,
+          "health_icir_20d": 0.062278,
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "cma_total": 5.408936,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "cma_total": 8.490904,
+              "cma_total_rank": 1,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ],
+          "pairwise_correlation_available": false,
+          "optimizer_trace_available": false
+        }
+      ]
+    }
+  },
+  "stock_selection": {
+    "tool": "get_stock_selection_context",
+    "ok": true,
+    "resolved_date": "2026-03-20",
+    "warnings": [],
+    "error": null,
+    "data": {
+      "lookback_days": 5,
+      "focus_actionable_factors": [],
+      "cma_current": {
+        "top": [
+          {
+            "symbol": "USAR",
+            "score": 0.962067,
+            "rank": 1
+          },
+          {
+            "symbol": "TWLO",
+            "score": 0.908384,
+            "rank": 2
+          },
+          {
+            "symbol": "TMUS",
+            "score": 0.857256,
+            "rank": 3
+          },
+          {
+            "symbol": "SNDK",
+            "score": 0.844395,
+            "rank": 4
+          },
+          {
+            "symbol": "B",
+            "score": 0.806954,
+            "rank": 5
+          },
+          {
+            "symbol": "V",
+            "score": 0.806049,
+            "rank": 6
+          },
+          {
+            "symbol": "CDE",
+            "score": 0.801516,
+            "rank": 7
+          },
+          {
+            "symbol": "META",
+            "score": 0.800937,
+            "rank": 8
+          }
+        ],
+        "bottom": [
+          {
+            "symbol": "GM",
+            "score": 0.178858,
+            "rank": 60
+          },
+          {
+            "symbol": "NVDA",
+            "score": 0.178279,
+            "rank": 61
+          },
+          {
+            "symbol": "INCY",
+            "score": 0.173087,
+            "rank": 62
+          },
+          {
+            "symbol": "PARR",
+            "score": 0.160226,
+            "rank": 63
+          },
+          {
+            "symbol": "RKLB",
+            "score": 0.136805,
+            "rank": 64
+          },
+          {
+            "symbol": "ORGO",
+            "score": 0.119736,
+            "rank": 65
+          },
+          {
+            "symbol": "TSLA",
+            "score": 0.112972,
+            "rank": 66
+          },
+          {
+            "symbol": "ARQT",
+            "score": 0.09318,
+            "rank": 67
+          }
+        ]
+      },
+      "cma_recent_counts": {
+        "top": [
+          {
+            "symbol": "USAR",
+            "count": 5
+          },
+          {
+            "symbol": "B",
+            "count": 4
+          },
+          {
+            "symbol": "CDE",
+            "count": 4
+          },
+          {
+            "symbol": "META",
+            "count": 4
+          },
+          {
+            "symbol": "SNDK",
+            "count": 4
+          },
+          {
+            "symbol": "TMUS",
+            "count": 4
+          },
+          {
+            "symbol": "TWLO",
+            "count": 4
+          },
+          {
+            "symbol": "V",
+            "count": 4
+          },
+          {
+            "symbol": "AGX",
+            "count": 1
+          },
+          {
+            "symbol": "APP",
+            "count": 1
+          },
+          {
+            "symbol": "CRDO",
+            "count": 1
+          },
+          {
+            "symbol": "EOSE",
+            "count": 1
+          },
+          {
+            "symbol": "SSRM",
+            "count": 1
+          },
+          {
+            "symbol": "TTMI",
+            "count": 1
+          },
+          {
+            "symbol": "WLDN",
+            "count": 1
+          }
+        ],
+        "bottom": [
+          {
+            "symbol": "GM",
+            "count": 5
+          },
+          {
+            "symbol": "INCY",
+            "count": 5
+          },
+          {
+            "symbol": "NVDA",
+            "count": 5
+          },
+          {
+            "symbol": "TSLA",
+            "count": 5
+          },
+          {
+            "symbol": "ARQT",
+            "count": 4
+          },
+          {
+            "symbol": "ORGO",
+            "count": 4
+          },
+          {
+            "symbol": "PARR",
+            "count": 4
+          },
+          {
+            "symbol": "RKLB",
+            "count": 4
+          },
+          {
+            "symbol": "BMY",
+            "count": 1
+          },
+          {
+            "symbol": "C",
+            "count": 1
+          },
+          {
+            "symbol": "CMCSA",
+            "count": 1
+          },
+          {
+            "symbol": "MU",
+            "count": 1
+          }
+        ]
+      },
+      "actionable_composite": {
+        "top": [],
+        "bottom": []
+      },
+      "actionable_factor_picks": [
+        {
+          "name": "actionable_alpha_0",
+          "expr": "Div($chip_overlap,Sqrt($high))",
+          "top": [
+            {
+              "symbol": "EOSE",
+              "value": 0.3995587041102051
+            },
+            {
+              "symbol": "ORGO",
+              "value": 0.32246049738245186
+            },
+            {
+              "symbol": "USAR",
+              "value": 0.21744135774877993
+            },
+            {
+              "symbol": "CDE",
+              "value": 0.21128678025353756
+            },
+            {
+              "symbol": "ARQT",
+              "value": 0.20372794770992597
+            },
+            {
+              "symbol": "CCL",
+              "value": 0.197368942703481
+            },
+            {
+              "symbol": "EZPW",
+              "value": 0.18803689473859136
+            },
+            {
+              "symbol": "CAAP",
+              "value": 0.18554823473987725
+            },
+            {
+              "symbol": "SSRM",
+              "value": 0.17556657926057542
+            },
+            {
+              "symbol": "PL",
+              "value": 0.16788746552819553
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "LLY",
+              "value": 0.028592126940758845
+            },
+            {
+              "symbol": "META",
+              "value": 0.03246089332462205
+            },
+            {
+              "symbol": "TMUS",
+              "value": 0.03384292874189827
+            },
+            {
+              "symbol": "MU",
+              "value": 0.03679745811067578
+            },
+            {
+              "symbol": "SNDK",
+              "value": 0.036866248343970204
+            },
+            {
+              "symbol": "CAT",
+              "value": 0.03726451736903312
+            },
+            {
+              "symbol": "GOOGL",
+              "value": 0.04053855778245295
+            },
+            {
+              "symbol": "V",
+              "value": 0.04139823938338612
+            },
+            {
+              "symbol": "POWL",
+              "value": 0.041722702278148616
+            },
+            {
+              "symbol": "FN",
+              "value": 0.04337599221659005
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_1",
+          "expr": "Mul($chl,Sub($close,$open))",
+          "top": [
+            {
+              "symbol": "AGX",
+              "value": 6.858957387478441e-05
+            },
+            {
+              "symbol": "POWL",
+              "value": 5.758903043689408e-05
+            },
+            {
+              "symbol": "LRN",
+              "value": 1.4149664565764845e-05
+            },
+            {
+              "symbol": "CRDO",
+              "value": 1.3557904795847204e-05
+            },
+            {
+              "symbol": "LLY",
+              "value": 1.3083663016811385e-05
+            },
+            {
+              "symbol": "SEZL",
+              "value": 8.091958783378894e-06
+            },
+            {
+              "symbol": "APP",
+              "value": 8.031052028905284e-06
+            },
+            {
+              "symbol": "STRL",
+              "value": 7.4443193217848795e-06
+            },
+            {
+              "symbol": "RL",
+              "value": 6.711011402012255e-06
+            },
+            {
+              "symbol": "TTMI",
+              "value": 5.777948334444487e-06
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "FN",
+              "value": -3.648062911504998e-05
+            },
+            {
+              "symbol": "CAAP",
+              "value": -7.596642995384527e-06
+            },
+            {
+              "symbol": "EAT",
+              "value": -7.120075433081196e-06
+            },
+            {
+              "symbol": "WLDN",
+              "value": -4.824061143129365e-06
+            },
+            {
+              "symbol": "PARR",
+              "value": -4.79615595512511e-06
+            },
+            {
+              "symbol": "SKYW",
+              "value": -1.0160569732489665e-06
+            },
+            {
+              "symbol": "IREN",
+              "value": -8.086625406155623e-07
+            },
+            {
+              "symbol": "V",
+              "value": -7.629510003557613e-07
+            },
+            {
+              "symbol": "ALL",
+              "value": -6.872728404386086e-07
+            },
+            {
+              "symbol": "CAT",
+              "value": -6.244203324241635e-07
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_10",
+          "expr": "TsSortino($chip_near_support,40)",
+          "top": [
+            {
+              "symbol": "LLY",
+              "value": 63317.470537341935
+            },
+            {
+              "symbol": "STRL",
+              "value": 39283.40808092941
+            },
+            {
+              "symbol": "UAL",
+              "value": 3622.0990241109976
+            },
+            {
+              "symbol": "TTMI",
+              "value": 3443.244831285527
+            },
+            {
+              "symbol": "ALL",
+              "value": 3414.8780352184394
+            },
+            {
+              "symbol": "ANET",
+              "value": 2023.3710275208405
+            },
+            {
+              "symbol": "CRDO",
+              "value": 1753.5768939957752
+            },
+            {
+              "symbol": "KGC",
+              "value": 1033.418403244918
+            },
+            {
+              "symbol": "CDE",
+              "value": 764.5825874424843
+            },
+            {
+              "symbol": "EZPW",
+              "value": 718.1510821160413
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "BLBD",
+              "value": -0.16012815380490988
+            },
+            {
+              "symbol": "CAAP",
+              "value": 2.296551831235727
+            },
+            {
+              "symbol": "BMY",
+              "value": 3.2561456520241494
+            },
+            {
+              "symbol": "MU",
+              "value": 3.5173682724041235
+            },
+            {
+              "symbol": "RL",
+              "value": 3.989795109516055
+            },
+            {
+              "symbol": "SNDK",
+              "value": 4.095690581959818
+            },
+            {
+              "symbol": "TMUS",
+              "value": 4.30042729040637
+            },
+            {
+              "symbol": "VRT",
+              "value": 4.696642777480398
+            },
+            {
+              "symbol": "CAT",
+              "value": 5.315389532482418
+            },
+            {
+              "symbol": "UBER",
+              "value": 5.514600073175022
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_11",
+          "expr": "Mul(-1.0,TsRelStrength(Inv($drift_factor),10,30))",
+          "top": [
+            {
+              "symbol": "MSGS",
+              "value": 160.36254331342604
+            },
+            {
+              "symbol": "STRL",
+              "value": 8.189115815867783
+            },
+            {
+              "symbol": "TTMI",
+              "value": 4.745112032610391
+            },
+            {
+              "symbol": "C",
+              "value": 2.8946039227996248
+            },
+            {
+              "symbol": "EOSE",
+              "value": 2.668303454334647
+            },
+            {
+              "symbol": "DIS",
+              "value": 2.5915502527369507
+            },
+            {
+              "symbol": "POWL",
+              "value": 2.3584820483565565
+            },
+            {
+              "symbol": "APP",
+              "value": 2.1649238509831896
+            },
+            {
+              "symbol": "EAT",
+              "value": 2.038612385487418
+            },
+            {
+              "symbol": "CAT",
+              "value": 1.9389693303020863
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "CAAP",
+              "value": -7.564729742115642
+            },
+            {
+              "symbol": "CRM",
+              "value": -7.297655867502996
+            },
+            {
+              "symbol": "PARR",
+              "value": -3.6891175417999005
+            },
+            {
+              "symbol": "UAL",
+              "value": -2.7560759159522688
+            },
+            {
+              "symbol": "EZPW",
+              "value": -2.0310605254854415
+            },
+            {
+              "symbol": "SKYW",
+              "value": -2.005313227924668
+            },
+            {
+              "symbol": "BLBD",
+              "value": -1.9787689845337084
+            },
+            {
+              "symbol": "KGC",
+              "value": -1.9457011751570814
+            },
+            {
+              "symbol": "B",
+              "value": -1.8144975029216113
+            },
+            {
+              "symbol": "OKTA",
+              "value": -1.7455850317744952
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_12",
+          "expr": "Mul(-1.0,Inv(TsRelStrength($amihud_range,10,15)))",
+          "top": [
+            {
+              "symbol": "INCY",
+              "value": 147.04645778721078
+            },
+            {
+              "symbol": "USAR",
+              "value": 67.22399143642221
+            },
+            {
+              "symbol": "NVDA",
+              "value": 22.05836162311897
+            },
+            {
+              "symbol": "SNDK",
+              "value": 22.0003840517052
+            },
+            {
+              "symbol": "AAPL",
+              "value": 21.881971594042643
+            },
+            {
+              "symbol": "MU",
+              "value": 19.785526647108483
+            },
+            {
+              "symbol": "SFM",
+              "value": 18.215470552703213
+            },
+            {
+              "symbol": "EAT",
+              "value": 17.962739544818216
+            },
+            {
+              "symbol": "CMCSA",
+              "value": 12.763346564151028
+            },
+            {
+              "symbol": "ORGO",
+              "value": 12.242540562316531
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "FN",
+              "value": -169.96833411342976
+            },
+            {
+              "symbol": "TTMI",
+              "value": -62.26543861927695
+            },
+            {
+              "symbol": "ALL",
+              "value": -47.257008301016626
+            },
+            {
+              "symbol": "GM",
+              "value": -39.63637384740992
+            },
+            {
+              "symbol": "B",
+              "value": -36.82785379018529
+            },
+            {
+              "symbol": "UBER",
+              "value": -36.25556097025197
+            },
+            {
+              "symbol": "BLBD",
+              "value": -33.26301267044401
+            },
+            {
+              "symbol": "RCL",
+              "value": -30.045802512895545
+            },
+            {
+              "symbol": "SYF",
+              "value": -25.34592744369937
+            },
+            {
+              "symbol": "PARR",
+              "value": -21.2828150339586
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_13",
+          "expr": "TsRet(Rank($high_break_revert_45_5),30)",
+          "top": [
+            {
+              "symbol": "SNDK",
+              "value": 34.5
+            },
+            {
+              "symbol": "AGX",
+              "value": 16.75
+            },
+            {
+              "symbol": "MU",
+              "value": 10.833333333333334
+            },
+            {
+              "symbol": "VRT",
+              "value": 7.875
+            },
+            {
+              "symbol": "STRL",
+              "value": 6.1000000000000005
+            },
+            {
+              "symbol": "CAT",
+              "value": 4.916666666666667
+            },
+            {
+              "symbol": "POWL",
+              "value": 4.071428571428572
+            },
+            {
+              "symbol": "SSRM",
+              "value": 3.4375
+            },
+            {
+              "symbol": "BLBD",
+              "value": 2.9444444444444446
+            },
+            {
+              "symbol": "EZPW",
+              "value": 2.5500000000000003
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "SFM",
+              "value": -0.9743589743589743
+            },
+            {
+              "symbol": "PARR",
+              "value": -0.9487179487179487
+            },
+            {
+              "symbol": "LRN",
+              "value": -0.4779411764705882
+            },
+            {
+              "symbol": "AAPL",
+              "value": -0.08974358974358965
+            },
+            {
+              "symbol": "ALL",
+              "value": -0.08974358974358965
+            },
+            {
+              "symbol": "AMD",
+              "value": -0.08974358974358965
+            },
+            {
+              "symbol": "AMZN",
+              "value": -0.08974358974358965
+            },
+            {
+              "symbol": "ANET",
+              "value": -0.08974358974358965
+            },
+            {
+              "symbol": "APP",
+              "value": -0.08974358974358965
+            },
+            {
+              "symbol": "ARQT",
+              "value": -0.08974358974358965
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_2",
+          "expr": "Mul(-1.0,TsCorr(TsNonLinearMom($vol_fft,40),$chip_vwap,15))",
+          "top": [
+            {
+              "symbol": "ORGO",
+              "value": 0.9134539759452636
+            },
+            {
+              "symbol": "PARR",
+              "value": 0.7397143917628087
+            },
+            {
+              "symbol": "ALL",
+              "value": 0.707053792731512
+            },
+            {
+              "symbol": "ARQT",
+              "value": 0.6404558996906604
+            },
+            {
+              "symbol": "QTWO",
+              "value": 0.6279991561555694
+            },
+            {
+              "symbol": "V",
+              "value": 0.6248641677662766
+            },
+            {
+              "symbol": "CDE",
+              "value": 0.6016160958266107
+            },
+            {
+              "symbol": "CMCSA",
+              "value": 0.57107412462432
+            },
+            {
+              "symbol": "DIS",
+              "value": 0.5571908262954239
+            },
+            {
+              "symbol": "CRDO",
+              "value": 0.5570071434097368
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "NEM",
+              "value": -0.9282262036257711
+            },
+            {
+              "symbol": "HOOD",
+              "value": -0.7878116750197359
+            },
+            {
+              "symbol": "MU",
+              "value": -0.7713247252084605
+            },
+            {
+              "symbol": "SFM",
+              "value": -0.7656095636140055
+            },
+            {
+              "symbol": "VRT",
+              "value": -0.7511245470783945
+            },
+            {
+              "symbol": "SNDK",
+              "value": -0.7502007797711673
+            },
+            {
+              "symbol": "SEZL",
+              "value": -0.7339018871362181
+            },
+            {
+              "symbol": "B",
+              "value": -0.6916167761266948
+            },
+            {
+              "symbol": "KGC",
+              "value": -0.6799859435641914
+            },
+            {
+              "symbol": "EAT",
+              "value": -0.6560167122692375
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_3",
+          "expr": "TsRelStrength(TsIr($log_volume,30),20,40)",
+          "top": [
+            {
+              "symbol": "INTC",
+              "value": 0.2565895582685127
+            },
+            {
+              "symbol": "SNDK",
+              "value": 0.2207847177444282
+            },
+            {
+              "symbol": "RKLB",
+              "value": 0.16142243375235288
+            },
+            {
+              "symbol": "HOOD",
+              "value": 0.1525617434631874
+            },
+            {
+              "symbol": "KGC",
+              "value": 0.1493530582726632
+            },
+            {
+              "symbol": "ALL",
+              "value": 0.14881764565475475
+            },
+            {
+              "symbol": "META",
+              "value": 0.14686739832769247
+            },
+            {
+              "symbol": "BMY",
+              "value": 0.14197735772033382
+            },
+            {
+              "symbol": "UBER",
+              "value": 0.14141527010357402
+            },
+            {
+              "symbol": "EZPW",
+              "value": 0.13309259725323663
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "EOSE",
+              "value": -0.23920928329950986
+            },
+            {
+              "symbol": "SEZL",
+              "value": -0.21815482465603242
+            },
+            {
+              "symbol": "NEM",
+              "value": -0.16202580723604487
+            },
+            {
+              "symbol": "GM",
+              "value": -0.13040527780761024
+            },
+            {
+              "symbol": "USAR",
+              "value": -0.12548265071362896
+            },
+            {
+              "symbol": "MSGS",
+              "value": -0.11117903747807334
+            },
+            {
+              "symbol": "PARR",
+              "value": -0.10903555837778611
+            },
+            {
+              "symbol": "ORGO",
+              "value": -0.09994092926660614
+            },
+            {
+              "symbol": "TMUS",
+              "value": -0.07923376013485806
+            },
+            {
+              "symbol": "NVDA",
+              "value": -0.07493964594601099
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_4",
+          "expr": "Mul(-1.0,TsQuantile(TsDelta($chl,40),0.25,30))",
+          "top": [
+            {
+              "symbol": "AGX",
+              "value": 7.237805672694243e-06
+            },
+            {
+              "symbol": "WLDN",
+              "value": 5.41460870902423e-06
+            },
+            {
+              "symbol": "CAAP",
+              "value": 4.114397575062482e-06
+            },
+            {
+              "symbol": "POWL",
+              "value": 3.6798093382994826e-06
+            },
+            {
+              "symbol": "SEZL",
+              "value": 1.5432803383983492e-06
+            },
+            {
+              "symbol": "BLBD",
+              "value": 1.522138549985152e-06
+            },
+            {
+              "symbol": "FN",
+              "value": 1.4600175025212147e-06
+            },
+            {
+              "symbol": "ORGO",
+              "value": 1.3520100335370322e-06
+            },
+            {
+              "symbol": "SKYW",
+              "value": 1.2733057146282538e-06
+            },
+            {
+              "symbol": "EOSE",
+              "value": 1.0688999359377683e-06
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "TTMI",
+              "value": -9.502779875408027e-07
+            },
+            {
+              "symbol": "ARQT",
+              "value": -5.590893631084344e-07
+            },
+            {
+              "symbol": "LRN",
+              "value": -1.726280693160933e-07
+            },
+            {
+              "symbol": "QTWO",
+              "value": -1.487242048649285e-07
+            },
+            {
+              "symbol": "AMD",
+              "value": -1.1884594440543675e-07
+            },
+            {
+              "symbol": "TWLO",
+              "value": -8.913086376014268e-08
+            },
+            {
+              "symbol": "ANET",
+              "value": -7.065193458935297e-08
+            },
+            {
+              "symbol": "APP",
+              "value": -6.702636251749415e-08
+            },
+            {
+              "symbol": "RL",
+              "value": -2.158473096833073e-08
+            },
+            {
+              "symbol": "GOOGL",
+              "value": -1.4747654012768932e-08
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_5",
+          "expr": "Sqrt(Abs(TsNonLinearMom($high_break_revert_45_5,20)))",
+          "top": [
+            {
+              "symbol": "SNDK",
+              "value": 102.83751119574376
+            },
+            {
+              "symbol": "AGX",
+              "value": 71.80638436161767
+            },
+            {
+              "symbol": "STRL",
+              "value": 37.476298315959156
+            },
+            {
+              "symbol": "SEZL",
+              "value": 29.749401630642097
+            },
+            {
+              "symbol": "VRT",
+              "value": 14.2652968785091
+            },
+            {
+              "symbol": "MSGS",
+              "value": 10.215922653581917
+            },
+            {
+              "symbol": "SFM",
+              "value": 2.0033705837912215
+            },
+            {
+              "symbol": "PARR",
+              "value": 1.5017642313396742
+            },
+            {
+              "symbol": "CDE",
+              "value": 0.8863134214084487
+            },
+            {
+              "symbol": "EZPW",
+              "value": 0.5130385038089553
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "AAPL",
+              "value": 0.0
+            },
+            {
+              "symbol": "ALL",
+              "value": 0.0
+            },
+            {
+              "symbol": "AMD",
+              "value": 0.0
+            },
+            {
+              "symbol": "AMZN",
+              "value": 0.0
+            },
+            {
+              "symbol": "ANET",
+              "value": 0.0
+            },
+            {
+              "symbol": "APP",
+              "value": 0.0
+            },
+            {
+              "symbol": "ARQT",
+              "value": 0.0
+            },
+            {
+              "symbol": "B",
+              "value": 0.0
+            },
+            {
+              "symbol": "BMY",
+              "value": 0.0
+            },
+            {
+              "symbol": "C",
+              "value": 0.0
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_6",
+          "expr": "Div($chip_near_support,TsQuantile($log_close,0.5,40))",
+          "top": [
+            {
+              "symbol": "ARQT",
+              "value": 0.2099196395597054
+            },
+            {
+              "symbol": "BLBD",
+              "value": 0.19586819981628298
+            },
+            {
+              "symbol": "EOSE",
+              "value": 0.19461375193654162
+            },
+            {
+              "symbol": "ORGO",
+              "value": 0.1920392802119569
+            },
+            {
+              "symbol": "CDE",
+              "value": 0.1846632869213894
+            },
+            {
+              "symbol": "AMZN",
+              "value": 0.18442515551501448
+            },
+            {
+              "symbol": "HOOD",
+              "value": 0.18109048543582235
+            },
+            {
+              "symbol": "DIS",
+              "value": 0.1772701356447312
+            },
+            {
+              "symbol": "GOOGL",
+              "value": 0.17235481860495847
+            },
+            {
+              "symbol": "TTMI",
+              "value": 0.1686196683503731
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "EAT",
+              "value": 0.0
+            },
+            {
+              "symbol": "TMUS",
+              "value": 0.0
+            },
+            {
+              "symbol": "SFM",
+              "value": 0.0002598257908529519
+            },
+            {
+              "symbol": "CMCSA",
+              "value": 0.0007391438681002751
+            },
+            {
+              "symbol": "META",
+              "value": 0.001579034061688318
+            },
+            {
+              "symbol": "CRM",
+              "value": 0.0015840458052274247
+            },
+            {
+              "symbol": "LLY",
+              "value": 0.0019782880296009254
+            },
+            {
+              "symbol": "CRDO",
+              "value": 0.0027235541461385266
+            },
+            {
+              "symbol": "RCL",
+              "value": 0.003906664315098227
+            },
+            {
+              "symbol": "INTC",
+              "value": 0.00456172734689863
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_7",
+          "expr": "Mul(-1.0,SLog1p(Div(Rank($ohl),$chlo)))",
+          "top": [
+            {
+              "symbol": "UBER",
+              "value": 16.974296628402914
+            },
+            {
+              "symbol": "KGC",
+              "value": 16.944210131989763
+            },
+            {
+              "symbol": "C",
+              "value": 16.23326443335861
+            },
+            {
+              "symbol": "INTC",
+              "value": 16.230947706959917
+            },
+            {
+              "symbol": "CRDO",
+              "value": 15.45214321159637
+            },
+            {
+              "symbol": "B",
+              "value": 15.1046438280851
+            },
+            {
+              "symbol": "SYF",
+              "value": 13.726957195894173
+            },
+            {
+              "symbol": "ORGO",
+              "value": -9.0266531159293
+            },
+            {
+              "symbol": "ARQT",
+              "value": -10.750371997371742
+            },
+            {
+              "symbol": "SEZL",
+              "value": -11.02427082043441
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "NVDA",
+              "value": -21.089898749700602
+            },
+            {
+              "symbol": "AAPL",
+              "value": -18.806398614470247
+            },
+            {
+              "symbol": "GOOGL",
+              "value": -18.592344348659708
+            },
+            {
+              "symbol": "TSLA",
+              "value": -17.31904839123238
+            },
+            {
+              "symbol": "AMZN",
+              "value": -17.081139505716017
+            },
+            {
+              "symbol": "MU",
+              "value": -16.7863139722239
+            },
+            {
+              "symbol": "AMD",
+              "value": -16.668196044969864
+            },
+            {
+              "symbol": "SCHW",
+              "value": -16.26468962487113
+            },
+            {
+              "symbol": "UAL",
+              "value": -16.16073704932501
+            },
+            {
+              "symbol": "NEM",
+              "value": -16.06781682734732
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_8",
+          "expr": "Mul(-1.0,TsRelStrength($ohl,20,30))",
+          "top": [
+            {
+              "symbol": "B",
+              "value": 6.769374603944759
+            },
+            {
+              "symbol": "V",
+              "value": 4.446511734162481
+            },
+            {
+              "symbol": "CDE",
+              "value": 2.8328060367631043
+            },
+            {
+              "symbol": "RKLB",
+              "value": 2.81012604462094
+            },
+            {
+              "symbol": "HOOD",
+              "value": 2.1255690506979747
+            },
+            {
+              "symbol": "PL",
+              "value": 1.9328649231765773
+            },
+            {
+              "symbol": "SCHW",
+              "value": 1.8055753694369558
+            },
+            {
+              "symbol": "NVDA",
+              "value": 1.7098500215214285
+            },
+            {
+              "symbol": "BMY",
+              "value": 1.3366884797398804
+            },
+            {
+              "symbol": "IREN",
+              "value": 1.156233515657335
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "KGC",
+              "value": -24.030933879567243
+            },
+            {
+              "symbol": "C",
+              "value": -14.116459368586813
+            },
+            {
+              "symbol": "GM",
+              "value": -1.7043481131476406
+            },
+            {
+              "symbol": "SSRM",
+              "value": -1.1586073678873055
+            },
+            {
+              "symbol": "ARQT",
+              "value": -0.2791529598409863
+            },
+            {
+              "symbol": "MSGS",
+              "value": -0.18531604752517672
+            },
+            {
+              "symbol": "EAT",
+              "value": -0.16721066965159848
+            },
+            {
+              "symbol": "GOOGL",
+              "value": -0.1617263364641055
+            },
+            {
+              "symbol": "EZPW",
+              "value": -0.14614523544547176
+            },
+            {
+              "symbol": "RCL",
+              "value": -0.12913293884982946
+            }
+          ]
+        },
+        {
+          "name": "actionable_alpha_9",
+          "expr": "Mul(-1.0,TsCorr($drift_factor,Rank($chip_overlap),20))",
+          "top": [
+            {
+              "symbol": "USAR",
+              "value": 0.5132408874848818
+            },
+            {
+              "symbol": "SEZL",
+              "value": 0.505942349703989
+            },
+            {
+              "symbol": "UBER",
+              "value": 0.4328158146728318
+            },
+            {
+              "symbol": "POWL",
+              "value": 0.41765026232434743
+            },
+            {
+              "symbol": "LRN",
+              "value": 0.3968968688340101
+            },
+            {
+              "symbol": "OKTA",
+              "value": 0.3783507894666071
+            },
+            {
+              "symbol": "APP",
+              "value": 0.34211567476328597
+            },
+            {
+              "symbol": "CMCSA",
+              "value": 0.28816119141217383
+            },
+            {
+              "symbol": "ANET",
+              "value": 0.2818481637643021
+            },
+            {
+              "symbol": "EZPW",
+              "value": 0.23427818058332328
+            }
+          ],
+          "bottom": [
+            {
+              "symbol": "SFM",
+              "value": -0.49309037639443387
+            },
+            {
+              "symbol": "EOSE",
+              "value": -0.4844890148423387
+            },
+            {
+              "symbol": "DY",
+              "value": -0.44796688405789103
+            },
+            {
+              "symbol": "B",
+              "value": -0.4433708806310543
+            },
+            {
+              "symbol": "WLDN",
+              "value": -0.43345963404470805
+            },
+            {
+              "symbol": "CDE",
+              "value": -0.4316812817080157
+            },
+            {
+              "symbol": "DIS",
+              "value": -0.42722064695498774
+            },
+            {
+              "symbol": "ALL",
+              "value": -0.42159724849371344
+            },
+            {
+              "symbol": "LLY",
+              "value": -0.39634717167144273
+            },
+            {
+              "symbol": "SKYW",
+              "value": -0.3786261468858946
+            }
+          ]
+        }
+      ],
+      "actionable_aggregate": {
+        "selected_factors": [
+          "actionable_alpha_3",
+          "actionable_alpha_4",
+          "actionable_alpha_5",
+          "actionable_alpha_9",
+          "actionable_alpha_10",
+          "actionable_alpha_11",
+          "actionable_alpha_12",
+          "actionable_alpha_13"
+        ],
+        "factors_used": [
+          "actionable_alpha_3",
+          "actionable_alpha_4",
+          "actionable_alpha_5",
+          "actionable_alpha_9",
+          "actionable_alpha_10",
+          "actionable_alpha_11",
+          "actionable_alpha_12",
+          "actionable_alpha_13"
+        ],
+        "top_n": 10,
+        "top_counts": [
+          {
+            "symbol": "EZPW",
+            "count": 5
+          },
+          {
+            "symbol": "POWL",
+            "count": 4
+          },
+          {
+            "symbol": "SNDK",
+            "count": 4
+          },
+          {
+            "symbol": "STRL",
+            "count": 4
+          },
+          {
+            "symbol": "AGX",
+            "count": 3
+          },
+          {
+            "symbol": "SEZL",
+            "count": 3
+          },
+          {
+            "symbol": "ALL",
+            "count": 2
+          },
+          {
+            "symbol": "ANET",
+            "count": 2
+          },
+          {
+            "symbol": "APP",
+            "count": 2
+          },
+          {
+            "symbol": "BLBD",
+            "count": 2
+          },
+          {
+            "symbol": "CAT",
+            "count": 2
+          },
+          {
+            "symbol": "CDE",
+            "count": 2
+          },
+          {
+            "symbol": "CMCSA",
+            "count": 2
+          },
+          {
+            "symbol": "EAT",
+            "count": 2
+          },
+          {
+            "symbol": "EOSE",
+            "count": 2
+          },
+          {
+            "symbol": "KGC",
+            "count": 2
+          },
+          {
+            "symbol": "MSGS",
+            "count": 2
+          },
+          {
+            "symbol": "MU",
+            "count": 2
+          },
+          {
+            "symbol": "ORGO",
+            "count": 2
+          },
+          {
+            "symbol": "SFM",
+            "count": 2
+          },
+          {
+            "symbol": "TTMI",
+            "count": 2
+          },
+          {
+            "symbol": "UBER",
+            "count": 2
+          },
+          {
+            "symbol": "USAR",
+            "count": 2
+          },
+          {
+            "symbol": "VRT",
+            "count": 2
+          },
+          {
+            "symbol": "AAPL",
+            "count": 1
+          },
+          {
+            "symbol": "BMY",
+            "count": 1
+          },
+          {
+            "symbol": "C",
+            "count": 1
+          },
+          {
+            "symbol": "CAAP",
+            "count": 1
+          },
+          {
+            "symbol": "CRDO",
+            "count": 1
+          },
+          {
+            "symbol": "DIS",
+            "count": 1
+          },
+          {
+            "symbol": "FN",
+            "count": 1
+          },
+          {
+            "symbol": "HOOD",
+            "count": 1
+          },
+          {
+            "symbol": "INCY",
+            "count": 1
+          },
+          {
+            "symbol": "INTC",
+            "count": 1
+          },
+          {
+            "symbol": "LLY",
+            "count": 1
+          },
+          {
+            "symbol": "LRN",
+            "count": 1
+          },
+          {
+            "symbol": "META",
+            "count": 1
+          },
+          {
+            "symbol": "NVDA",
+            "count": 1
+          },
+          {
+            "symbol": "OKTA",
+            "count": 1
+          },
+          {
+            "symbol": "PARR",
+            "count": 1
+          },
+          {
+            "symbol": "RKLB",
+            "count": 1
+          },
+          {
+            "symbol": "SKYW",
+            "count": 1
+          },
+          {
+            "symbol": "SSRM",
+            "count": 1
+          },
+          {
+            "symbol": "UAL",
+            "count": 1
+          },
+          {
+            "symbol": "WLDN",
+            "count": 1
+          }
+        ],
+        "bottom_counts": [
+          {
+            "symbol": "ALL",
+            "count": 4
+          },
+          {
+            "symbol": "B",
+            "count": 4
+          },
+          {
+            "symbol": "PARR",
+            "count": 4
+          },
+          {
+            "symbol": "AMD",
+            "count": 3
+          },
+          {
+            "symbol": "ANET",
+            "count": 3
+          },
+          {
+            "symbol": "APP",
+            "count": 3
+          },
+          {
+            "symbol": "ARQT",
+            "count": 3
+          },
+          {
+            "symbol": "BLBD",
+            "count": 3
+          },
+          {
+            "symbol": "AAPL",
+            "count": 2
+          },
+          {
+            "symbol": "AMZN",
+            "count": 2
+          },
+          {
+            "symbol": "BMY",
+            "count": 2
+          },
+          {
+            "symbol": "CAAP",
+            "count": 2
+          },
+          {
+            "symbol": "EOSE",
+            "count": 2
+          },
+          {
+            "symbol": "GM",
+            "count": 2
+          },
+          {
+            "symbol": "LRN",
+            "count": 2
+          },
+          {
+            "symbol": "RL",
+            "count": 2
+          },
+          {
+            "symbol": "SFM",
+            "count": 2
+          },
+          {
+            "symbol": "SKYW",
+            "count": 2
+          },
+          {
+            "symbol": "TMUS",
+            "count": 2
+          },
+          {
+            "symbol": "TTMI",
+            "count": 2
+          },
+          {
+            "symbol": "UBER",
+            "count": 2
+          },
+          {
+            "symbol": "C",
+            "count": 1
+          },
+          {
+            "symbol": "CAT",
+            "count": 1
+          },
+          {
+            "symbol": "CDE",
+            "count": 1
+          },
+          {
+            "symbol": "CRM",
+            "count": 1
+          },
+          {
+            "symbol": "DIS",
+            "count": 1
+          },
+          {
+            "symbol": "DY",
+            "count": 1
+          },
+          {
+            "symbol": "EZPW",
+            "count": 1
+          },
+          {
+            "symbol": "FN",
+            "count": 1
+          },
+          {
+            "symbol": "GOOGL",
+            "count": 1
+          },
+          {
+            "symbol": "KGC",
+            "count": 1
+          },
+          {
+            "symbol": "LLY",
+            "count": 1
+          },
+          {
+            "symbol": "MSGS",
+            "count": 1
+          },
+          {
+            "symbol": "MU",
+            "count": 1
+          },
+          {
+            "symbol": "NEM",
+            "count": 1
+          },
+          {
+            "symbol": "NVDA",
+            "count": 1
+          },
+          {
+            "symbol": "OKTA",
+            "count": 1
+          },
+          {
+            "symbol": "ORGO",
+            "count": 1
+          },
+          {
+            "symbol": "QTWO",
+            "count": 1
+          },
+          {
+            "symbol": "RCL",
+            "count": 1
+          },
+          {
+            "symbol": "SEZL",
+            "count": 1
+          },
+          {
+            "symbol": "SNDK",
+            "count": 1
+          },
+          {
+            "symbol": "SYF",
+            "count": 1
+          },
+          {
+            "symbol": "TWLO",
+            "count": 1
+          },
+          {
+            "symbol": "UAL",
+            "count": 1
+          },
+          {
+            "symbol": "USAR",
+            "count": 1
+          },
+          {
+            "symbol": "VRT",
+            "count": 1
+          },
+          {
+            "symbol": "WLDN",
+            "count": 1
+          }
+        ],
+        "combined_rank": [
+          {
+            "symbol": "STRL",
+            "score": 0.5818181818181818,
+            "top_count": 4,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "SNDK",
+            "score": 0.5636363636363636,
+            "top_count": 4,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "AGX",
+            "score": 0.509090909090909,
+            "top_count": 3,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "POWL",
+            "score": 0.4,
+            "top_count": 4,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "USAR",
+            "score": 0.2363636363636364,
+            "top_count": 2,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "SEZL",
+            "score": 0.23636363636363633,
+            "top_count": 3,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "INCY",
+            "score": 0.18181818181818182,
+            "top_count": 1,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "INTC",
+            "score": 0.18181818181818182,
+            "top_count": 1,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "MSGS",
+            "score": 0.18181818181818182,
+            "top_count": 2,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "VRT",
+            "score": 0.1818181818181818,
+            "top_count": 2,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "LLY",
+            "score": 0.14545454545454545,
+            "top_count": 1,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "RKLB",
+            "score": 0.14545454545454545,
+            "top_count": 1,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "HOOD",
+            "score": 0.12727272727272726,
+            "top_count": 1,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "NVDA",
+            "score": 0.12727272727272726,
+            "top_count": 1,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "KGC",
+            "score": 0.1090909090909091,
+            "top_count": 2,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "MU",
+            "score": 0.1090909090909091,
+            "top_count": 2,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "C",
+            "score": 0.10909090909090907,
+            "top_count": 1,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "CMCSA",
+            "score": 0.09090909090909091,
+            "top_count": 2,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "EAT",
+            "score": 0.09090909090909091,
+            "top_count": 2,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "CAT",
+            "score": 0.07272727272727272,
+            "top_count": 2,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "CRDO",
+            "score": 0.07272727272727272,
+            "top_count": 1,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "META",
+            "score": 0.07272727272727272,
+            "top_count": 1,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "OKTA",
+            "score": 0.07272727272727272,
+            "top_count": 1,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "UBER",
+            "score": 0.07272727272727272,
+            "top_count": 2,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "WLDN",
+            "score": 0.05454545454545455,
+            "top_count": 1,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "SSRM",
+            "score": 0.05454545454545454,
+            "top_count": 1,
+            "bottom_count": 0
+          },
+          {
+            "symbol": "DIS",
+            "score": 0.018181818181818188,
+            "top_count": 1,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "UAL",
+            "score": 0.018181818181818188,
+            "top_count": 1,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "ORGO",
+            "score": 0.01818181818181818,
+            "top_count": 2,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "EZPW",
+            "score": -0.01818181818181818,
+            "top_count": 5,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "GOOGL",
+            "score": -0.01818181818181818,
+            "top_count": 0,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "CDE",
+            "score": -0.018181818181818188,
+            "top_count": 2,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "SYF",
+            "score": -0.03636363636363636,
+            "top_count": 0,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "APP",
+            "score": -0.05454545454545454,
+            "top_count": 2,
+            "bottom_count": 3
+          },
+          {
+            "symbol": "RCL",
+            "score": -0.05454545454545454,
+            "top_count": 0,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "SKYW",
+            "score": -0.07272727272727272,
+            "top_count": 1,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "TTMI",
+            "score": -0.07272727272727275,
+            "top_count": 2,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "TWLO",
+            "score": -0.09090909090909091,
+            "top_count": 0,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "ANET",
+            "score": -0.10909090909090907,
+            "top_count": 2,
+            "bottom_count": 3
+          },
+          {
+            "symbol": "TMUS",
+            "score": -0.10909090909090909,
+            "top_count": 0,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "FN",
+            "score": -0.1090909090909091,
+            "top_count": 1,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "BMY",
+            "score": -0.12727272727272726,
+            "top_count": 1,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "QTWO",
+            "score": -0.12727272727272726,
+            "top_count": 0,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "DY",
+            "score": -0.14545454545454545,
+            "top_count": 0,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "NEM",
+            "score": -0.14545454545454545,
+            "top_count": 0,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "RL",
+            "score": -0.14545454545454545,
+            "top_count": 0,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "CRM",
+            "score": -0.16363636363636364,
+            "top_count": 0,
+            "bottom_count": 1
+          },
+          {
+            "symbol": "LRN",
+            "score": -0.18181818181818182,
+            "top_count": 1,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "AMZN",
+            "score": -0.19999999999999998,
+            "top_count": 0,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "AAPL",
+            "score": -0.2,
+            "top_count": 1,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "BLBD",
+            "score": -0.2,
+            "top_count": 2,
+            "bottom_count": 3
+          },
+          {
+            "symbol": "CAAP",
+            "score": -0.2,
+            "top_count": 1,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "EOSE",
+            "score": -0.2181818181818182,
+            "top_count": 2,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "SFM",
+            "score": -0.2181818181818182,
+            "top_count": 2,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "ARQT",
+            "score": -0.2545454545454545,
+            "top_count": 0,
+            "bottom_count": 3
+          },
+          {
+            "symbol": "GM",
+            "score": -0.2545454545454545,
+            "top_count": 0,
+            "bottom_count": 2
+          },
+          {
+            "symbol": "ALL",
+            "score": -0.2727272727272727,
+            "top_count": 2,
+            "bottom_count": 4
+          },
+          {
+            "symbol": "B",
+            "score": -0.3272727272727272,
+            "top_count": 0,
+            "bottom_count": 4
+          },
+          {
+            "symbol": "AMD",
+            "score": -0.34545454545454546,
+            "top_count": 0,
+            "bottom_count": 3
+          },
+          {
+            "symbol": "PARR",
+            "score": -0.34545454545454546,
+            "top_count": 1,
+            "bottom_count": 4
+          }
+        ],
+        "per_factor": {
+          "actionable_alpha_3": {
+            "top": [
+              {
+                "symbol": "INTC",
+                "value": 0.2565895582685127,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "SNDK",
+                "value": 0.2207847177444282,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "RKLB",
+                "value": 0.16142243375235288,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "HOOD",
+                "value": 0.1525617434631874,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "KGC",
+                "value": 0.1493530582726632,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "ALL",
+                "value": 0.14881764565475475,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "META",
+                "value": 0.14686739832769247,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "BMY",
+                "value": 0.14197735772033382,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "UBER",
+                "value": 0.14141527010357402,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "EZPW",
+                "value": 0.13309259725323663,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ],
+            "bottom": [
+              {
+                "symbol": "EOSE",
+                "value": -0.23920928329950986,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "SEZL",
+                "value": -0.21815482465603242,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "NEM",
+                "value": -0.16202580723604487,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "GM",
+                "value": -0.13040527780761024,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "USAR",
+                "value": -0.12548265071362896,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "MSGS",
+                "value": -0.11117903747807334,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "PARR",
+                "value": -0.10903555837778611,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "ORGO",
+                "value": -0.09994092926660614,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "TMUS",
+                "value": -0.07923376013485806,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "NVDA",
+                "value": -0.07493964594601099,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ]
+          },
+          "actionable_alpha_4": {
+            "top": [
+              {
+                "symbol": "AGX",
+                "value": 7.237805672694243e-06,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "WLDN",
+                "value": 5.41460870902423e-06,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "CAAP",
+                "value": 4.114397575062482e-06,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "POWL",
+                "value": 3.6798093382994826e-06,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "SEZL",
+                "value": 1.5432803383983492e-06,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "BLBD",
+                "value": 1.522138549985152e-06,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "FN",
+                "value": 1.4600175025212147e-06,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "ORGO",
+                "value": 1.3520100335370322e-06,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "SKYW",
+                "value": 1.2733057146282538e-06,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "EOSE",
+                "value": 1.0688999359377683e-06,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ],
+            "bottom": [
+              {
+                "symbol": "TTMI",
+                "value": -9.502779875408027e-07,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "ARQT",
+                "value": -5.590893631084344e-07,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "LRN",
+                "value": -1.726280693160933e-07,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "QTWO",
+                "value": -1.487242048649285e-07,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "AMD",
+                "value": -1.1884594440543675e-07,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "TWLO",
+                "value": -8.913086376014268e-08,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "ANET",
+                "value": -7.065193458935297e-08,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "APP",
+                "value": -6.702636251749415e-08,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "RL",
+                "value": -2.158473096833073e-08,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "GOOGL",
+                "value": -1.4747654012768932e-08,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ]
+          },
+          "actionable_alpha_5": {
+            "top": [
+              {
+                "symbol": "SNDK",
+                "value": 102.83751119574376,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "AGX",
+                "value": 71.80638436161767,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "STRL",
+                "value": 37.476298315959156,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "SEZL",
+                "value": 29.749401630642097,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "VRT",
+                "value": 14.2652968785091,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "MSGS",
+                "value": 10.215922653581917,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "SFM",
+                "value": 2.0033705837912215,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "PARR",
+                "value": 1.5017642313396742,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "CDE",
+                "value": 0.8863134214084487,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "EZPW",
+                "value": 0.5130385038089553,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ],
+            "bottom": [
+              {
+                "symbol": "AAPL",
+                "value": 0.0,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "ALL",
+                "value": 0.0,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "AMD",
+                "value": 0.0,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "AMZN",
+                "value": 0.0,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "ANET",
+                "value": 0.0,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "APP",
+                "value": 0.0,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "ARQT",
+                "value": 0.0,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "B",
+                "value": 0.0,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "BMY",
+                "value": 0.0,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "C",
+                "value": 0.0,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ]
+          },
+          "actionable_alpha_9": {
+            "top": [
+              {
+                "symbol": "USAR",
+                "value": 0.5132408874848818,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "SEZL",
+                "value": 0.505942349703989,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "UBER",
+                "value": 0.4328158146728318,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "POWL",
+                "value": 0.41765026232434743,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "LRN",
+                "value": 0.3968968688340101,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "OKTA",
+                "value": 0.3783507894666071,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "APP",
+                "value": 0.34211567476328597,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "CMCSA",
+                "value": 0.28816119141217383,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "ANET",
+                "value": 0.2818481637643021,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "EZPW",
+                "value": 0.23427818058332328,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ],
+            "bottom": [
+              {
+                "symbol": "SFM",
+                "value": -0.49309037639443387,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "EOSE",
+                "value": -0.4844890148423387,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "DY",
+                "value": -0.44796688405789103,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "B",
+                "value": -0.4433708806310543,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "WLDN",
+                "value": -0.43345963404470805,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "CDE",
+                "value": -0.4316812817080157,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "DIS",
+                "value": -0.42722064695498774,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "ALL",
+                "value": -0.42159724849371344,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "LLY",
+                "value": -0.39634717167144273,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "SKYW",
+                "value": -0.3786261468858946,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ]
+          },
+          "actionable_alpha_10": {
+            "top": [
+              {
+                "symbol": "LLY",
+                "value": 63317.470537341935,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "STRL",
+                "value": 39283.40808092941,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "UAL",
+                "value": 3622.0990241109976,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "TTMI",
+                "value": 3443.244831285527,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "ALL",
+                "value": 3414.8780352184394,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "ANET",
+                "value": 2023.3710275208405,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "CRDO",
+                "value": 1753.5768939957752,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "KGC",
+                "value": 1033.418403244918,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "CDE",
+                "value": 764.5825874424843,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "EZPW",
+                "value": 718.1510821160413,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ],
+            "bottom": [
+              {
+                "symbol": "BLBD",
+                "value": -0.16012815380490988,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "CAAP",
+                "value": 2.296551831235727,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "BMY",
+                "value": 3.2561456520241494,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "MU",
+                "value": 3.5173682724041235,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "RL",
+                "value": 3.989795109516055,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "SNDK",
+                "value": 4.095690581959818,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "TMUS",
+                "value": 4.30042729040637,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "VRT",
+                "value": 4.696642777480398,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "CAT",
+                "value": 5.315389532482418,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "UBER",
+                "value": 5.514600073175022,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ]
+          },
+          "actionable_alpha_11": {
+            "top": [
+              {
+                "symbol": "MSGS",
+                "value": 160.36254331342604,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "STRL",
+                "value": 8.189115815867783,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "TTMI",
+                "value": 4.745112032610391,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "C",
+                "value": 2.8946039227996248,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "EOSE",
+                "value": 2.668303454334647,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "DIS",
+                "value": 2.5915502527369507,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "POWL",
+                "value": 2.3584820483565565,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "APP",
+                "value": 2.1649238509831896,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "EAT",
+                "value": 2.038612385487418,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "CAT",
+                "value": 1.9389693303020863,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ],
+            "bottom": [
+              {
+                "symbol": "CAAP",
+                "value": -7.564729742115642,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "CRM",
+                "value": -7.297655867502996,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "PARR",
+                "value": -3.6891175417999005,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "UAL",
+                "value": -2.7560759159522688,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "EZPW",
+                "value": -2.0310605254854415,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "SKYW",
+                "value": -2.005313227924668,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "BLBD",
+                "value": -1.9787689845337084,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "KGC",
+                "value": -1.9457011751570814,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "B",
+                "value": -1.8144975029216113,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "OKTA",
+                "value": -1.7455850317744952,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ]
+          },
+          "actionable_alpha_12": {
+            "top": [
+              {
+                "symbol": "INCY",
+                "value": 147.04645778721078,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "USAR",
+                "value": 67.22399143642221,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "NVDA",
+                "value": 22.05836162311897,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "SNDK",
+                "value": 22.0003840517052,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "AAPL",
+                "value": 21.881971594042643,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "MU",
+                "value": 19.785526647108483,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "SFM",
+                "value": 18.215470552703213,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "EAT",
+                "value": 17.962739544818216,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "CMCSA",
+                "value": 12.763346564151028,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "ORGO",
+                "value": 12.242540562316531,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ],
+            "bottom": [
+              {
+                "symbol": "FN",
+                "value": -169.96833411342976,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "TTMI",
+                "value": -62.26543861927695,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "ALL",
+                "value": -47.257008301016626,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "GM",
+                "value": -39.63637384740992,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "B",
+                "value": -36.82785379018529,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "UBER",
+                "value": -36.25556097025197,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "BLBD",
+                "value": -33.26301267044401,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "RCL",
+                "value": -30.045802512895545,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "SYF",
+                "value": -25.34592744369937,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "PARR",
+                "value": -21.2828150339586,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ]
+          },
+          "actionable_alpha_13": {
+            "top": [
+              {
+                "symbol": "SNDK",
+                "value": 34.5,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "AGX",
+                "value": 16.75,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "MU",
+                "value": 10.833333333333334,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "VRT",
+                "value": 7.875,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "STRL",
+                "value": 6.1000000000000005,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "CAT",
+                "value": 4.916666666666667,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "POWL",
+                "value": 4.071428571428572,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "SSRM",
+                "value": 3.4375,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "BLBD",
+                "value": 2.9444444444444446,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "EZPW",
+                "value": 2.5500000000000003,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ],
+            "bottom": [
+              {
+                "symbol": "SFM",
+                "value": -0.9743589743589743,
+                "rank": 1,
+                "weight": 0.18181818181818182
+              },
+              {
+                "symbol": "PARR",
+                "value": -0.9487179487179487,
+                "rank": 2,
+                "weight": 0.16363636363636364
+              },
+              {
+                "symbol": "LRN",
+                "value": -0.4779411764705882,
+                "rank": 3,
+                "weight": 0.14545454545454545
+              },
+              {
+                "symbol": "AAPL",
+                "value": -0.08974358974358965,
+                "rank": 4,
+                "weight": 0.12727272727272726
+              },
+              {
+                "symbol": "ALL",
+                "value": -0.08974358974358965,
+                "rank": 5,
+                "weight": 0.10909090909090909
+              },
+              {
+                "symbol": "AMD",
+                "value": -0.08974358974358965,
+                "rank": 6,
+                "weight": 0.09090909090909091
+              },
+              {
+                "symbol": "AMZN",
+                "value": -0.08974358974358965,
+                "rank": 7,
+                "weight": 0.07272727272727272
+              },
+              {
+                "symbol": "ANET",
+                "value": -0.08974358974358965,
+                "rank": 8,
+                "weight": 0.05454545454545454
+              },
+              {
+                "symbol": "APP",
+                "value": -0.08974358974358965,
+                "rank": 9,
+                "weight": 0.03636363636363636
+              },
+              {
+                "symbol": "ARQT",
+                "value": -0.08974358974358965,
+                "rank": 10,
+                "weight": 0.01818181818181818
+              }
+            ]
+          }
+        }
+      },
+      "cross_signal_rows": [
+        {
+          "symbol": "SNDK",
+          "cma_score": 0.844395,
+          "cma_rank": 4,
+          "cma_side": "top",
+          "cma_top_hits_recent": 4,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 4,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "EZPW",
+          "cma_score": 0.545562,
+          "cma_rank": 32,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 5,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "POWL",
+          "cma_score": 0.733654,
+          "cma_rank": 17,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 4,
+          "actionable_aggregate_bottom_count": 0
+        },
+        {
+          "symbol": "STRL",
+          "cma_score": 0.208217,
+          "cma_rank": 55,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 4,
+          "actionable_aggregate_bottom_count": 0
+        },
+        {
+          "symbol": "USAR",
+          "cma_score": 0.962067,
+          "cma_rank": 1,
+          "cma_side": "top",
+          "cma_top_hits_recent": 5,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "CDE",
+          "cma_score": 0.801516,
+          "cma_rank": 7,
+          "cma_side": "top",
+          "cma_top_hits_recent": 4,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "AGX",
+          "cma_score": 0.508868,
+          "cma_rank": 35,
+          "cma_side": null,
+          "cma_top_hits_recent": 1,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 3,
+          "actionable_aggregate_bottom_count": 0
+        },
+        {
+          "symbol": "SEZL",
+          "cma_score": 0.454279,
+          "cma_rank": 40,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 3,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "META",
+          "cma_score": 0.800937,
+          "cma_rank": 8,
+          "cma_side": "top",
+          "cma_top_hits_recent": 4,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 1,
+          "actionable_aggregate_bottom_count": 0
+        },
+        {
+          "symbol": "CAT",
+          "cma_score": 0.795824,
+          "cma_rank": 9,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "SFM",
+          "cma_score": 0.77084,
+          "cma_rank": 12,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 2
+        },
+        {
+          "symbol": "APP",
+          "cma_score": 0.768037,
+          "cma_rank": 13,
+          "cma_side": null,
+          "cma_top_hits_recent": 1,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 3
+        },
+        {
+          "symbol": "TTMI",
+          "cma_score": 0.718315,
+          "cma_rank": 18,
+          "cma_side": null,
+          "cma_top_hits_recent": 1,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 2
+        },
+        {
+          "symbol": "UBER",
+          "cma_score": 0.672301,
+          "cma_rank": 20,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 2
+        },
+        {
+          "symbol": "ANET",
+          "cma_score": 0.669744,
+          "cma_rank": 21,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 3
+        },
+        {
+          "symbol": "KGC",
+          "cma_score": 0.646737,
+          "cma_rank": 22,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "BLBD",
+          "cma_score": 0.621507,
+          "cma_rank": 24,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 3
+        },
+        {
+          "symbol": "ALL",
+          "cma_score": 0.605835,
+          "cma_rank": 26,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 4
+        },
+        {
+          "symbol": "MU",
+          "cma_score": 0.456089,
+          "cma_rank": 39,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 1,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "EAT",
+          "cma_score": 0.389465,
+          "cma_rank": 48,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 0
+        },
+        {
+          "symbol": "EOSE",
+          "cma_score": 0.381796,
+          "cma_rank": 49,
+          "cma_side": null,
+          "cma_top_hits_recent": 1,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 2
+        },
+        {
+          "symbol": "CMCSA",
+          "cma_score": 0.208955,
+          "cma_rank": 54,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 1,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 0
+        },
+        {
+          "symbol": "MSGS",
+          "cma_score": 0.200302,
+          "cma_rank": 56,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "VRT",
+          "cma_score": 0.199309,
+          "cma_rank": 57,
+          "cma_side": null,
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 0,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 1
+        },
+        {
+          "symbol": "ORGO",
+          "cma_score": 0.119736,
+          "cma_rank": 65,
+          "cma_side": "bottom",
+          "cma_top_hits_recent": 0,
+          "cma_bottom_hits_recent": 4,
+          "actionable_composite_side": null,
+          "focus_factor_top_hits": 0,
+          "focus_factor_bottom_hits": 0,
+          "focus_factor_top_names": [],
+          "focus_factor_bottom_names": [],
+          "actionable_aggregate_top_count": 2,
+          "actionable_aggregate_bottom_count": 1
+        }
+      ]
+    }
+  },
+  "factor_momentum": {
+    "tool": "get_factor_momentum_context",
+    "ok": true,
+    "resolved_date": "2026-03-20",
+    "warnings": [],
+    "error": null,
+    "data": {
+      "lookback_days": 20,
+      "cma": {
+        "selected_factors": [
+          "alpha_5",
+          "alpha_11",
+          "alpha_1",
+          "alpha_12",
+          "alpha_10"
+        ],
+        "dates": [
+          "2026-02-20",
+          "2026-02-23",
+          "2026-02-24",
+          "2026-02-25",
+          "2026-02-26",
+          "2026-02-27",
+          "2026-03-02",
+          "2026-03-04",
+          "2026-03-05",
+          "2026-03-06",
+          "2026-03-09",
+          "2026-03-10",
+          "2026-03-11",
+          "2026-03-12",
+          "2026-03-13",
+          "2026-03-16",
+          "2026-03-17",
+          "2026-03-18",
+          "2026-03-19",
+          "2026-03-20"
+        ],
+        "metrics": {
+          "cma_total": {
+            "alpha_5": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              10.238875,
+              9.582215,
+              6.703178,
+              6.534487,
+              6.534487,
+              4.723747,
+              4.427886,
+              4.671056,
+              9.90663,
+              9.90663,
+              8.490904,
+              8.490904
+            ],
+            "alpha_11": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              2.528911,
+              0.200542,
+              0.528398,
+              0.253372,
+              0.253372,
+              0.506848,
+              0.368804,
+              0.064628,
+              6.069484,
+              6.069484,
+              6.486108,
+              6.486108
+            ],
+            "alpha_1": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              10.417091,
+              12.003322,
+              10.88231,
+              10.810974,
+              10.810974,
+              9.379974,
+              8.452514,
+              9.134138,
+              5.807725,
+              5.807725,
+              5.408936,
+              5.408936
+            ],
+            "alpha_12": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              3.27042,
+              3.379469,
+              2.507623,
+              3.300707,
+              3.300707,
+              5.784033,
+              5.346558,
+              5.882905,
+              3.450713,
+              3.450713,
+              3.099644,
+              3.099644
+            ],
+            "alpha_10": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              4.901595,
+              1.992678,
+              2.978485,
+              2.261717,
+              2.261717,
+              2.610532,
+              3.180594,
+              2.743388,
+              3.545965,
+              3.545965,
+              2.94878,
+              2.94878
+            ]
+          },
+          "fitness": {
+            "alpha_5": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              9.858173,
+              9.215553,
+              6.406576,
+              6.243782,
+              6.243782,
+              4.491028,
+              4.203558,
+              4.437476,
+              9.58307,
+              9.58307,
+              8.202161,
+              8.202161
+            ],
+            "alpha_11": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              2.410229,
+              0.176986,
+              0.484483,
+              0.226794,
+              0.226794,
+              0.461798,
+              0.332765,
+              0.054838,
+              5.882557,
+              5.882557,
+              6.29172,
+              6.29172
+            ],
+            "alpha_1": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              10.011421,
+              11.540599,
+              10.449476,
+              10.379653,
+              10.379653,
+              8.996682,
+              8.096847,
+              8.760158,
+              5.548244,
+              5.548244,
+              5.163385,
+              5.163385
+            ],
+            "alpha_12": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              3.11487,
+              3.218116,
+              2.382602,
+              3.143165,
+              3.143165,
+              5.54206,
+              5.117217,
+              5.63363,
+              3.297638,
+              3.297638,
+              2.956038,
+              2.956038
+            ],
+            "alpha_10": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              4.63759,
+              1.866255,
+              2.799144,
+              2.117477,
+              2.117477,
+              2.446543,
+              2.985271,
+              2.570016,
+              3.357724,
+              3.357724,
+              2.78737,
+              2.78737
+            ]
+          },
+          "icir": {
+            "alpha_5": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.3596,
+              0.374162,
+              0.333853,
+              0.331965,
+              0.331965,
+              0.307135,
+              0.310808,
+              0.321593,
+              0.180033,
+              0.180033,
+              0.171238,
+              0.171238
+            ],
+            "alpha_11": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.144659,
+              0.11475,
+              0.124158,
+              0.107062,
+              0.107062,
+              0.142926,
+              0.13051,
+              0.088419,
+              0.074615,
+              0.074615,
+              0.076304,
+              0.076304
+            ],
+            "alpha_1": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.148151,
+              0.168138,
+              0.15871,
+              0.169696,
+              0.169696,
+              0.126073,
+              0.126375,
+              0.124757,
+              0.135657,
+              0.135657,
+              0.141147,
+              0.141147
+            ],
+            "alpha_12": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.003916,
+              -0.001747,
+              -0.011918,
+              -0.001671,
+              -0.001671,
+              0.057217,
+              0.059401,
+              0.089985,
+              0.067,
+              0.067,
+              0.073307,
+              0.073307
+            ],
+            "alpha_10": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.085261,
+              0.052542,
+              0.068879,
+              0.06773,
+              0.06773,
+              0.075945,
+              0.094217,
+              0.088758,
+              0.023039,
+              0.023039,
+              0.019605,
+              0.019605
+            ]
+          },
+          "weight": {
+            "alpha_5": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.392435,
+              0.280601,
+              0.299596,
+              0.2082,
+              0.2082,
+              0.213591,
+              0.115093,
+              0.115093,
+              0.184181,
+              0.184181,
+              0.171277,
+              0.171277
+            ],
+            "alpha_11": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.158248,
+              0.0,
+              0.070728,
+              0.189298,
+              0.189298,
+              0.159989,
+              0.310136,
+              0.310136,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "alpha_1": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.418577,
+              0.530615,
+              0.236212,
+              0.248883,
+              0.248883,
+              0.26787,
+              0.251037,
+              0.251037,
+              0.815819,
+              0.815819,
+              0.828723,
+              0.828723
+            ],
+            "alpha_12": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.0,
+              0.0,
+              0.0,
+              0.047387,
+              0.047387,
+              0.033756,
+              0.134297,
+              0.134297,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "alpha_10": [
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.189437,
+              0.189437,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        }
+      },
+      "actionable": {
+        "selected_factors": [],
+        "dates": [
+          "2026-03-05",
+          "2026-03-08",
+          "2026-03-09",
+          "2026-03-10",
+          "2026-03-11",
+          "2026-03-12",
+          "2026-03-13",
+          "2026-03-16",
+          "2026-03-17",
+          "2026-03-18",
+          "2026-03-19",
+          "2026-03-20"
+        ],
+        "metrics": {
+          "fitness": {},
+          "sharpe": {},
+          "weight": {},
+          "annual_return": {}
+        }
+      }
+    }
+  },
+  "factor_details": [
+    {
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_11",
+        "selection": {
+          "selected_weight": 0.0,
+          "selected_weight_pct": 0.0,
+          "weight_rank": 5,
+          "selected": false
+        },
+        "standalone_cma": {
+          "log_ret": 0.185227,
+          "ic_mean": 0.009161,
+          "icir": 0.076304,
+          "fitness": 6.29172,
+          "sharpe": 2.855861,
+          "annual_return": 0.606701,
+          "cma_total": 6.486108,
+          "cma_total_rank": 2
+        },
+        "health_20d": {
+          "latest_ic": 0.112998,
+          "ic_mean_20d": 0.000341,
+          "ic_std_20d": 0.129916,
+          "icir_20d": 0.002626,
+          "ic_trend": "+",
+          "ic_trend_slope": 0.043401,
+          "sharpe_20d": -0.590096,
+          "fitness_20d": -0.502569,
+          "ls_cum_20d": -0.007196,
+          "status": "Degrading"
+        },
+        "optimizer_context": {
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "cma_total": 5.408936,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "cma_total": 8.490904,
+              "cma_total_rank": 1,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 396,
+          "ls_points_used": 396,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": false,
+          "missing_inputs": []
+        }
+      }
+    },
+    {
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_12",
+        "selection": {
+          "selected_weight": 0.0,
+          "selected_weight_pct": 0.0,
+          "weight_rank": 6,
+          "selected": false
+        },
+        "standalone_cma": {
+          "log_ret": 0.132166,
+          "ic_mean": 0.01144,
+          "icir": 0.073307,
+          "fitness": 2.956038,
+          "sharpe": 1.539819,
+          "annual_return": 0.460671,
+          "cma_total": 3.099644,
+          "cma_total_rank": 4
+        },
+        "health_20d": {
+          "latest_ic": 0.32777,
+          "ic_mean_20d": 0.001276,
+          "ic_std_20d": 0.144875,
+          "icir_20d": 0.008805,
+          "ic_trend": "+",
+          "ic_trend_slope": 0.078314,
+          "sharpe_20d": -2.415282,
+          "fitness_20d": -4.575303,
+          "ls_cum_20d": -0.035599,
+          "status": "Degrading"
+        },
+        "optimizer_context": {
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "cma_total": 5.408936,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "cma_total": 8.490904,
+              "cma_total_rank": 1,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 277,
+          "ls_points_used": 281,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": false,
+          "missing_inputs": []
+        }
+      }
+    },
+    {
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_10",
+        "selection": {
+          "selected_weight": 0.0,
+          "selected_weight_pct": 0.0,
+          "weight_rank": 4,
+          "selected": false
+        },
+        "standalone_cma": {
+          "log_ret": 0.156375,
+          "ic_mean": 0.005035,
+          "icir": 0.019605,
+          "fitness": 2.78737,
+          "sharpe": 1.261057,
+          "annual_return": 0.610702,
+          "cma_total": 2.94878,
+          "cma_total_rank": 5
+        },
+        "health_20d": {
+          "latest_ic": 0.247403,
+          "ic_mean_20d": 0.016063,
+          "ic_std_20d": 0.25792,
+          "icir_20d": 0.062278,
+          "ic_trend": "=",
+          "ic_trend_slope": -0.002651,
+          "sharpe_20d": -0.035871,
+          "fitness_20d": -0.00942,
+          "ls_cum_20d": -0.000684,
+          "status": "Neutral"
+        },
+        "optimizer_context": {
+          "reason_code": "positive_standalone_zero_weight",
+          "reason_detail": "Standalone CMA total is positive but selected weight is zero; optimizer trace is unavailable.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "cma_total": 5.408936,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "cma_total": 8.490904,
+              "cma_total_rank": 1,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 396,
+          "ls_points_used": 396,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": false,
+          "missing_inputs": []
+        }
+      }
+    },
+    {
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_1",
+        "selection": {
+          "selected_weight": 0.828723,
+          "selected_weight_pct": 82.87,
+          "weight_rank": 1,
+          "selected": true
+        },
+        "standalone_cma": {
+          "log_ret": 0.22226,
+          "ic_mean": 0.023291,
+          "icir": 0.141147,
+          "fitness": 5.163385,
+          "sharpe": 2.081655,
+          "annual_return": 0.769062,
+          "cma_total": 5.408936,
+          "cma_total_rank": 3
+        },
+        "health_20d": {
+          "latest_ic": 0.19675,
+          "ic_mean_20d": 0.014216,
+          "ic_std_20d": 0.157329,
+          "icir_20d": 0.09036,
+          "ic_trend": "+",
+          "ic_trend_slope": 0.021696,
+          "sharpe_20d": 1.635043,
+          "fitness_20d": 2.881151,
+          "ls_cum_20d": 0.030804,
+          "status": "Neutral"
+        },
+        "optimizer_context": {
+          "reason_code": "selected",
+          "reason_detail": "Factor has non-zero selected weight in current CMA output.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "cma_total": 8.490904,
+              "cma_total_rank": 1,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 396,
+          "ls_points_used": 396,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": false,
+          "missing_inputs": []
+        }
+      }
+    },
+    {
+      "tool": "get_factor_selection_context",
+      "data": {
+        "factor": "alpha_5",
+        "selection": {
+          "selected_weight": 0.171277,
+          "selected_weight_pct": 17.13,
+          "weight_rank": 2,
+          "selected": true
+        },
+        "standalone_cma": {
+          "log_ret": 0.262064,
+          "ic_mean": 0.026679,
+          "icir": 0.171238,
+          "fitness": 8.202161,
+          "sharpe": 3.11789,
+          "annual_return": 0.865058,
+          "cma_total": 8.490904,
+          "cma_total_rank": 1
+        },
+        "health_20d": {
+          "latest_ic": 0.003689,
+          "ic_mean_20d": 0.046526,
+          "ic_std_20d": 0.146196,
+          "icir_20d": 0.318247,
+          "ic_trend": "=",
+          "ic_trend_slope": -0.004666,
+          "sharpe_20d": 3.502332,
+          "fitness_20d": 8.394518,
+          "ls_cum_20d": 0.056992,
+          "status": "Healthy"
+        },
+        "optimizer_context": {
+          "reason_code": "selected",
+          "reason_detail": "Factor has non-zero selected weight in current CMA output.",
+          "top_competing_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "cma_total": 5.408936,
+              "cma_total_rank": 3,
+              "pairwise_correlation": null,
+              "pairwise_correlation_available": false
+            }
+          ]
+        },
+        "data_quality": {
+          "ic_points_used": 396,
+          "ls_points_used": 396,
+          "per_factor_metrics_available": true,
+          "interpretation_stale": false,
+          "missing_inputs": []
+        }
+      }
+    }
+  ],
+  "symbol_details": [
+    {
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "SNDK",
+        "inside_scored_universe": true,
+        "cma_score": 0.844395,
+        "score_rank": 4,
+        "score_percentile": 0.955224,
+        "score_delta_1d": null,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": 0.011853,
+          "return_5d": 0.162462,
+          "vol_ratio": 0.835672
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 4,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "percentile_rank": 0.895522,
+              "contribution": 0.327778
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "percentile_rank": 0.597015,
+              "contribution": 0.016616
+            }
+          ],
+          "top_dragging_factors": [],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
+    },
+    {
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "EZPW",
+        "inside_scored_universe": true,
+        "cma_score": 0.545562,
+        "score_rank": 32,
+        "score_percentile": 0.537313,
+        "score_delta_1d": 0.0,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": -0.008526,
+          "return_5d": 0.009257,
+          "vol_ratio": 1.284589
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 7,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "percentile_rank": 0.910448,
+              "contribution": 0.0703
+            }
+          ],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "percentile_rank": 0.470149,
+              "contribution": -0.024738
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
+    },
+    {
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "POWL",
+        "inside_scored_universe": true,
+        "cma_score": 0.733654,
+        "score_rank": 17,
+        "score_percentile": 0.761194,
+        "score_delta_1d": null,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": -0.008141,
+          "return_5d": 0.0157,
+          "vol_ratio": 0.670958
+        },
+        "anomaly_flags": [
+          {
+            "symbol": "POWL",
+            "feature": "vol_fft",
+            "value": 0.242186,
+            "ts_z": -1.771,
+            "cs_z": -2.0222,
+            "signal": "HF volume drop"
+          }
+        ],
+        "factor_alignment": {
+          "consensus_count": 7,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "percentile_rank": 0.69403,
+              "contribution": 0.160797
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "percentile_rank": 0.925373,
+              "contribution": 0.072856
+            }
+          ],
+          "top_dragging_factors": [],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
+    },
+    {
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "STRL",
+        "inside_scored_universe": true,
+        "cma_score": 0.208217,
+        "score_rank": 55,
+        "score_percentile": 0.19403,
+        "score_delta_1d": null,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": -0.004915,
+          "return_5d": 0.050531,
+          "vol_ratio": 0.591358
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 4,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "percentile_rank": 0.746269,
+              "contribution": 0.04218
+            }
+          ],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "percentile_rank": 0.097015,
+              "contribution": -0.333963
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
+    },
+    {
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "USAR",
+        "inside_scored_universe": true,
+        "cma_score": 0.962067,
+        "score_rank": 1,
+        "score_percentile": 1.0,
+        "score_delta_1d": 0.0,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": 0.002436,
+          "return_5d": -0.004364,
+          "vol_ratio": 0.897481
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 6,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "percentile_rank": 0.985075,
+              "contribution": 0.401993
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "percentile_rank": 0.850746,
+              "contribution": 0.060075
+            }
+          ],
+          "top_dragging_factors": [],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
+    },
+    {
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "CDE",
+        "inside_scored_universe": true,
+        "cma_score": 0.801516,
+        "score_rank": 7,
+        "score_percentile": 0.910448,
+        "score_delta_1d": null,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": -0.005799,
+          "return_5d": -0.042203,
+          "vol_ratio": 0.804351
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 5,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "percentile_rank": 0.828358,
+              "contribution": 0.272118
+            },
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "percentile_rank": 0.671642,
+              "contribution": 0.029398
+            }
+          ],
+          "top_dragging_factors": [],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
+    },
+    {
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "AGX",
+        "inside_scored_universe": true,
+        "cma_score": 0.508868,
+        "score_rank": 35,
+        "score_percentile": 0.492537,
+        "score_delta_1d": null,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": -0.007685,
+          "return_5d": 0.028683,
+          "vol_ratio": 0.623917
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 7,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "percentile_rank": 0.985075,
+              "contribution": 0.083082
+            }
+          ],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "percentile_rank": 0.410448,
+              "contribution": -0.074214
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
+    },
+    {
+      "tool": "get_symbol_decision_context",
+      "data": {
+        "symbol": "SEZL",
+        "inside_scored_universe": true,
+        "cma_score": 0.454279,
+        "score_rank": 40,
+        "score_percentile": 0.41791,
+        "score_delta_1d": 0.0,
+        "timing_state": "active",
+        "market_context": {
+          "return_1d": 0.008568,
+          "return_5d": 0.04237,
+          "vol_ratio": 0.414346
+        },
+        "anomaly_flags": [],
+        "factor_alignment": {
+          "consensus_count": 7,
+          "consensus_total": 13,
+          "top_supporting_factors": [
+            {
+              "factor": "alpha_5",
+              "selected_weight": 0.171277,
+              "percentile_rank": 0.955224,
+              "contribution": 0.077969
+            }
+          ],
+          "top_dragging_factors": [
+            {
+              "factor": "alpha_1",
+              "selected_weight": 0.828723,
+              "percentile_rank": 0.350746,
+              "contribution": -0.12369
+            }
+          ],
+          "contribution_method": "weighted_centered_percentile_rank"
+        }
+      }
+    }
+  ],
+  "supplemental_context": {
+    "objective_breakdown": {
+      "total": 17.591976213331193,
+      "weighted_terms": {
+        "log_ret": 0.5183825086623348,
+        "ic": 0.027786455498982073,
+        "fitness": 17.045807249169876
+      },
+      "raw_terms": {
+        "log_ret": 0.5183825086623348,
+        "ic_mean": 0.027786455498982073,
+        "ic_std": 0.15877528979365343,
+        "icir": 0.17500490022751483,
+        "fitness": 17.045807249169876,
+        "sharpe": 4.615683555337031,
+        "annual_return": 1.7047987030642955,
+        "turnover": 0.0
+      },
+      "penalty_terms": {
+        "turnover_penalty": 0.0,
+        "icir_penalty": 0.0
+      }
+    },
+    "factor_health": [
+      {
+        "factor": "alpha_1",
+        "weight": 0.828723,
+        "weight_pct": 82.87,
+        "effective_direction": 1,
+        "expr_hash": "b8804399e2ec",
+        "latest_ic": 0.19675,
+        "ic_mean_20d": 0.014216,
+        "ic_std_20d": 0.157329,
+        "icir_20d": 0.09036,
+        "ic_trend_slope": 0.021696,
+        "ic_trend": "+",
+        "sharpe_20d": 1.635043,
+        "fitness_20d": 2.881151,
+        "ls_cum_20d": 0.030804,
+        "contribution": 0.074883,
+        "status": "Neutral",
+        "interpretation": "Takes the median rolling quantile of ranked log-volume momentum. It favors names with persistent medium-horizon acceleration in trading activity instead of one-day spikes.",
+        "extended_interpretation": "Calculates the rolling 40-day momentum rank of log-volume, then tracks the median (0.5 quantile) of this rank over a 30-day window. This effectively smooths out noisy daily volume spikes, rewarding stocks that have maintained consistently high volume momentum over a medium-term horizon.",
+        "direction_note": "Higher effective score implies steadier positive volume momentum.",
+        "interpretation_stale": false
+      },
+      {
+        "factor": "alpha_5",
+        "weight": 0.171277,
+        "weight_pct": 17.13,
+        "effective_direction": 1,
+        "expr_hash": "3e3f92d55847",
+        "latest_ic": 0.003689,
+        "ic_mean_20d": 0.046526,
+        "ic_std_20d": 0.146196,
+        "icir_20d": 0.318247,
+        "ic_trend_slope": -0.004666,
+        "ic_trend": "=",
+        "sharpe_20d": 3.502332,
+        "fitness_20d": 8.394518,
+        "ls_cum_20d": 0.056992,
+        "contribution": 0.054508,
+        "status": "Healthy",
+        "interpretation": "Scales log-money by the gap between log-money and intraday range geometry (`ohl`). It seeks names where traded capital is large relative to price-spread structure.",
+        "extended_interpretation": "Scales logarithmic dollar volume by the difference between itself and the `ohl` gap metric. This highlights periods where the absolute capital flowing into a stock fundamentally dwarfs its intraday structural price variance, indicating strong institutional sponsorship holding down volatility relative to trading magnitude.",
+        "direction_note": "Higher effective score implies stronger capital-flow support.",
+        "interpretation_stale": false
+      },
+      {
+        "factor": "alpha_0",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "d6511af1f613",
+        "latest_ic": -0.131443,
+        "ic_mean_20d": -0.01698,
+        "ic_std_20d": 0.110541,
+        "icir_20d": -0.153609,
+        "ic_trend_slope": -0.031034,
+        "ic_trend": "-",
+        "sharpe_20d": 1.071719,
+        "fitness_20d": 1.62127,
+        "ls_cum_20d": 0.022703,
+        "contribution": 0.0,
+        "status": "Degrading",
+        "interpretation": "Compares log-volume to a self-referential nonlinear volume baseline. It highlights symbols where participation is unusually strong relative to their own ranked volume regime.",
+        "extended_interpretation": "The formula constructs a denominator calculating the difference between a dampened, ranked-adjusted log-volume and the raw log-volume itself. Since the denominator tends to be negative for high volume names, the division yields a negative value, which is then inverted by `Mul(-1.0, ...)` to produce a positive score for actively traded stocks. It isolates local dislocations in trading interest.",
+        "direction_note": "Higher effective score implies unusually strong participation versus local volume baseline.",
+        "interpretation_stale": false
+      },
+      {
+        "factor": "alpha_10",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "5ef699416b1e",
+        "latest_ic": 0.247403,
+        "ic_mean_20d": 0.016063,
+        "ic_std_20d": 0.25792,
+        "icir_20d": 0.062278,
+        "ic_trend_slope": -0.002651,
+        "ic_trend": "=",
+        "sharpe_20d": -0.035871,
+        "fitness_20d": -0.00942,
+        "ls_cum_20d": -0.000684,
+        "contribution": 0.0,
+        "status": "Neutral",
+        "interpretation": "Takes the negative lower-quantile of open returns over 40 days. It is an oversold-rebound factor that favors names with sufficiently washed-out recent opening moves.",
+        "extended_interpretation": "Captures the 25th percentile (lower quartile) of daily open returns over a 40-day window, measuring the worst characteristic morning drops. Multiplying by -1.0 transforms severe negative open paths into high positive scores, acting as an oversold rebound trigger targeting stocks exhibiting washed-out opening plunge exhaustion.",
+        "direction_note": "Higher effective score implies a more attractive open-driven rebound setup.",
+        "interpretation_stale": false
+      },
+      {
+        "factor": "alpha_11",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "ab1728904fcf",
+        "latest_ic": 0.112998,
+        "ic_mean_20d": 0.000341,
+        "ic_std_20d": 0.129916,
+        "icir_20d": 0.002626,
+        "ic_trend_slope": 0.043401,
+        "ic_trend": "+",
+        "sharpe_20d": -0.590096,
+        "fitness_20d": -0.502569,
+        "ls_cum_20d": -0.007196,
+        "contribution": 0.0,
+        "status": "Degrading",
+        "interpretation": "Uses the rolling MAD of log-volume to capture abnormal participation dispersion. It tends to flag names where crowding or neglect is becoming informative.",
+        "extended_interpretation": "Computes the 30-day Mean Absolute Deviation of log volume. This pure dispersion metric identifies symbols experiencing unusually fragmented or dispersed participation (abnormal volume). Elevated levels frequently precede regime shifts, as stable neglect or steady crowding gives way to disagreement and eventual breakout or breakdown.",
+        "direction_note": "Higher effective score implies a more favorable abnormal-volume regime.",
+        "interpretation_stale": false
+      },
+      {
+        "factor": "alpha_12",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "ef9be7ef82f5",
+        "latest_ic": 0.32777,
+        "ic_mean_20d": 0.001276,
+        "ic_std_20d": 0.144875,
+        "icir_20d": 0.008805,
+        "ic_trend_slope": 0.078314,
+        "ic_trend": "+",
+        "sharpe_20d": -2.415282,
+        "fitness_20d": -4.575303,
+        "ls_cum_20d": -0.035599,
+        "contribution": 0.0,
+        "status": "Degrading",
+        "interpretation": "Subtracts volume-to-chip-support correlation from `ohlc` gap geometry. It prefers names whose price structure remains strong even as chip-near-support dynamics shift.",
+        "extended_interpretation": "Subtracts the 10-day short-term correlation between raw volume and near-support chip density from the `ohlc` gap geometry. High scores occur when a stock demonstrates structurally strong bar profiles (`ohlc`) simultaneously diverging from the reliance on immediate volume-driven support, suggesting self-sustaining price momentum.",
+        "direction_note": "Higher effective score implies supportive price structure relative to chip-support behavior.",
+        "interpretation_stale": false
+      },
+      {
+        "factor": "alpha_2",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "b232be3cd9d5",
+        "latest_ic": 0.148928,
+        "ic_mean_20d": -0.021484,
+        "ic_std_20d": 0.110207,
+        "icir_20d": -0.19494,
+        "ic_trend_slope": 0.072156,
+        "ic_trend": "+",
+        "sharpe_20d": -4.70843,
+        "fitness_20d": -9.780018,
+        "ls_cum_20d": -0.042802,
+        "contribution": 0.0,
+        "status": "Degrading",
+        "interpretation": "Measures how much log-volume outruns log-close through an upper-quantile filter. It rewards demand pressure where activity rises faster than price level.",
+        "extended_interpretation": "Measures the difference between log-volume and log-close price, approximating the number of shares traded relative to the price level. Taking the 67th percentile (upper tercile) over a fast 10-day window creates a smoothed indicator of sustained demand pressure pushing volume up faster than the stock price appreciates.",
+        "direction_note": "Higher effective score implies stronger volume pressure relative to price level.",
+        "interpretation_stale": false
+      },
+      {
+        "factor": "alpha_3",
+        "weight": 0.0,
+        "weight_pct": 0.0,
+        "effective_direction": 1,
+        "expr_hash": "94bd1aea62d8",
+        "latest_ic": -0.054886,
+        "ic_mean_20d": 0.039086,
+        "ic_std_20d": 0.107028,
+        "icir_20d": 0.365194,
+        "ic_trend_slope": 0.005684,
+        "ic_trend": "+",
+        "sharpe_20d": 6.489544,
+        "fitness_20d": 20.323661,
+        "ls_cum_20d": 0.0973,
+        "contribution": 0.0,
+        "status": "Healthy",
+        "interpretation": "Uses the negative 20-day correlation between volume/open intensity and lows. It looks for washout patterns where heavy participation coincides with stressed lows that later mean-revert.",
+        "extended_interpretation": "Computes the 20-day correlation between open-adjusted volume intensity and the daily low price. The `Mul(-1.0, ...)` operator negates this correlation. A high final score emerges when volume intensity is negatively correlated with lows, indicating heavy accumulation occurring precisely when the price drops, an algorithmic signature of strong mean-reversion support.",
+        "direction_note": "Higher effective score implies healthier reversal support after stress.",
+        "interpretation_stale": false
+      }
+    ],
+    "market_summary_daily": {
+      "as_of_date": "2026-03-20",
+      "data_as_of_date": "2026-03-20",
+      "window_days": 1,
+      "universe_mean_ret": -0.0018029939012989664,
+      "universe_median_ret": -0.00247596764683633,
+      "win_rate": 0.27941176470588236,
+      "advancers": 19,
+      "decliners": 49,
+      "unchanged": 0,
+      "total_scored": 68,
+      "best_5": {
+        "EOSE": 0.01623083859332719,
+        "PL": 0.014723532742026757,
+        "RKLB": 0.013135648328781446,
+        "SNDK": 0.011852582622789098,
+        "BLBD": 0.011425924210136218
+      },
+      "worst_5": {
+        "B": -0.010774762236140156,
+        "EAT": -0.011404349174621853,
+        "IREN": -0.011662817551962967,
+        "WLDN": -0.012032254000251985,
+        "BMY": -0.0125267842426241
+      },
+      "sector_winners": [
+        {
+          "sector": "Communication Services",
+          "return": 0.0001733640264023062
+        },
+        {
+          "sector": "Utilities",
+          "return": -0.00021285653469560462
+        },
+        {
+          "sector": "Financials",
+          "return": -0.00027541467606854997
+        }
+      ],
+      "sector_losers": [
+        {
+          "sector": "Information Technology",
+          "return": -0.002208242068899889
+        },
+        {
+          "sector": "Health Care",
+          "return": -0.006182444196758552
+        },
+        {
+          "sector": "Materials",
+          "return": -0.006668816569493086
+        }
+      ],
+      "date_match": true,
+      "source": "exact"
+    },
+    "market_summary_weekly": {
+      "as_of_date": "2026-03-20",
+      "data_as_of_date": "2026-03-20",
+      "window_days": 5,
+      "universe_mean_ret": 0.014533901572284546,
+      "universe_median_ret": 0.011548138807465969,
+      "win_rate": 0.6470588235294118,
+      "advancers": 44,
+      "decliners": 24,
+      "unchanged": 0,
+      "total_scored": 68,
+      "best_5": {
+        "SNDK": 0.16246235549366927,
+        "RKLB": 0.13789073911773309,
+        "MU": 0.13709896180118863,
+        "TTMI": 0.08319531853814732,
+        "UAL": 0.07923370760504689
+      },
+      "worst_5": {
+        "SSRM": -0.048969942586963855,
+        "LLY": -0.04979927893835179,
+        "KGC": -0.053157166999539096,
+        "CRDO": -0.07072600329329215,
+        "EOSE": -0.07545652922935575
+      },
+      "sector_winners": [
+        {
+          "sector": "Consumer Defensive",
+          "return": 0.035082538563468844
+        },
+        {
+          "sector": "Consumer Discretionary",
+          "return": 0.03480749383420312
+        },
+        {
+          "sector": "Utilities",
+          "return": 0.025130171795591405
+        }
+      ],
+      "sector_losers": [
+        {
+          "sector": "Health Care",
+          "return": -0.01294071321078365
+        },
+        {
+          "sector": "Unknown",
+          "return": -0.013212533894389616
+        },
+        {
+          "sector": "Materials",
+          "return": -0.030851241581956235
+        }
+      ],
+      "date_match": true,
+      "source": "exact"
+    },
+    "microstructure_anomalies": [
+      {
+        "symbol": "KGC",
+        "feature": "amihud_range",
+        "value": 0.596768,
+        "ts_z": 3.713,
+        "cs_z": 0.0288,
+        "signal": "Illiquidity spike"
+      },
+      {
+        "symbol": "KGC",
+        "feature": "amihud_mean",
+        "value": 0.004612,
+        "ts_z": 3.4388,
+        "cs_z": -0.1593,
+        "signal": "Liquidity drop"
+      },
+      {
+        "symbol": "HOOD",
+        "feature": "amihud_range",
+        "value": 0.014495,
+        "ts_z": 2.6863,
+        "cs_z": -0.194,
+        "signal": "Illiquidity spike"
+      },
+      {
+        "symbol": "GM",
+        "feature": "amihud_mean",
+        "value": 0.001239,
+        "ts_z": 2.5656,
+        "cs_z": -0.1775,
+        "signal": "Liquidity drop"
+      },
+      {
+        "symbol": "CAT",
+        "feature": "amihud_mean",
+        "value": 0.000477,
+        "ts_z": 2.398,
+        "cs_z": -0.1816,
+        "signal": "Liquidity drop"
+      },
+      {
+        "symbol": "RKLB",
+        "feature": "amihud_mean",
+        "value": 0.000457,
+        "ts_z": -2.3571,
+        "cs_z": -0.1817,
+        "signal": "Liquidity surge"
+      },
+      {
+        "symbol": "MU",
+        "feature": "amihud_mean",
+        "value": 2.7e-05,
+        "ts_z": -2.0862,
+        "cs_z": -0.184,
+        "signal": "Liquidity surge"
+      },
+      {
+        "symbol": "HOOD",
+        "feature": "amihud_mean",
+        "value": 0.000406,
+        "ts_z": 2.0834,
+        "cs_z": -0.182,
+        "signal": "Liquidity drop"
+      },
+      {
+        "symbol": "POWL",
+        "feature": "vol_fft",
+        "value": 0.242186,
+        "ts_z": -1.771,
+        "cs_z": -2.0222,
+        "signal": "HF volume drop"
+      },
+      {
+        "symbol": "BLBD",
+        "feature": "vol_fft",
+        "value": 0.230456,
+        "ts_z": -1.6507,
+        "cs_z": -2.1259,
+        "signal": "HF volume drop"
+      },
+      {
+        "symbol": "INCY",
+        "feature": "vol_fft",
+        "value": 0.698198,
+        "ts_z": 0.6815,
+        "cs_z": 2.01,
+        "signal": "HF volume spike"
+      },
+      {
+        "symbol": "ORGO",
+        "feature": "amihud_range",
+        "value": 21.238948,
+        "ts_z": -0.3524,
+        "cs_z": 7.9265,
+        "signal": "Illiquidity drop"
+      },
+      {
+        "symbol": "ORGO",
+        "feature": "amihud_mean",
+        "value": 1.523953,
+        "ts_z": -0.2673,
+        "cs_z": 8.0251,
+        "signal": "Liquidity surge"
+      },
+      {
+        "symbol": "NVDA",
+        "feature": "drift_factor",
+        "value": -2414328738.850304,
+        "ts_z": 0.0328,
+        "cs_z": -7.2596,
+        "signal": "Momentum surge"
+      }
+    ],
+    "stock_alerts": [
+      {
+        "symbol": "USAR",
+        "score": 0.962067,
+        "rank": "1/67",
+        "delta_1d": 0.0,
+        "consensus": "6/13",
+        "return_1d": 0.00244,
+        "return_5d": -0.00436,
+        "vol_ratio": 0.9
+      },
+      {
+        "symbol": "TWLO",
+        "score": 0.908384,
+        "rank": "2/67",
+        "delta_1d": 0.0,
+        "consensus": "5/13",
+        "return_1d": -0.00106,
+        "return_5d": 0.0083,
+        "vol_ratio": 0.64
+      },
+      {
+        "symbol": "TMUS",
+        "score": 0.857256,
+        "rank": "3/67",
+        "delta_1d": 0.0,
+        "consensus": "1/13",
+        "return_1d": -0.00829,
+        "return_5d": -0.00222,
+        "vol_ratio": 1.0
+      },
+      {
+        "symbol": "SNDK",
+        "score": 0.844395,
+        "rank": "4/67",
+        "delta_1d": 0.0,
+        "consensus": "4/13",
+        "return_1d": 0.01185,
+        "return_5d": 0.16246,
+        "vol_ratio": 0.84
+      },
+      {
+        "symbol": "B",
+        "score": 0.806954,
+        "rank": "5/67",
+        "delta_1d": 0.0,
+        "consensus": "4/13",
+        "return_1d": -0.01077,
+        "return_5d": -0.04146,
+        "vol_ratio": 0.7
+      },
+      {
+        "symbol": "V",
+        "score": 0.806049,
+        "rank": "6/67",
+        "delta_1d": 0.0,
+        "consensus": "1/13",
+        "return_1d": -0.00087,
+        "return_5d": 0.00587,
+        "vol_ratio": 1.07
+      },
+      {
+        "symbol": "CDE",
+        "score": 0.801516,
+        "rank": "7/67",
+        "delta_1d": 0.0,
+        "consensus": "5/13",
+        "return_1d": -0.0058,
+        "return_5d": -0.0422,
+        "vol_ratio": 0.8
+      },
+      {
+        "symbol": "META",
+        "score": 0.800937,
+        "rank": "8/67",
+        "delta_1d": 0.0,
+        "consensus": "2/13",
+        "return_1d": -0.00329,
+        "return_5d": -0.02411,
+        "vol_ratio": 0.98
+      }
+    ],
+    "shortlists": {
+      "factor_names": [
+        "alpha_11",
+        "alpha_12",
+        "alpha_10",
+        "alpha_1",
+        "alpha_5"
+      ],
+      "symbol_names": [
+        "SNDK",
+        "EZPW",
+        "POWL",
+        "STRL",
+        "USAR",
+        "CDE",
+        "AGX",
+        "SEZL"
+      ]
+    },
+    "active_factor_definitions": {
+      "alpha_1": "Calculates the rolling 40-day momentum rank of log-volume, then tracks the median (0.5 quantile) of this rank over a 30-day window. This effectively smooths out noisy daily volume spikes, rewarding stocks that have maintained consistently high volume momentum over a medium-term horizon.",
+      "alpha_5": "Scales logarithmic dollar volume by the difference between itself and the `ohl` gap metric. This highlights periods where the absolute capital flowing into a stock fundamentally dwarfs its intraday structural price variance, indicating strong institutional sponsorship holding down volatility relative to trading magnitude.",
+      "alpha_0": "The formula constructs a denominator calculating the difference between a dampened, ranked-adjusted log-volume and the raw log-volume itself. Since the denominator tends to be negative for high volume names, the division yields a negative value, which is then inverted by `Mul(-1.0, ...)` to produce a positive score for actively traded stocks. It isolates local dislocations in trading interest.",
+      "alpha_2": "Measures the difference between log-volume and log-close price, approximating the number of shares traded relative to the price level. Taking the 67th percentile (upper tercile) over a fast 10-day window creates a smoothed indicator of sustained demand pressure pushing volume up faster than the stock price appreciates.",
+      "alpha_3": "Computes the 20-day correlation between open-adjusted volume intensity and the daily low price. The `Mul(-1.0, ...)` operator negates this correlation. A high final score emerges when volume intensity is negatively correlated with lows, indicating heavy accumulation occurring precisely when the price drops, an algorithmic signature of strong mean-reversion support.",
+      "alpha_4": "Divides the rolling 40-day rank of the spectral volume signature (vol_fft) by the Amihud illiquidity mean. Because Amihud gets larger when liquidity is worse, strong cyclical activity coupled with excellent liquidity creates a huge positive value, which the outermost `Mul(-1.0, ...)` flips into a highly negative score. The score serves as an inverted quality measure where lower (more negative) values indicate optimal liquid cyclic activity.",
+      "alpha_6": "Ranks the ratio of the square root of the high price to the VWAP across the cross-section. The square root transformation dampens extreme high prints. High ranks are achieved by stocks pushing consistently higher trading ranges and execution volumes well above their average weighted execution price, signaling robust intraday buying control."
+    }
+  }
+}
